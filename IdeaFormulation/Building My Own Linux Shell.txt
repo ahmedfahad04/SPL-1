@@ -9,8 +9,12 @@ Basic Features:
 2. Parsing and Executing Commands
 3. Symbol table
 
+What I'll implement:
+* AST
+* Hash Table/Linked list/Binary search tree
 
 Why I need it?
+
 As most GNU/Linux shells are open-sourced, if you want to learn the inner workings of the shell, 
 you can search online for the source code and start digging in (that's what I actually did). 
 But this advice is actually easier said than done. For example, where exactly should you start 
@@ -25,10 +29,13 @@ execute commands, loops, and conditional expressions by actually writing the C c
 does the above tasks. We’ll talk about word expansions and I/O redirection, and we’ll see 
 the code that performs features.
 
+Personally I feel the importance of using linux shell while using the windows. So I thought if we
+can run linux terminal (shell) in windows, that would be great beneficial for increasing our productivity.
+
 
 Resource:
 1. https://hackernoon.com/lets-build-a-linux-shell-part-i-bz3n3vg1
 2. https://hackernoon.com/building-a-linux-shell-part-ii-a-step-by-step-guide-pk203ywg
 3. https://hackernoon.com/building-a-linux-shell-part-iii-wzo3uoi
 4. https://hackernoon.com/building-a-linux-shell-part-iv-h21o3uwl
-
+5. https://hackernoon.com/building-a-linux-shell-part-v-k61a3uai

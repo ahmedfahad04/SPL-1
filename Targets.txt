@@ -1,0 +1,8 @@
+* know yourself (your work and knowledge)
+* plan according to your scop
+* never miss your commitment
+
+------------
+
+1. Learn more about windows and linux file system.
+2. Build Basic Shell structure in linux
