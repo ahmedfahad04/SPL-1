@@ -6,3 +6,24 @@ Basic Features:
 1. REPL (Read-Eval-Print-Loop)
 2. Parsing and Executing Commands
 3. Symbol table
+
+
+Why I need it?
+As most GNU/Linux shells are open-sourced, if you want to learn the inner workings of the shell, 
+you can search online for the source code and start digging in (that's what I actually did). 
+But this advice is actually easier said than done. For example, where exactly should you start 
+reading the code from? Which source files contain the code that implements I/O redirection? 
+Where can I find the code that parses user commands? I guess you got the point.
+
+
+This is why I’ve decided to write this tutorial, to help Linux users and programmers gain a 
+better understanding of their shells. Together, we are going to implement a fully functional 
+Linux shell, from scratch. Along the way, we'll see how a Linux shell manages to parse and 
+execute commands, loops, and conditional expressions by actually writing the C code that 
+does the above tasks. We’ll talk about word expansions and I/O redirection, and we’ll see 
+the code that performs features.
+
+
+Resource:
+1. https://hackernoon.com/lets-build-a-linux-shell-part-i-bz3n3vg1
+2. https://hackernoon.com/building-a-linux-shell-part-ii-a-step-by-step-guide-pk203ywg
