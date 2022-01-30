@@ -1,4 +1,4 @@
-1. structure in c
-2. pointer
-3. Revisit the linked list
-4. realloc and malloc
+structure in c
+pointer
+Revisit the linked list
+realloc and malloc
