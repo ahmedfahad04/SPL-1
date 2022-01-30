@@ -29,4 +29,8 @@ the code that performs features.
 Resource:
 1. https://hackernoon.com/lets-build-a-linux-shell-part-i-bz3n3vg1
 2. https://hackernoon.com/building-a-linux-shell-part-ii-a-step-by-step-guide-pk203ywg
+<<<<<<< HEAD
 3. https://hackernoon.com/building-a-linux-shell-part-iii-wzo3uoi
+=======
+3. https://hackernoon.com/building-a-linux-shell-part-iii-wzo3uoi
+>>>>>>> 0bdb23f9e29f874f44292eb566dc76b3f0a99c07
