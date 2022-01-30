@@ -1,0 +1,8 @@
+What I need to do:
+1. Making a Prompt UI of the shell
+
+
+Basic Features:
+1. REPL (Read-Eval-Print-Loop)
+2. Parsing and Executing Commands
+3. Symbol table
