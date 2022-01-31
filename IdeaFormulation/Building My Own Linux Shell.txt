@@ -7,10 +7,17 @@ defined.)
 
 
 
-### Basic Features:
+### Procedure:
 1. REPL (Read-Eval/Execute-Print-Loop)
 2. Parsing and Executing Commands
 3. Symbol table
+
+
+
+
+### What I want:
+1. All the commands will be renamed by me. (also user can customize the commands as they like)
+
 
 
 
@@ -27,6 +34,30 @@ defined.)
 * Basic Shell Features (https://www.gnu.org/software/bash/manual/html_node/Basic-Shell-Features.html)
 * Interactive and non interactive shell (https://www.gnu.org/software/bash/manual/html_node/What-is-an-Interactive-Shell_003f.html)
 *** Shell operation (https://www.gnu.org/software/bash/manual/html_node/Shell-Operation.html)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
