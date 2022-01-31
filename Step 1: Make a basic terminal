@@ -1,10 +1,13 @@
 GOAL: Make a basic terminal that execute a basic command
 
-
+1. Make a version of own gnome-terminal using c
+2. Execute a command by custom name (example: listItem; to show the list of a directory's item)
+3. Write one page of documentation about what I'll do.
 
 
 Resource:
 https://www.unix.com/shell-programming-and-scripting/131510-need-explanation-ps1-ps2-ps3-ps4.html
 https://www.thegeekstuff.com/2008/09/bash-shell-take-control-of-ps1-ps2-ps3-ps4-and-prompt_command/
+https://www.youtube.com/watch?v=FjgPGheuM_g
 
 Reporting: Monday, 30 jan, 2022

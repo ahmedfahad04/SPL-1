@@ -1,26 +1,43 @@
-Challenges:
+### Challenges:
 1. I'll have to provide command's executable file which I can't built right now.
 (For example: ls -l; list of all the file name along with their read,write,execute
 permission. Here what that command does is not defined in my code, rather it's 
 defined.)
 
-Basic Features:
-1. REPL (Read-Eval-Print-Loop)
+
+
+
+### Basic Features:
+1. REPL (Read-Eval/Execute-Print-Loop)
 2. Parsing and Executing Commands
 3. Symbol table
 
-What I'll implement:
+
+
+### What I'll implement:
 * AST
 * Hash Table/Linked list/Binary search tree
 
-Why I need it?
+
+
+
+### What I need to KNOW:
+* Shell builtins (https://www.gnu.org/software/bash/manual/html_node/Shell-Builtin-Commands.html)
+* Simple commands (https://www.gnu.org/software/bash/manual/html_node/Simple-Commands.html)
+* Basic Shell Features (https://www.gnu.org/software/bash/manual/html_node/Basic-Shell-Features.html)
+* Interactive and non interactive shell (https://www.gnu.org/software/bash/manual/html_node/What-is-an-Interactive-Shell_003f.html)
+*** Shell operation (https://www.gnu.org/software/bash/manual/html_node/Shell-Operation.html)
+
+
+
+
+### Why I need it?
 
 As most GNU/Linux shells are open-sourced, if you want to learn the inner workings of the shell, 
 you can search online for the source code and start digging in (that's what I actually did). 
 But this advice is actually easier said than done. For example, where exactly should you start 
 reading the code from? Which source files contain the code that implements I/O redirection? 
 Where can I find the code that parses user commands? I guess you got the point.
-
 
 This is why I’ve decided to write this tutorial, to help Linux users and programmers gain a 
 better understanding of their shells. Together, we are going to implement a fully functional 
@@ -33,9 +50,11 @@ Personally I feel the importance of using linux shell while using the windows. S
 can run linux terminal (shell) in windows, that would be great beneficial for increasing our productivity.
 
 
-Resource:
+
+### Resource:
 1. https://hackernoon.com/lets-build-a-linux-shell-part-i-bz3n3vg1
 2. https://hackernoon.com/building-a-linux-shell-part-ii-a-step-by-step-guide-pk203ywg
 3. https://hackernoon.com/building-a-linux-shell-part-iii-wzo3uoi
 4. https://hackernoon.com/building-a-linux-shell-part-iv-h21o3uwl
 5. https://hackernoon.com/building-a-linux-shell-part-v-k61a3uai
+6. https://brennan.io/2015/01/16/write-a-shell-in-c/

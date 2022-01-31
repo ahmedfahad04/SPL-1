@@ -6,3 +6,6 @@
 
 1. Learn more about windows and linux file system.
 2. Build Basic Shell structure in linux
+3. What is shell process, how they works.
+4. So writing a shell means that you need to know exactly what’s going on with processes and how they start.
+**** Details understanding of PROCESS in UNIX based system.
