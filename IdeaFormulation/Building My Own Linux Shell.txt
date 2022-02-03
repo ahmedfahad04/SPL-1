@@ -24,6 +24,7 @@ defined.)
 ### What I'll implement:
 * AST
 * Hash Table/Linked list/Binary search tree
+* Types of prompt (https://www.cyberciti.biz/tips/howto-linux-unix-bash-shell-setup-prompt.html)
 
 
 
