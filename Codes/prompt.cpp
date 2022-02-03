@@ -17,7 +17,9 @@ char *take_user_input()
     buffer = (char *)malloc(sizeof(char) * buffer_size);
     splitted_words = (char *)malloc(sizeof(char) * buffer_size);
 
-    printf("myShell$ ");
+    // color coded text
+    printf("\u001b[1m\u001b[35;1mcsh@mmyShell~$\u001b[35;1m\u001b[1m ");
+    printf("\u001b[32m");
 
     while (1)
     {

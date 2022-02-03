@@ -1,4 +1,5 @@
 structure in c
-pointer
+pointer [DONE]
 Revisit the linked list
-realloc and malloc
+realloc and malloc [DONE]
+Lexical Analyzer

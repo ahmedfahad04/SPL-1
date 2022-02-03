@@ -5,6 +5,7 @@ In this project what I'll implement the Three basic parts of a shell:
 	* The Parser
 		- Lexical Analyzer (take user input and convert it into token)
 		- Parser (Process the token according to grammer and build the Command Table)
+		- Command Table (mainly used for handling mulitple commands separated by pipeline)
 	
 	* The Executor
 		- Builtin Commands
