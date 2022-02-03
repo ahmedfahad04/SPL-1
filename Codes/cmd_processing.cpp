@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <unistd.h>
 
-int cmd_execution(char *cmd)
+void cmd_execute(char *cmd)
 {
     // temporarily I'll send the pure text
     // in future I'll send the tokenize text for execution
@@ -15,14 +15,11 @@ int cmd_execution(char *cmd)
     else
     {
         perror("getcwd() error");
-        return 1;
+        //return 1;
     }
 
-    if (chdir("..") != 0)
-    {
-        printf("Operation Unsuccessful");
-    }
-
+    if (chdir(cmd) != 0) printf("csh: cd: %s: No such file or directory\n", cmd);
+    
     if (getcwd(cwd, sizeof(cwd)) != NULL)
     {
         printf("Current working dir: %s\n", cwd);
@@ -30,6 +27,7 @@ int cmd_execution(char *cmd)
     else
     {
         perror("getcwd() error");
-        return 1;
+        //return 1;
     }
+
 }

@@ -29,9 +29,13 @@ int main()
         else
         {
             printf("%s\n", commandLine);
-            for(int i=0; i<100; i++){
-                if(tokens[i] != NULL) printf("%d. %s\n", i+1, tokens[i]);
-            }
+
+            // display the words given in the prompt
+            // for(int i=0; i<100; i++){
+            //     if(tokens[i] != NULL) printf("%d. %s\n", i+1, tokens[i]);
+            // }
+
+            cmd_execute(tokens[1]);
         }
 
         free(tokens);

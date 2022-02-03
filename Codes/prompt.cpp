@@ -1,8 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "shell.h"
-#define BUFFER_SIZE 1024
+
 using namespace std;
+
+#define BUFFER_SIZE 1024
 
 char *take_user_input()
 {
@@ -59,19 +61,17 @@ char **splitstr(char *ch)
 
     for (int i = 0;; i++)
     {
-        if ((ch[i] == ' ' && i > 0) || (ch[i] == '\0'))
+        if (((ch[i] == ' ' && i > 0) || (ch[i] == '\0')) && (ch[i - 1] != ' '))
         {
-            if (ch[i - 1] >= 'a' && ch[i - 1] <= 'z')
-            {
-                cnt++;
-                words[k++] = newstr;
+            cnt++;
+            newstr[j] = '\0';
+            words[k++] = newstr;
 
-                newstr = (char *)malloc(sizeof(char) * BUFFER_SIZE);
-                j = 0;
+            newstr = (char *)malloc(sizeof(char) * BUFFER_SIZE);
+            j = 0;
 
-                if (ch[i] == '\0')
-                    break;
-            }
+            if (ch[i] == '\0')
+                break;
         }
 
         else
@@ -79,6 +79,7 @@ char **splitstr(char *ch)
             newstr[j++] = ch[i];
         }
     }
+
 
     return words;
 }
