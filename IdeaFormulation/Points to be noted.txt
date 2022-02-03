@@ -1,4 +1,0 @@
-1. Raw code is a must.
-2. Must implement something complex.
-3. It must be a workable software/tool.
-4. It must be mesmerising for the spectators.

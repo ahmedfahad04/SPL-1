@@ -1,19 +1,25 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "shell.h"
-using namespace std;
 
+int main()
+{
 
-int main(){
+    char *commandLine;
 
-    char *cmd;
+    do
+    {
+        commandLine = take_user_input();
 
-    do{
+        // this is a temporary block to exit the loop
+        // in final outcome the command will send a termination code
+        // for specific command
+        if (strcmp(commandLine, "exit"))
+            break;
+        else
+        {
+            printf("%s\n", commandLine);
+        }
 
-        cmd = take_user_input();
-        printf("%s\n", cmd);
-        
-
-    } while(!strcmp(cmd, "exit")); 
-
+    } while (1);
 }

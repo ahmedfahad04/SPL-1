@@ -3,6 +3,7 @@
 
 // Read command 
 char *take_user_input();
+char *filter(char *ch);
 
 
 // string opearation
