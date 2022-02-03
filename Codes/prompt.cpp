@@ -4,83 +4,81 @@
 #define BUFFER_SIZE 1024
 using namespace std;
 
+char *take_user_input()
+{
 
-char *take_user_input(){
-    
-    char *buffer, *filtered_buffer;
+    char *buffer, *splitted_words;
     char ch;
     int location = 0, buffer_size = BUFFER_SIZE;
 
     //dynamically allocate memory to store the user prompt
     buffer = (char *)malloc(sizeof(char) * buffer_size);
-    filtered_buffer = (char *)malloc(sizeof(char) * buffer_size);
+    splitted_words = (char *)malloc(sizeof(char) * buffer_size);
 
     printf("myShell$ ");
 
-    while(1){
+    while (1)
+    {
 
         scanf("%c", &ch);
 
-        if((int)ch == EOF or ch == '\n' or buffer == NULL){
+        if ((int)ch == EOF or ch == '\n' or buffer == NULL)
+        {
             buffer[location] = '\0';
             break;
         }
 
-        else{
+        else
+        {
             buffer[location] = ch;
         }
 
-        if(location > buffer_size){
+        if (location > buffer_size)
+        {
             buffer_size += 1024;
-            buffer = (char *)realloc(buffer, buffer_size); 
-            filtered_buffer = (char *)realloc(buffer, buffer_size); 
+            buffer = (char *)realloc(buffer, buffer_size);
+            splitted_words = (char *)realloc(buffer, buffer_size);
         }
-        
+
         location++;
     }
 
-    // filtered_buffer = filter(buffer);
-    // return filtered_buffer;
+    //splitted_words = splitstr(buffer);
+    //return splitted_words;
     return buffer;
-    
 }
 
-char *filter(char *ch){
+char **splitstr(char *ch)
+{
 
     char *newstr;
-    newstr = (char*)malloc(sizeof(char) * BUFFER_SIZE);
+    newstr = (char *)malloc(sizeof(char) * BUFFER_SIZE);
+    char **words = (char **)malloc(sizeof(char) * BUFFER_SIZE);
 
-    int flag = 0, id = 0, word = 0;
-    char prev = ' ';
+    int cnt = 0, k = 0, j = 0;
 
-    while(1){
+    for (int i = 0;; i++)
+    {
+        if ((ch[i] == ' ' && i > 0) || (ch[i] == '\0'))
+        {
+            if (ch[i - 1] >= 'a' && ch[i - 1] <= 'z')
+            {
+                cnt++;
+                words[k++] = newstr;
 
-        if(*ch == ' ' && prev != ' '){
+                newstr = (char *)malloc(sizeof(char) * BUFFER_SIZE);
+                j = 0;
 
-            flag = 0;
-            word++;
-            
+                if (ch[i] == '\0')
+                    break;
+            }
         }
-        else{
 
-            newstr[id] = *ch;
-            id++;
-            flag = 1;
-            prev = *ch;
-            printf("CHAR: %c..", *ch);
-
+        else
+        {
+            newstr[j++] = ch[i];
         }
-
-        ch++;
-
-        if(*ch == '\0') break;
-
     }
 
-    // newstr[id] = '\0';
-
-    printf("\nAfter, %s, len = %ld, word = %d", newstr, strlen(newstr), word);    
-
-    return ch;
-
+    return words;
 }
