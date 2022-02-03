@@ -1,9 +1,9 @@
 #include <stdio.h>
 
 
-// Read command 
+// Command Prompt
 char *take_user_input();
-char **splitstr(char *ch);
+char **tokenization(char *ch);
 
 
 // string opearation
@@ -12,4 +12,6 @@ bool strcmp(char *a, char *b);
 
 
 // Command Execution
-void cmd_execute(char *cmd);
+void cmd_execute(char *cmd, char *path);
+void change_directory(char *path);
+void current_directory();

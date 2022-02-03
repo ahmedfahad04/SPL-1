@@ -12,7 +12,7 @@ int main()
     do
     {
         commandLine = take_user_input();
-        tokens = splitstr(commandLine);
+        tokens = tokenization(commandLine);
 
         // this is a temporary block to exit the loop
         // in final outcome the command will send a termination code
@@ -35,7 +35,7 @@ int main()
             //     if(tokens[i] != NULL) printf("%d. %s\n", i+1, tokens[i]);
             // }
 
-            cmd_execute(tokens[1]);
+            cmd_execute(tokens[0],tokens[1]);
         }
 
         free(tokens);

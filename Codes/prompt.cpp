@@ -50,7 +50,7 @@ char *take_user_input()
     return buffer;
 }
 
-char **splitstr(char *ch)
+char **tokenization(char *ch)
 {
 
     char *newstr;
