@@ -18,12 +18,11 @@ char *take_user_input()
     splitted_words = (char *)malloc(sizeof(char) * buffer_size);
 
     // color coded text
-    printf("\u001b[1m\u001b[35;1mcsh@mmyShell~$\u001b[35;1m\u001b[1m ");
+    printf("\u001b[1m\u001b[35;1mecsh@mmyShell~$\u001b[35;1m\u001b[1m ");
     printf("\u001b[32m");
 
     while (1)
     {
-
         scanf("%c", &ch);
 
         if ((int)ch == EOF or ch == '\n' or buffer == NULL)
@@ -52,22 +51,23 @@ char *take_user_input()
     return buffer;
 }
 
-char **tokenization(char *ch)
+char **tokenizations(char *ch)
 {
 
-    char *newstr;
-    newstr = (char *)malloc(sizeof(char) * BUFFER_SIZE);
+    char *newstr = (char *)malloc(sizeof(char) * BUFFER_SIZE);
+    char **raw_words = (char **)malloc(sizeof(char) * BUFFER_SIZE);
     char **words = (char **)malloc(sizeof(char) * BUFFER_SIZE);
 
     int cnt = 0, k = 0, j = 0;
 
+    // split the string into words based on spaces
     for (int i = 0;; i++)
     {
         if (((ch[i] == ' ' && i > 0) || (ch[i] == '\0')) && (ch[i - 1] != ' '))
         {
             cnt++;
             newstr[j] = '\0';
-            words[k++] = newstr;
+            raw_words[k++] = newstr;
 
             newstr = (char *)malloc(sizeof(char) * BUFFER_SIZE);
             j = 0;
@@ -82,6 +82,28 @@ char **tokenization(char *ch)
         }
     }
 
+    for(int i=0; i<cnt; i++){
+        printf("%d: %s, len = %ld\n", i+1, raw_words[i], strlen(raw_words[i]));
+    }
+
+    // removing white spaces from each words
+    for(int i=0; i<cnt; i++){
+
+        char *demo = (char *)malloc(sizeof(char) * BUFFER_SIZE);
+        int id = 0;
+
+        for(int j=0; j<strlen(raw_words[i]); j++){
+
+            if(raw_words[i][j] != ' ') 
+                demo[id++] = raw_words[i][j];
+        }
+
+        words[i] = demo;
+    }
+
+    for(int i=0; i<cnt; i++){
+        printf("%d: %s, len = %ld\n", i+1, words[i], strlen(words[i]));
+    }
 
     return words;
 }

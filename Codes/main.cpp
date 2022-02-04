@@ -6,22 +6,23 @@
 
 int main()
 {
+    fprintf(stdout, "\e[1;1H\e[2J");
 
     char *commandLine, **tokens;
 
     do
     {
         commandLine = take_user_input();
-        tokens = tokenization(commandLine);
+        tokens = tokenizations(commandLine);
 
         // this is a temporary block to exit the loop
         // in final outcome the command will send a termination code
         // for specific command
-        if (strcmp(commandLine, "exit"))
+        if (strcmp(tokens[0], "exit"))
             break;
 
         // this if block is used to clear the console
-        if (strcmp(commandLine, "clear"))
+        if (strcmp(tokens[0], "clear"))
         {
             fprintf(stdout, "\e[1;1H\e[2J");
         }

@@ -3,12 +3,13 @@
 
 // Command Prompt
 char *take_user_input();
-char **tokenization(char *ch);
+char **tokenizations(char *ch);
 
 
 // string opearation
 size_t strlen(char *str);
 bool strcmp(char *a, char *b);
+void strcpy(char *a, char *b);
 
 
 // Command Execution

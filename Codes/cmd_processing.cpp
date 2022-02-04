@@ -31,6 +31,7 @@ void current_directory()
     if (getcwd(cwd, sizeof(cwd)) != NULL)
     {
         printf("Current working dir: %s\n", cwd);
+        
     }
     else
     {
