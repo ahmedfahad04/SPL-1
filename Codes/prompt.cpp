@@ -11,7 +11,9 @@ void prompt(){
 
     // color coded text (user prompt)
     // printf("mecsh@Dell %s$", path);
-    printf("\u001b[1m\u001b[35;1mecsh@mmyShell: %s$\u001b[35;1m\u001b[1m ", path);
+    // => convert /home/fahad to ~ 
+    // => we need to implement parsing
+    printf("\u001b[1m\u001b[34;1m%s@ubuntu22: %s$\u001b[34;1m\u001b[1m ", hostname(), path);
 }
 
 char *take_user_input()

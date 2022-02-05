@@ -12,3 +12,6 @@ operations.o: operations.cpp shell.h
 
 cmd_processing.o: cmd_processing.cpp shell.h
 	g++ -c cmd_processing.cpp
+
+clean:
+	rm *.o run 

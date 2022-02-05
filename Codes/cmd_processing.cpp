@@ -27,7 +27,7 @@ char* current_directory()
     
     if (getcwd(cwd, sizeof(cwd)) != NULL)
     {   
-        // copyt the value of cwd into char pointer addr
+        // copy the value of cwd into char pointer addr
         addr = cwd;
     }
     else

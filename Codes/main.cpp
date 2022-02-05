@@ -27,9 +27,7 @@ int main()
         else
         {
             printf("%s\n", commandLine);
-            cmd_execute(tokens[0], tokens[1]);
-            
-            printf("HOST: %s\n", hostname());
+            cmd_execute(tokens[0], tokens[1]);            
         }
 
         free(tokens);
