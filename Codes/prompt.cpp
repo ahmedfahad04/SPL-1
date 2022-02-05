@@ -9,12 +9,14 @@ void prompt(){
 
     char *path = current_directory();
     char *myhost = hostname();
+    char *tindle = strcatt("/home/", myhost);
 
-    // color coded text (user prompt)
-    // printf("mecsh@Dell %s$", path);
+    // An important thing is, if you are using the root user,
+    // ~/ will be the /root directory, not /home/user_name.
     // => convert /home/fahad to ~ 
     // => we need to implement parsing
-    printf("\u001b[1m\u001b[34;1m%s@ubuntu22: %s$\u001b[34;1m\u001b[1m ", myhost, path);
+    printf("\u001b[31;1m%s@ubuntu22:\u001b[31;1m\u001b[0m", myhost);
+    printf("\u001b[1m\u001b[36;1m%s$ \u001b[36;1m\u001b[1m\u001b[0m", path);
 }
 
 char *take_user_input()
@@ -28,7 +30,6 @@ char *take_user_input()
     splitted_words = (char *)malloc(sizeof(char) * buffer_size);
 
     prompt();
-    printf("\u001b[32m");
 
     while (1)
     {

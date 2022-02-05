@@ -37,7 +37,7 @@ bool strcmp(char *a, char *b)
 
 char *strcpy(char *from)
 {
-    char *to = (char *)malloc(sizeof(char)*1024);
+    char *to = (char *)malloc(sizeof(char) * 1024);
 
     int i;
     for (i = 0; i < strlen(from); i++)
@@ -48,16 +48,24 @@ char *strcpy(char *from)
     return to;
 }
 
-char *strcatt(char *with, char *str){
+char *strcatt(char *with, char *str)
+{
+    char ans[2000];
+    int i = 0;
 
-  char *res = with + strlen(str);
+    while (*with != '\0')
+    {
+        ans[i++] = *with++;
+    }
 
-  while(*res != '\0'){
-      *res++ = *str++;
-  }
+    while (*str != '\0')
+    {
+        ans[i++] = *str++;
+    }
 
-  *res = '\0';
+    ans[i] = '\0';
 
-  return res;
+    char *res = ans; // always try to declare *res -> this variable where you need it, don't declare at top. It might results in wrong answer.
 
+    return res;
 }
