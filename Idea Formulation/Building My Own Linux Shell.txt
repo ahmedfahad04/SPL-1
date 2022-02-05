@@ -39,30 +39,6 @@ defined.)
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ### Why I need it?
 
 As most GNU/Linux shells are open-sourced, if you want to learn the inner workings of the shell, 

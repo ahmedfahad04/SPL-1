@@ -30,8 +30,8 @@ int main()
             cmd_execute(tokens[0], tokens[1]);            
         }
 
-        free(tokens);
-        free(commandLine);
+        // free(tokens);
+        // free(commandLine);
 
     } while (1);
 }

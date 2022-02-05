@@ -47,3 +47,17 @@ char *strcpy(char *from)
 
     return to;
 }
+
+char *strcatt(char *with, char *str){
+
+  char *res = with + strlen(str);
+
+  while(*res != '\0'){
+      *res++ = *str++;
+  }
+
+  *res = '\0';
+
+  return res;
+
+}
