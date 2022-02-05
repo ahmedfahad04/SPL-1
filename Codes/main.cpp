@@ -3,7 +3,6 @@
 #include <unistd.h>
 #include "shell.h"
 
-
 int main()
 {
     fprintf(stdout, "\e[1;1H\e[2J");
@@ -23,20 +22,14 @@ int main()
 
         // this if block is used to clear the console
         if (strcmp(tokens[0], "clear"))
-        {
-            fprintf(stdout, "\e[1;1H\e[2J");
-        }
+            fprintf(stdout, "\e[1;1H\e[2J"); // ansi code to clear the console
 
         else
         {
             printf("%s\n", commandLine);
-
-            // display the words given in the prompt
-            // for(int i=0; i<100; i++){
-            //     if(tokens[i] != NULL) printf("%d. %s\n", i+1, tokens[i]);
-            // }
-
-            cmd_execute(tokens[0],tokens[1]);
+            cmd_execute(tokens[0], tokens[1]);
+            
+            printf("HOST: %s\n", hostname());
         }
 
         free(tokens);

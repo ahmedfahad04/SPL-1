@@ -1,15 +1,22 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "shell.h"
-
 using namespace std;
 
 #define BUFFER_SIZE 1024
 
+void prompt(){
+
+    char *path = current_directory();
+
+    // color coded text (user prompt)
+    // printf("mecsh@Dell %s$", path);
+    printf("\u001b[1m\u001b[35;1mecsh@mmyShell: %s$\u001b[35;1m\u001b[1m ", path);
+}
+
 char *take_user_input()
 {
-
-    char *buffer, *splitted_words;
+    char *buffer, *splitted_words, *path;
     char ch;
     int location = 0, buffer_size = BUFFER_SIZE;
 
@@ -17,8 +24,7 @@ char *take_user_input()
     buffer = (char *)malloc(sizeof(char) * buffer_size);
     splitted_words = (char *)malloc(sizeof(char) * buffer_size);
 
-    // color coded text
-    printf("\u001b[1m\u001b[35;1mecsh@mmyShell~$\u001b[35;1m\u001b[1m ");
+    prompt();
     printf("\u001b[32m");
 
     while (1)
@@ -63,7 +69,7 @@ char **tokenizations(char *ch)
     // split the string into words based on spaces
     for (int i = 0;; i++)
     {
-        if (((ch[i] == ' ' && i > 0) || (ch[i] == '\0')) && (ch[i - 1] != ' '))
+        if (((ch[i] == ' ' && i > 0) || (ch[i] == '\0') || (ch[i] == '\n')) && (ch[i - 1] != ' '))
         {
             cnt++;
             newstr[j] = '\0';
@@ -82,10 +88,6 @@ char **tokenizations(char *ch)
         }
     }
 
-    for(int i=0; i<cnt; i++){
-        printf("%d: %s, len = %ld\n", i+1, raw_words[i], strlen(raw_words[i]));
-    }
-
     // removing white spaces from each words
     for(int i=0; i<cnt; i++){
 
@@ -99,10 +101,6 @@ char **tokenizations(char *ch)
         }
 
         words[i] = demo;
-    }
-
-    for(int i=0; i<cnt; i++){
-        printf("%d: %s, len = %ld\n", i+1, words[i], strlen(words[i]));
     }
 
     return words;

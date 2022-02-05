@@ -2,6 +2,7 @@
 
 
 // Command Prompt
+void prompt();
 char *take_user_input();
 char **tokenizations(char *ch);
 
@@ -9,10 +10,11 @@ char **tokenizations(char *ch);
 // string opearation
 size_t strlen(char *str);
 bool strcmp(char *a, char *b);
-void strcpy(char *a, char *b);
+char* strcpy(char *b);
 
 
 // Command Execution
 void cmd_execute(char *cmd, char *path);
 void change_directory(char *path);
-void current_directory();
+char* current_directory();
+char* hostname();
