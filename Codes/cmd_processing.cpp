@@ -9,8 +9,11 @@ void cmd_execute(char *cmd, char *args)
     // in future I'll send the tokenize text for execution
     //cmd_execute(commandLine);
     
-    if (strcmp(cmd, "chngdir"))
+    if (strcmp(cmd, "cd"))
         change_directory(args);
+    else if(strcmp(cmd, "nano")){
+        launch_nano();
+    }
 
 }
 
@@ -64,3 +67,9 @@ char* hostname(){
  
     return host;
 }
+
+void launch_nano(){
+
+
+}
+

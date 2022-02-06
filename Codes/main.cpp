@@ -1,11 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <signal.h>
 #include "shell.h"
 
 int main()
 {
     fprintf(stdout, "\e[1;1H\e[2J");
+
 
     char *commandLine, **tokens;
 

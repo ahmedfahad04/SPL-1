@@ -1,24 +1,21 @@
 #include <stdio.h>
 #include <signal.h>
-void sigint_handler(int signum)
-{ //Handler for SIGINT
-   //Reset handler to catch SIGINT next time.
+#include <unistd.h>
 
-   signal(SIGINT, sigint_handler);
-   printf("Cannot be stopped using Ctrl+C \n");
-   //fflush(stdout);
+void sig_handler(int signum)
+{
+   // Return type of the handler function should be void
+   printf("\nInside handler function\n");
 }
+
 int main()
 {
+   signal(SIGINT, sig_handler); // Register signal handler
 
-   int a;
-
-   signal(SIGINT, sigint_handler);
-
-   while (1)
-   { //create infinite loop
-      scanf("%d", &a);
-      printf("A: %d", a);
-      
+   for (int i = 1;; i++)
+   { // Infinite loop
+      printf("%d : Inside main function\n", i);
+      sleep(1); // Delay for 1 second
    }
+   return 0;
 }
