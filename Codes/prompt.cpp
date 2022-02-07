@@ -32,7 +32,17 @@ char *take_user_input()
 
     while (1)
     {
-        scanf("%c", &ch);
+        // scanf("%c", &ch);
+        ch = getchar();
+        printf("ID of %c is %d..\n", ch, (int)ch);
+
+
+        if (location > buffer_size)
+        {
+            buffer_size += 1024;
+            buffer = (char *)realloc(buffer, buffer_size);
+            splitted_words = (char *)realloc(buffer, buffer_size);
+        }
 
         if ((int)ch == EOF or ch == '\n' or buffer == NULL)
         {
@@ -43,13 +53,6 @@ char *take_user_input()
         else
         {
             buffer[location] = ch;
-        }
-
-        if (location > buffer_size)
-        {
-            buffer_size += 1024;
-            buffer = (char *)realloc(buffer, buffer_size);
-            splitted_words = (char *)realloc(buffer, buffer_size);
         }
 
         location++;
