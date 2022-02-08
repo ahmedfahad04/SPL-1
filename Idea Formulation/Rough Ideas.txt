@@ -1,8 +1,8 @@
 Planning: 
 1. Python to Cpp converter.
-2. Trelly ERP.
+2. Trelly ERP. (Business software)
 3. Python Compiler.
-4. Linux Shell
+4. Linux Shell (FINAL)
 
 What I need to care: 
 1. First I have to do rough about the basic features of both languages.
@@ -10,5 +10,3 @@ What I need to care:
 3. Read out the facebook research AI team. 
 4. https://medium.com/swlh/converting-code-from-one-programming-language-to-another-fe4b2ad8ed43#:~:text=Compilers%20convert%20one%20programming%20language,generally%20understandable%20by%20a%20human.
 
-
-How to do:

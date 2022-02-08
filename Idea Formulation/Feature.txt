@@ -1,2 +1,0 @@
-1. terminate upon ctrl+d
-2. choose your customized color (ansi)

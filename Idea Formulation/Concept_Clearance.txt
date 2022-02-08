@@ -8,5 +8,5 @@ ssize_t is used for functions whose return value could either be a valid size, o
 
 So you should use size_t whenever you mean to return a size in bytes, and ssize_t whenever you would return either a size in bytes or a (negative) error value. 
 
-### \e[1;1H\e[2J
+### \e[1;1H\e[2J (ANSI codes)
 \e is escape and what that printf() line is telling the terminal to move the cursor to line 1 column 1 ( \e[1;1H ) and to move all the text currently in the terminal to the scrollback buffer ( \e[2J ). These are ANSI escape codes and here's some resources: https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797.
