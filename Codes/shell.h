@@ -13,12 +13,12 @@ void sig_handler(int signum);
 
 
 // string opearation
-size_t strlen(char *str);
-bool strcmp(char *a, char *b);
-char* strcpy(char *b);
-char* strchr(char *a, char ch);
-char* strcatt(char *with, char *str);
-char* strreplace(char *info, char *with, char *str);
+size_t strlen(const char *str);
+bool strcmp(const char *a, const char *b);
+char* strcpy(const char *b);
+char* strchr(const char *a, const char ch);
+char* strcatt(const char *with, const char *str);
+char* strreplace(const char *info, const char *with, const char *str);
 
 
 // Command Execution

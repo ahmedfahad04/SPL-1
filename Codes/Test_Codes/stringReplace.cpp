@@ -23,7 +23,7 @@ char *strcatt(char *with, char *str)
     return res;
 }
 
-void strreplace(char *data, char *with, char *str){
+char *strreplace(char *data, char *with, char *str){
 
     char ans[1024], *p1, *res, tmp[1024];;
     int start = -1, end = -1, pos = -1;
@@ -56,14 +56,16 @@ void strreplace(char *data, char *with, char *str){
         tmp[id++] = data[k];
     }
 
-    p1 = strcatt(p1, tmp);
+    res = strcatt(p1, tmp);
 
-    cout << "After: " << p1 << endl;
+    return res;
+
 }
 
 int main(){
 
-    char *data = "FahadMyxWorld";
-    strreplace(data, "Myx", "~");
+    char *data = "/home/fahad/Desktop";
+    char *ans = strreplace(data, "/home/fahad", "~");
+    cout << ans << endl;
 
 }

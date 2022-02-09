@@ -9,16 +9,15 @@ void prompt(){
     char *path = current_directory();
     char *myhost = hostname();
     char *tindle = strcatt("/home/", myhost);
-    char *p = strreplace(path, tindle, "~");
-
-    printf("TEST: %s\n", p);
+    char *stat = strreplace(path, tindle, "~");
 
     // An important thing is, if you are using the root user,
     // ~/ will be the /root directory, not /home/user_name.
     // => convert /home/fahad to ~ 
     // => we need to implement parsing
     printf("\u001b[31;1m%s@ubuntu22:\u001b[31;1m\u001b[0m", myhost);
-    printf("\u001b[1m\u001b[36;1m%s$ \u001b[36;1m\u001b[1m\u001b[0m", path);
+    printf("\u001b[1m\u001b[36;1m%s$ \u001b[36;1m\u001b[1m\u001b[0m", stat);
+
 }
 
 char *take_user_input()

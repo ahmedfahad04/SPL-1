@@ -58,7 +58,7 @@ char *hostname()
 
     // we need to use character array instead of pointers.
     // as pointer array of character lost the input after reading the whole file.
-    char a[200], b[200], hostname[200], *host;
+    char a[200], b[200], *host;
     int line = 1;
 
     while (fscanf(fp, "%s %s ", a, b) != EOF)
@@ -69,6 +69,7 @@ char *hostname()
         }
         line++;
     }
+
 
     fclose(fp);
 

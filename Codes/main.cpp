@@ -1,13 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <signal.h>
 #include "shell.h"
 
 int main()
 {
     fprintf(stdout, "\e[1;1H\e[2J");
-
 
     char *commandLine, **tokens;
 
@@ -27,13 +25,12 @@ int main()
             fprintf(stdout, "\e[1;1H\e[2J"); // ansi code to clear the console
 
         
-       
         //printf("%s\n", commandLine);
         cmd_execute(tokens);            
         
 
-        // free(tokens);
-        // free(commandLine);
+        free(tokens);
+        free(commandLine);
 
     } while (1);
 }

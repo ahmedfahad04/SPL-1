@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-size_t strlen(char *str)
+size_t strlen(const char *str)
 {
 
     size_t len = 0;
@@ -14,7 +14,7 @@ size_t strlen(char *str)
     return len;
 }
 
-bool strcmp(char *a, char *b)
+bool strcmp(const char *a, const char *b)
 {
 
     if (strlen(a) != strlen(b))
@@ -35,20 +35,22 @@ bool strcmp(char *a, char *b)
     }
 }
 
-char *strcpy(char *from)
+char *strcpy(const char *from)
 {
-    char *to = (char *)malloc(sizeof(char) * 1024);
+    int len = strlen(from);
+    char res[len + 1];
 
     int i;
-    for (i = 0; i < strlen(from); i++)
-        to[i] = from[i];
+    for (i = 0; i < len; i++)
+        res[i] = from[i];
 
-    from[i] = '\0';
+    res[i] = '\0';
 
+    char *to = res;
     return to;
 }
 
-char *strcatt(char *with, char *str)
+char *strcatt(const char *with, const char *str)
 {
     char ans[2000];
     int i = 0;
@@ -70,41 +72,51 @@ char *strcatt(char *with, char *str)
     return res;
 }
 
-char *strreplace(char *data, char *with, char *str){
+char *strreplace(const char *data, const char *with, const char *str)
+{
 
-    char ans[1024], *p1, *res, tmp[1024];;
-    int start = -1, end = -1, pos = -1;
+    char ans[1024];
+    int start = -1, end = -1;
 
     int id = 0, j = 0;
-    for(int i=0; i<strlen(data); i++){
+    for (int i = 0; i < strlen(data); i++)
+    {
 
-        //cout << "D: " << data[i] << ", W: " << with[j] <<", I: " << i <<endl;
+        // cout << "D: " << data[i] << ", W: " << with[j] <<", I: " << i <<endl;
 
-        if(data[i] == with[j]){
-            if(start == -1) start = i;
+        if (data[i] == with[j])
+        {
+            if (start == -1)
+                start = i;
             j++;
         }
 
-        else if ( (data[i] != with[j]) && start != -1){
+        else if ((data[i] != with[j]) && start != -1)
+        {
             end = i;
             break;
         }
 
-        if(start == -1){
+        if (start == -1)
+        {
             ans[++id] = data[i];
         }
-
-    }
-    
-    p1 = strcatt(ans, str);
-
-    id = 0;
-    for(int k=end; k<strlen(data); k++){
-        tmp[id++] = data[k];
     }
 
-    p1 = strcatt(p1, tmp);
+    id--;
 
-    return p1;
+    while(*str != '\0'){
+        ans[++id] = *str++;
+    }
 
+    data += end;
+    while(*data != '\0'){
+        ans[++id] = *data++;
+    }
+
+    ans[++id] = '\0';
+
+    char *res = ans;
+
+    return res;
 }
