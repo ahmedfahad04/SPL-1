@@ -1,3 +1,4 @@
 1. Terminate upon ctrl+d (controlling the signals)
 2. Customized Color
 3. cd ~ => should change the directory to root directory
+4. Keyboard navigation must be fixed.

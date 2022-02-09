@@ -9,6 +9,9 @@ void prompt(){
     char *path = current_directory();
     char *myhost = hostname();
     char *tindle = strcatt("/home/", myhost);
+    char *p = strreplace(path, tindle, "~");
+
+    printf("TEST: %s\n", p);
 
     // An important thing is, if you are using the root user,
     // ~/ will be the /root directory, not /home/user_name.
@@ -32,10 +35,7 @@ char *take_user_input()
 
     while (1)
     {
-        // scanf("%c", &ch);
-        ch = getchar();
-        printf("ID of %c is %d..\n", ch, (int)ch);
-
+        scanf("%c", &ch);
 
         if (location > buffer_size)
         {

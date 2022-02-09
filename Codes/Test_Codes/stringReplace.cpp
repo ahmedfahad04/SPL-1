@@ -1,52 +1,5 @@
-#include <stdio.h>
-#include <stdlib.h>
-
-size_t strlen(char *str)
-{
-
-    size_t len = 0;
-
-    while (str[len] != '\0')
-    {
-        len++;
-    }
-
-    return len;
-}
-
-bool strcmp(char *a, char *b)
-{
-
-    if (strlen(a) != strlen(b))
-        return false;
-    else
-    {
-
-        while (*a)
-        {
-
-            if (*a != *b)
-                return false;
-            a++;
-            b++;
-        }
-
-        return true;
-    }
-}
-
-char *strcpy(char *from)
-{
-    char *to = (char *)malloc(sizeof(char) * 1024);
-
-    int i;
-    for (i = 0; i < strlen(from); i++)
-        to[i] = from[i];
-
-    from[i] = '\0';
-
-    return to;
-}
+#include <bits/stdc++.h>
+using namespace std;
 
 char *strcatt(char *with, char *str)
 {
@@ -70,7 +23,7 @@ char *strcatt(char *with, char *str)
     return res;
 }
 
-char *strreplace(char *data, char *with, char *str){
+void strreplace(char *data, char *with, char *str){
 
     char ans[1024], *p1, *res, tmp[1024];;
     int start = -1, end = -1, pos = -1;
@@ -105,6 +58,12 @@ char *strreplace(char *data, char *with, char *str){
 
     p1 = strcatt(p1, tmp);
 
-    return p1;
+    cout << "After: " << p1 << endl;
+}
+
+int main(){
+
+    char *data = "FahadMyxWorld";
+    strreplace(data, "Myx", "~");
 
 }

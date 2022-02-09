@@ -26,11 +26,11 @@ int main()
         if (strcmp(tokens[0], "clear"))
             fprintf(stdout, "\e[1;1H\e[2J"); // ansi code to clear the console
 
-        else
-        {
-            printf("%s\n", commandLine);
-            cmd_execute(tokens[0], tokens[1]);            
-        }
+        
+       
+        //printf("%s\n", commandLine);
+        cmd_execute(tokens);            
+        
 
         // free(tokens);
         // free(commandLine);
