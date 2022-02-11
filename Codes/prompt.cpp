@@ -3,18 +3,17 @@
 #include "shell.h"
 using namespace std;
 
-
-void prompt(){
+void prompt()
+{
 
     char *path = getCurrentDirectory();
 
     // An important thing is, if you are using the root user,
     // ~/ will be the /root directory, not /home/user_name.
-    // => convert /home/fahad to ~ 
+    // => convert /home/fahad to ~ [Done]
     // => we need to implement parsing
-    printf("\u001b[31;1m%s@ubuntu22:\u001b[31;1m\u001b[0m", hostname());
+    printf("\u001b[31;1m%s@myShell:\u001b[31;1m\u001b[0m", hostname());
     printf("\u001b[1m\u001b[36;1m%s$ \u001b[36;1m\u001b[1m\u001b[0m", path);
-
 }
 
 char *take_user_input()
@@ -23,7 +22,7 @@ char *take_user_input()
     char ch;
     int location = 0, buffer_size = BUFFER_SIZE;
 
-    //dynamically allocate memory to store the user prompt
+    // dynamically allocate memory to store the user prompt
     buffer = (char *)malloc(sizeof(char) * buffer_size);
     splitted_words = (char *)malloc(sizeof(char) * buffer_size);
 
@@ -41,21 +40,28 @@ char *take_user_input()
         }
 
         if ((int)ch == EOF or ch == '\n' or buffer == NULL)
-        {
+        {   
+            // this portion is for taking multiline input delimited by '\'
+            int tmploc = location-1;
+
+            if (buffer[tmploc] == '\\')
+            {
+                location--;
+                printf("> ");
+                continue;
+            }
+
             buffer[location] = '\0';
             break;
         }
 
-        else
-        {
-            buffer[location] = ch;
-        }
-
+        buffer[location] = ch;
         location++;
     }
 
-    //splitted_words = splitstr(buffer);
-    //return splitted_words;
+    // splitted_words = splitstr(buffer);
+    // return splitted_words;
+    
     return buffer;
 }
 
@@ -91,14 +97,16 @@ char **tokenizations(char *ch)
     }
 
     // removing white spaces from each words
-    for(int i=0; i<cnt; i++){
+    for (int i = 0; i < cnt; i++)
+    {
 
         char *demo = (char *)malloc(sizeof(char) * BUFFER_SIZE);
         int id = 0;
 
-        for(int j=0; j<strlen(raw_words[i]); j++){
+        for (int j = 0; j < strlen(raw_words[i]); j++)
+        {
 
-            if(raw_words[i][j] != ' ') 
+            if (raw_words[i][j] != ' ')
                 demo[id++] = raw_words[i][j];
         }
 

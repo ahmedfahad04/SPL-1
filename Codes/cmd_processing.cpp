@@ -149,17 +149,16 @@ char *getCurrentDirectory()
 
     char *dir = current_directory();
     char *myhost = hostname();
-    char *tindle = strcatt("/home/", myhost);
+    char *tilde = strcatt("/home/", myhost);
     char *dirPath;
 
-    if (strcontain(dir, tindle))
+    if (strcontain(dir, tilde))
     {
 
-        dirPath = strreplace(dir, tindle, "~");
+        dirPath = strreplace(dir, tilde, "~");
     }
     else
     {
-
         dirPath = dir;
     }
 
