@@ -19,6 +19,8 @@ char* strcpy(const char *b);
 char* strchr(const char *a, const char ch);
 char* strcatt(const char *with, const char *str);
 char* strreplace(const char *info, const char *with, const char *str);
+bool strcontain(const char *data, const char *substr);
+
 
 
 // Command Execution
@@ -29,3 +31,4 @@ char* hostname();
 void launch_nano();
 void execute(char **args);
 bool isBuiltInCmd(char *cmd);
+char *getCurrentDirectory();

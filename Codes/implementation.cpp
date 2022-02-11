@@ -105,12 +105,14 @@ char *strreplace(const char *data, const char *with, const char *str)
 
     id--;
 
-    while(*str != '\0'){
+    while (*str != '\0')
+    {
         ans[++id] = *str++;
     }
 
     data += end;
-    while(*data != '\0'){
+    while (*data != '\0')
+    {
         ans[++id] = *data++;
     }
 
@@ -119,4 +121,34 @@ char *strreplace(const char *data, const char *with, const char *str)
     char *res = ans;
 
     return res;
+}
+
+bool strcontain(const char *data, const char *substr)
+{
+
+    int j = 0, len = 0, flag = 0;
+    for (int i = 0; i < strlen(data); i++)
+    {
+        if (data[i] == substr[j])
+        {
+            j++;
+            len++;  
+        }
+        else
+        {
+            if (len == strlen(substr))
+            {
+                flag = 1;
+                break;
+            }
+            j = 0;
+            len = 0;
+        }
+
+        
+    }
+
+    if(len == strlen(substr)) flag = 1;
+
+    return flag;
 }

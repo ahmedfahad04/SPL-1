@@ -6,17 +6,14 @@ using namespace std;
 
 void prompt(){
 
-    char *path = current_directory();
-    char *myhost = hostname();
-    char *tindle = strcatt("/home/", myhost);
-    char *stat = strreplace(path, tindle, "~");
+    char *path = getCurrentDirectory();
 
     // An important thing is, if you are using the root user,
     // ~/ will be the /root directory, not /home/user_name.
     // => convert /home/fahad to ~ 
     // => we need to implement parsing
-    printf("\u001b[31;1m%s@ubuntu22:\u001b[31;1m\u001b[0m", myhost);
-    printf("\u001b[1m\u001b[36;1m%s$ \u001b[36;1m\u001b[1m\u001b[0m", stat);
+    printf("\u001b[31;1m%s@ubuntu22:\u001b[31;1m\u001b[0m", hostname());
+    printf("\u001b[1m\u001b[36;1m%s$ \u001b[36;1m\u001b[1m\u001b[0m", path);
 
 }
 

@@ -24,6 +24,8 @@ void cmd_execute(char **args)
 void change_directory(char *path)
 {
 
+
+
     if (chdir(path) != 0)
         printf("ecsh: cd: %s: No such file or directory\n", path);
 }
@@ -127,4 +129,24 @@ void execute(char **args)
 
         } while (status);
     }
+}
+
+char *getCurrentDirectory(){
+
+    char *dir = current_directory();
+    char *myhost = hostname();
+    char *tindle = strcatt("/home/", myhost);
+    char *dirPath;
+
+    if(strcontain(dir, tindle)){
+    
+        dirPath = strreplace(dir, tindle, "~");
+         
+    }
+    else{
+
+        dirPath = dir;
+    }
+
+    return dirPath;
 }
