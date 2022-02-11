@@ -26,7 +26,7 @@ int main()
 
         
         //printf("%s\n", commandLine);
-        cmd_execute(tokens);            
+        execute(tokens);            
         
 
         free(tokens);

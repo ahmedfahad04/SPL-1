@@ -24,8 +24,6 @@ void cmd_execute(char **args)
 void change_directory(char *path)
 {
 
-
-
     if (chdir(path) != 0)
         printf("ecsh: cd: %s: No such file or directory\n", path);
 }
@@ -72,7 +70,6 @@ char *hostname()
         line++;
     }
 
-
     fclose(fp);
 
     return host;
@@ -85,7 +82,16 @@ void launch_nano()
 bool isBuiltInCmd(char *cmd)
 {
 
-    bool status;
+    bool status = 0;
+
+    if (strcmp(cmd, "cd"))
+    {
+        status = 1;
+    }
+    else
+    {
+        status = 0;
+    }
 
     return status;
 }
@@ -95,9 +101,11 @@ void execute(char **args)
 
     char *command = args[0];
 
-    if (isBuiltInCmd(command))
+    if (strcmp(command, "cd"))
     {
+        cmd_execute(args);
     }
+
     else
     {
 
@@ -106,44 +114,51 @@ void execute(char **args)
         // if it's the child process run execv()
         // if it's parent process then wait for the child process to be terminated
 
-        int status = 1;
-        do
+        pid_t status;
+
+        pid_t process_id;
+
+        process_id = fork();
+
+        // child process
+        if (process_id == 0)
         {
-            pid_t process_id;
-
-            process_id = fork();
-
-            // child process
-            if (process_id == 0)
+            if (execvp(command, args) == -1)
             {
-                if (execvp(command, args) == -1)
-                {
-                    perror("Execution failed\n");
-                }
-            }
-            else
-            {
-                int status = waitpid(process_id, NULL, 0);
-                printf("It's a parent proecss\n");
+                perror("Execution failed\n");
             }
 
-        } while (status);
+            exit(EXIT_FAILURE);
+        }
+        else if (process_id < 1)
+        {
+
+            perror("Process Forking Failed\n");
+        }
+
+        else
+        {
+            status = waitpid(process_id, NULL, 0);
+            // printf("It's a parent proecss\n");
+        }
     }
 }
 
-char *getCurrentDirectory(){
+char *getCurrentDirectory()
+{
 
     char *dir = current_directory();
     char *myhost = hostname();
     char *tindle = strcatt("/home/", myhost);
     char *dirPath;
 
-    if(strcontain(dir, tindle)){
-    
+    if (strcontain(dir, tindle))
+    {
+
         dirPath = strreplace(dir, tindle, "~");
-         
     }
-    else{
+    else
+    {
 
         dirPath = dir;
     }
