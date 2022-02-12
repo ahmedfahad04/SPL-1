@@ -12,6 +12,11 @@ struct student{
     char *name;
 };
 
+typedef struct str{
+    char *data;
+    int len;
+} string;
+
 int main(){
 
     int a;
@@ -25,4 +30,10 @@ int main(){
     // we can also directly cope the content of one struct to another
     s2 = s1;
 
+    string s;
+    s.len = 21;
+    s.data = "Istiaq Ahmed Fahad";
+
+    printf("NAME: %s, Age: %d", s.data, s.len);
+    
 }
