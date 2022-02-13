@@ -64,8 +64,8 @@ char *strreplace(char *data, char *with, char *str){
 
 int main(){
 
-    char *data = "/home/fahad/Desktop";
-    char *ans = strreplace(data, "/home/fahad", "~");
+    char *data = "/home/fahad/ Desktop";
+    char *ans = strreplace(data, " /home/fahad", "~");
     cout << ans << endl;
 
 }
