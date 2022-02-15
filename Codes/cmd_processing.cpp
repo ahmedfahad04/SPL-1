@@ -53,7 +53,7 @@ char *hostname()
 
     if ((fp = fopen("/etc/hosts", "r")) == NULL)
     {
-        printf("Failed to open /etc/hostname\n");
+        printf("Failed to open /etc/hosts\n");
     }
 
     // we need to use character array instead of pointers.
@@ -61,11 +61,12 @@ char *hostname()
     char a[200], b[200], *host;
     int line = 1;
 
-    while (fscanf(fp, "%s %s ", a, b) != EOF)
+    while (fscanf(fp, "%s %s", a, b) != EOF)
     {
         if (line == 2)
         {
             host = strcpy(b);
+            break;
         }
         line++;
     }
