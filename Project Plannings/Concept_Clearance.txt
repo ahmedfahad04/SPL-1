@@ -12,4 +12,4 @@ So you should use size_t whenever you mean to return a size in bytes, and ssize_
 \e is escape and what that printf() line is telling the terminal to move the cursor to line 1 column 1 ( \e[1;1H ) and to move all the text currently in the terminal to the scrollback buffer ( \e[2J ). These are ANSI escape codes and here's some resources: https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797.
 
 ### (null)
-In computer programming, null is both a value and a pointer. Null is a built-in constant that has a value of zero. It is the same as the character 0 used to terminate strings in C. Null can also be the value of a pointer, which is the same as zero unless the CPU supports a special bit pattern for a null pointer.
+In computer programming, null is both a value and a pointer. Null is a built-in constant that has a value of zero. It is the same as the character 0 used to terminate strings in C. Null can also be the value of a pointer, which is the same as zero unless the CPU supports a special bit pattern for a null pointer.fi

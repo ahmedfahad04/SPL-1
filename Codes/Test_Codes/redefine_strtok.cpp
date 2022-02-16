@@ -57,6 +57,27 @@ char **str_tokenize(char *ch, char sep)
     return raw_words;
 }
 
+bool strcmp(const char *a, const char *b)
+{
+
+    if (strlen(a) != strlen(b))
+        return false;
+    else
+    {
+
+        while (*a)
+        {
+
+            if (*a != *b)
+                return false;
+            a++;
+            b++;
+        }
+
+        return true;
+    }
+}
+
 char **userNames()
 {
     char **names = (char **)malloc(sizeof(char) * BUFFER_SIZE);
@@ -77,7 +98,8 @@ char **userNames()
     while (fscanf(fp, "%s", a) != EOF)
     {
         char **res = str_tokenize(a, ':');
-        if (res[5] != 0)
+        
+        if (res[5] != 0 )
             names[id++] = res[5];
 
         // printf("%s", res[5]);

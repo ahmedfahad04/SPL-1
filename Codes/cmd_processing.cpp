@@ -46,8 +46,9 @@ char *current_directory()
     return addr;
 }
 
-char *hostname()
+char *hostName()
 {
+    char *host = (char *)malloc(sizeof(char) * BUFFER_SIZE);
 
     FILE *fp;
 
@@ -58,22 +59,24 @@ char *hostname()
 
     // we need to use character array instead of pointers.
     // as pointer array of character lost the input after reading the whole file.
-    char a[200], b[200], *host;
-    int line = 1;
+    char a[2000];
 
     while (fscanf(fp, "%s", a) != EOF)
     {
-        host = strcpy(a);
+        host = a;
     }
+
+    // int len = strlen(host);
+    // host[len] = '\0';
 
     fclose(fp);
 
     return host;
 }
 
-char **userNames()
+char *userName()
 {
-    char **names = (char **)malloc(sizeof(char) * BUFFER_SIZE);
+    char *user = (char *)malloc(sizeof(char) * BUFFER_SIZE);
     int id = 0;
 
     FILE *fp;
@@ -85,21 +88,24 @@ char **userNames()
 
     // we need to use character array instead of pointers.
     // as pointer array of character lost the input after reading the whole file.
-    char a[200], b[200], *host;
-    int line = 1;
+    char a[200];
+    char *currdir = current_directory();
+
 
     while (fscanf(fp, "%s", a) != EOF)
     {
         char **res = str_tokenize(a, ':');
-        if (res[5] != 0)
-            names[id++] = res[5];
-    }
 
-    names[id] = NULL;
+        if (res[5] != 0){
+            if(strcontain(currdir, res[5])){
+                user = res[0];
+            }
+        }
+    }
 
     fclose(fp);
 
-    return names;
+    return user;
 }
 
 void launch_nano()
@@ -175,11 +181,9 @@ char *getCurrentDirectory()
 {
 
     char *dir = current_directory();
-    char **myuser = userNames();
-    
-    char *myhost = hostname();
-    char *tilde = strcatt("/home/", myhost);
+    char *tilde = strcatt("/home/", userName());
     char *dirPath;
+
 
     if (strcontain(dir, tilde))
     {
