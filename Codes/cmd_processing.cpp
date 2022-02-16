@@ -51,9 +51,9 @@ char *hostname()
 
     FILE *fp;
 
-    if ((fp = fopen("/etc/hosts", "r")) == NULL)
+    if ((fp = fopen("/etc/hostname", "r")) == NULL)
     {
-        printf("Failed to open /etc/hosts\n");
+        printf("Failed to open /etc/hostname\n");
     }
 
     // we need to use character array instead of pointers.
@@ -61,19 +61,45 @@ char *hostname()
     char a[200], b[200], *host;
     int line = 1;
 
-    while (fscanf(fp, "%s %s", a, b) != EOF)
+    while (fscanf(fp, "%s", a) != EOF)
     {
-        if (line == 2)
-        {
-            host = strcpy(b);
-            break;
-        }
-        line++;
+        host = strcpy(a);
     }
 
     fclose(fp);
 
     return host;
+}
+
+char **userNames()
+{
+    char **names = (char **)malloc(sizeof(char) * BUFFER_SIZE);
+    int id = 0;
+
+    FILE *fp;
+
+    if ((fp = fopen("/etc/passwd", "r")) == NULL)
+    {
+        printf("Failed to open /etc/passwd\n");
+    }
+
+    // we need to use character array instead of pointers.
+    // as pointer array of character lost the input after reading the whole file.
+    char a[200], b[200], *host;
+    int line = 1;
+
+    while (fscanf(fp, "%s", a) != EOF)
+    {
+        char **res = str_tokenize(a, ':');
+        if (res[5] != 0)
+            names[id++] = res[5];
+    }
+
+    names[id] = NULL;
+
+    fclose(fp);
+
+    return names;
 }
 
 void launch_nano()
@@ -149,13 +175,14 @@ char *getCurrentDirectory()
 {
 
     char *dir = current_directory();
+    char **myuser = userNames();
+    
     char *myhost = hostname();
     char *tilde = strcatt("/home/", myhost);
     char *dirPath;
 
     if (strcontain(dir, tilde))
     {
-
         dirPath = strreplace(dir, tilde, "~");
     }
     else

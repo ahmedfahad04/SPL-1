@@ -41,9 +41,9 @@ char *take_user_input()
         }
 
         if ((int)ch == EOF or ch == '\n' or buffer == NULL)
-        {   
+        {
             // this portion is for taking multiline input delimited by '\'
-            int tmploc = location-1;
+            int tmploc = location - 1;
 
             if (buffer[tmploc] == '\\')
             {
@@ -62,23 +62,49 @@ char *take_user_input()
 
     // splitted_words = splitstr(buffer);
     // return splitted_words;
-    
+
     return buffer;
 }
 
-char **tokenizations(char *ch)
+char **removeWhiteSpace(char **raw_data)
+{
+
+    char **words = (char **)malloc(sizeof(char) * BUFFER_SIZE);
+    int i = 0;
+
+    // removing white spaces from each words
+    for (; raw_data[i]; i++)
+    {
+        char *demo = (char *)malloc(sizeof(char) * BUFFER_SIZE);
+        int id = 0;
+
+        for (int j = 0; j < strlen(raw_data[i]); j++)
+        {
+
+            if (raw_data[i][j] != ' ')
+                demo[id++] = raw_data[i][j];
+        }
+
+        words[i] = demo;
+    }
+
+    words[i] = NULL;
+
+    return words;
+}
+
+char **str_tokenize(char *ch, char sep)
 {
 
     char *newstr = (char *)malloc(sizeof(char) * BUFFER_SIZE);
     char **raw_words = (char **)malloc(sizeof(char) * BUFFER_SIZE);
-    char **words = (char **)malloc(sizeof(char) * BUFFER_SIZE);
 
     int cnt = 0, k = 0, j = 0;
 
     // split the string into words based on spaces
     for (int i = 0;; i++)
     {
-        if (((ch[i] == ' ' && i > 0) || (ch[i] == '\0') || (ch[i] == '\n')) && (ch[i - 1] != ' '))
+        if (((ch[i] == sep && i > 0) || (ch[i] == '\0') || (ch[i] == '\n')) && (ch[i - 1] != sep))
         {
             cnt++;
             newstr[j] = '\0';
@@ -97,22 +123,7 @@ char **tokenizations(char *ch)
         }
     }
 
-    // removing white spaces from each words
-    for (int i = 0; i < cnt; i++)
-    {
+    raw_words[k] = NULL;
 
-        char *demo = (char *)malloc(sizeof(char) * BUFFER_SIZE);
-        int id = 0;
-
-        for (int j = 0; j < strlen(raw_words[i]); j++)
-        {
-
-            if (raw_words[i][j] != ' ')
-                demo[id++] = raw_words[i][j];
-        }
-
-        words[i] = demo;
-    }
-
-    return words;
+    return raw_words;
 }

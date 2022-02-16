@@ -8,7 +8,7 @@
 // Command Prompt
 void prompt();
 char *take_user_input();
-char **tokenizations(char *ch);
+char **str_tokenize(char *ch, char sep);
 void sig_handler(int signum);
 
 
@@ -20,6 +20,7 @@ char* strchr(const char *a, const char ch);
 char* strcatt(const char *with, const char *str);
 char* strreplace(const char *info, const char *with, const char *str);
 bool strcontain(const char *data, const char *substr);
+char **removeWhiteSpace(char **raw_data);
 
 
 
@@ -28,6 +29,7 @@ void cmd_execute(char **args);
 void change_directory(char *path);
 char* current_directory();
 char* hostname();
+char** userNames();
 void launch_nano();
 void execute(char **args);
 bool isBuiltInCmd(char *cmd);

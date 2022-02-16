@@ -7,12 +7,13 @@ int main()
 {
     fprintf(stdout, "\e[1;1H\e[2J");
 
-    char *commandLine, **tokens;
+    char *commandLine, **tokens, **filtered_tokens;
 
     do
     {
         commandLine = take_user_input();
-        tokens = tokenizations(commandLine);
+        tokens = str_tokenize(commandLine, ' ');
+        filtered_tokens = removeWhiteSpace(tokens);
 
         // this is a temporary block to exit the loop
         // in final outcome the command will send a termination code
@@ -26,10 +27,11 @@ int main()
 
         
         //printf("%s\n", commandLine);
-        execute(tokens);            
+        execute(filtered_tokens);            
         
 
         free(tokens);
+        free(filtered_tokens);
         free(commandLine);
 
     } while (1);
