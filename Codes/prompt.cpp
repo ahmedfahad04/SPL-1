@@ -12,6 +12,7 @@ void prompt()
     // ~/ will be the /root directory, not /home/user_name.
     // => convert /home/fahad to ~ [Done]
     // => we need to implement parsing
+    // username@hostname~..
     printf("\u001b[31;1m%s@myShell:\u001b[31;1m\u001b[0m", hostname());
     printf("\u001b[1m\u001b[36;1m%s$ \u001b[36;1m\u001b[1m\u001b[0m", path);
 }
