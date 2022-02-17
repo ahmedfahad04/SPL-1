@@ -1,7 +1,7 @@
 1. Terminate upon ctrl+d (controlling the signals)
 2. Customized Color ***
 3. cd ~ => should change the directory to root directory [DONE]
-4. Keyboard navigation must be fixed. [NOW WORKING..]
+4. Keyboard navigation + Tab Completion (optional) + backspace must be fixed. [NOW WORKING..]
 5. Implementing the following commands:
 	- history
 	- alias ***
@@ -10,5 +10,5 @@
 	- eval.....(will discover more of builtin commands to be executed)
 6. Command Correction
 7. suggesting tentative commands ***
-8. executing command from scratch {VVI right now...}
-9. Ami /etc/passwd theke home directory gula fetch kore oita match korbo and then oita replaec korbo ~ diye....[Now Working]
+8. executing command from scratch {VVI}
+9. Ami /etc/passwd theke home directory gula fetch kore oita match korbo and then oita replaec korbo ~ diye....[DONE]
