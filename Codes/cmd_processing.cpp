@@ -66,8 +66,6 @@ char *hostName()
         host = a;
     }
 
-    // int len = strlen(host);
-    // host[len] = '\0';
 
     fclose(fp);
 
@@ -76,34 +74,48 @@ char *hostName()
 
 char *userName()
 {
-    char *user = (char *)malloc(sizeof(char) * BUFFER_SIZE);
-    int id = 0;
 
+    // we need to use character array instead of pointers.
+    // as pointer array of character lost the input after reading the whole file.
+    char *currdir = current_directory();
+    char *user = (char *)malloc(sizeof(char) * BUFFER_SIZE);
+    char *line = NULL;
+    size_t length = 0;
+    ssize_t read;
     FILE *fp;
+
 
     if ((fp = fopen("/etc/passwd", "r")) == NULL)
     {
         printf("Failed to open /etc/passwd\n");
     }
 
-    // we need to use character array instead of pointers.
-    // as pointer array of character lost the input after reading the whole file.
-    char a[200];
-    char *currdir = current_directory();
 
-
-    while (fscanf(fp, "%s", a) != EOF)
+    // I need to use getline becuase it can handle line with spaces easily
+    // other file function is malfunctioning in many cases
+    // read - holds the length of the line
+    while ((read = getline(&line, &length, fp)) != -1)
     {
-        char **res = str_tokenize(a, ':');
+        char **chunk = str_tokenize(line, ':');
 
-        if (res[5] != 0){
-            if(strcontain(currdir, res[5])){
-                user = res[0];
+        if (chunk[5] != 0)
+        {
+            // this following two condition is a must.
+            // it's because if I don't add the first condition
+            // it matches '/' with currentdi and that produce faulty results
+            if (strcontain(chunk[5], "/home/") && strcontain(currdir, chunk[5]))
+            {
+                user = chunk[0];
             }
         }
     }
 
+
     fclose(fp);
+
+
+    if (line)
+        free(line);
 
     return user;
 }
@@ -183,7 +195,6 @@ char *getCurrentDirectory()
     char *dir = current_directory();
     char *tilde = strcatt("/home/", userName());
     char *dirPath;
-
 
     if (strcontain(dir, tilde))
     {

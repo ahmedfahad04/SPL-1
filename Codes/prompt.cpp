@@ -16,10 +16,9 @@ void prompt()
     // username@hostname~..
 
     printf("\u001b[31;1m%s@%s:\u001b[31;1m\u001b[0m", myuser, myhost);
-    printf("\u001b[1m\u001b[36;1m%s$ \u001b[36;1m\u001b[1m\u001b[0m", path);
+    fflush(stdin);
+    printf("\u001b[1m\u001b[36;1m%s$ \u001b[36;1m\u001b[1m\u001b[0m", getCurrentDirectory());
 
-    // free(myuser);
-    // free(myhost);
 }
 
 char *take_user_input()
