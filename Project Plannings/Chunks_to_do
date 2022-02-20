@@ -1,7 +1,7 @@
 1. Terminate upon ctrl+d (controlling the signals)
 2. Customized Color ***
 3. cd ~ => should change the directory to root directory [DONE]
-4. Keyboard navigation + Tab Completion (optional) + backspace must be fixed. [NOW WORKING..]
+4. Keyboard navigation + Tab Completion (optional) + backspace must be fixed.
 5. Implementing the following commands:
 	- history
 	- alias ***
@@ -12,3 +12,8 @@
 7. suggesting tentative commands ***
 8. executing command from scratch {VVI}
 9. Ami /etc/passwd theke home directory gula fetch kore oita match korbo and then oita replaec korbo ~ diye....[DONE]
+10. Command Correction suggestion-
+	> I'll take the command
+	> Will pass it into the Edit distance function
+	> The function will list up most close related commands according to ED and sort them
+	> Show the suggestion of correct command
