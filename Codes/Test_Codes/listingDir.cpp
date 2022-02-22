@@ -8,11 +8,11 @@
 using namespace std;
 
 int c[100][100], b[100][100];
-int m, n;
+int m, n, mindist = INT_MAX, k = 0;
+string closest_words[100];
 
 void ED(char x[], char y[], int row, int col)
 {
-
     // initialize
     for (int i = 0; i < row; i++)
     {
@@ -108,11 +108,11 @@ void execute(string a, string d)
     // function call
     ED(xx, yy, m, n);
 
-    if (c[m - 1][n - 1] <= 3)
-    {
-        cout << "Edit Distance: " << c[m - 1][n - 1] << " -- " << d << "\n\n";
-        cout << "BINGOOOOOO" << endl;
+    if(a == d){
+        cout << "String matched\n";
+        return;
     }
+
 }
 
 int main()
@@ -123,7 +123,7 @@ int main()
 
     char ch[100];
     int cnt = 0;
-    string s = "claer";
+    string s = "clear";
     printf("Enter directory path: ");
     scanf("%s", ch);
 
