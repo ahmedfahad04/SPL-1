@@ -12,8 +12,10 @@
 7. suggesting tentative commands ***
 8. executing command from scratch {VVI}
 9. Ami /etc/passwd theke home directory gula fetch kore oita match korbo and then oita replaec korbo ~ diye....[DONE]
-10. Command Correction suggestion-
+10. Command Correction suggestion- [Working.....]
 	> I'll take the command
 	> Will pass it into the Edit distance function
 	> The function will list up most close related commands according to ED and sort them
 	> Show the suggestion of correct command
+	>> "Some approaches to best match file searching" https://iq.opengenus.org/burkhard-keller-tree/
+	[ here I'll allow to ignore upper case character ... ]

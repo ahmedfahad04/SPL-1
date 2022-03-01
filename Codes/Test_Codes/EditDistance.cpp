@@ -122,8 +122,7 @@ int main(){
 	//freopen("in.txt", "r", stdin);
     //freopen("out.txt", "w", stdout);
 
-    
-    
+
     string a,d;
     cout << "Enter tow strings: ";	
 
