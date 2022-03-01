@@ -10,7 +10,20 @@ using namespace std;
 int c[100][100], b[100][100];
 int m, n;
 
-void ED(char x[], char y[], int row, int col)
+size_t strlen(const char *str)
+{
+
+    size_t len = 0;
+
+    while (str[len] != '\0')
+    {
+        len++;
+    }
+
+    return len;
+}
+
+void ED(char *x, char *y, int row, int col)
 {
 
     // initialize
@@ -40,12 +53,13 @@ void ED(char x[], char y[], int row, int col)
 
         for (int j = 1; j < col; j++)
         {
-
             int subs = c[i - 1][j - 1];
             int del = c[i - 1][j];
             int insert = c[i][j - 1];
 
-            if (x[i] == y[j])
+            cout << "X: " << x[i-1] << ", Y: " << y[i-1] << endl;
+
+            if (x[i-1] == y[j-1])
             {
                 c[i][j] = c[i - 1][j - 1];
                 b[i][j] = UNCHANGED;
@@ -53,14 +67,12 @@ void ED(char x[], char y[], int row, int col)
 
             else
             {
-
                 int m1 = min(subs, del);
                 int minimum = min(m1, insert);
 
                 // cout << x[i] << " " << y[j] << endl;
                 if (minimum == subs)
                 {
-
                     // min = substitute
                     c[i][j] = c[i - 1][j - 1] + 1;
                     b[i][j] = SUBSTITUE;
@@ -77,7 +89,6 @@ void ED(char x[], char y[], int row, int col)
 
                 else
                 {
-
                     // min = del
                     c[i][j] = c[i - 1][j] + 1;
                     b[i][j] = DELETE;
@@ -91,14 +102,15 @@ void ED(char x[], char y[], int row, int col)
 struct node
 {
     int data;
-    string word;
+    char * word;
     struct node *left;
     struct node *right;
 };
 
-struct node *createNode(int value, string info)
+struct node *createNode(int value, char * info)
 {
     struct node *p = (struct node *)malloc(sizeof(struct node));
+
     p->data = value;
     p->word = info;
     p->left = NULL;
@@ -107,7 +119,7 @@ struct node *createNode(int value, string info)
     return p;
 }
 
-void addNode(struct node *parent, int value, string info)
+void addNode(struct node *parent, int value, char * info)
 {
 
     if (value <= parent->data)
@@ -116,7 +128,6 @@ void addNode(struct node *parent, int value, string info)
         {
             struct node *leftnode = createNode(value, info);
             parent->left = leftnode;
-            // parent->word = info;
             printf("LEFT NODE ADDED >> %d---P: %d\n", value, parent->data);
         }
         else
@@ -130,7 +141,6 @@ void addNode(struct node *parent, int value, string info)
         {
             struct node *rightnode = createNode(value, info);
             parent->right = rightnode;
-            // parent->word = info;
             printf("RIGHT NODE ADDED >> %d---P: %d\n", value, parent->data);
         }
         else
@@ -164,33 +174,29 @@ int main()
 
     int x = 10;
     int size = 4;
-    string rootWord = "cat";
+
+    char * rootWord = (char *) malloc (1024);
+    cout << "Enter the root word: ";
+    scanf("%s", rootWord);
+
     struct node *root = createNode(x, rootWord);
 
     while (size--)
     {
-        string newWord;
+        char * newWord = (char *) malloc (1024);
+
         cout << "Enter Word: " ;
-        cin >> newWord;
+        scanf("%s", newWord);
 
-        m = newWord.size() + 1;
-        n = rootWord.size() + 1;
+        m = strlen(newWord)+1;
+        n = strlen(rootWord)+1;
 
-        char xx[m + 1], yy[n + 1];
+        cout << "M: " << m << ", N: " << n << endl;
 
-        xx[0] = ' ';
-        yy[0] = ' ';
-
-        for (int i = 1; i < m; i++)
-            xx[i] = newWord[i - 1];
-        for (int i = 1; i < n; i++)
-            yy[i] = rootWord[i - 1];
-
-        ED(xx, yy, m, n);
+        ED(newWord, rootWord, m, n);
 
         int edgeValue = c[m-1][n-1];
         addNode(root, edgeValue, newWord);
-
     }
     printTree(root);
 }
