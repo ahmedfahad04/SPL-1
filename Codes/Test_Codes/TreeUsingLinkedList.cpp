@@ -53,8 +53,8 @@ void addNode(struct node *parent, int value)
 
 void printTree(struct node *head, int nodes)
 {
-
-    if (head == NULL){
+    if (head == NULL)
+    {
         return;
     }
 
