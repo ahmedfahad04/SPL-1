@@ -7,7 +7,7 @@
 #define UNCHANGED -4
 using namespace std;
 
-int c[100][100], b[100][100];
+int c[100][100], b[100][100], tolerance=-1;
 int m, n;
 
 size_t strlen(const char *str)
@@ -57,7 +57,7 @@ void ED(char *x, char *y, int row, int col)
             int del = c[i - 1][j];
             int insert = c[i][j - 1];
 
-            cout << "X: " << x[i-1] << ", Y: " << y[i-1] << endl;
+            // cout << "X: " << x[i-1] << ", Y: " << y[i-1] << endl;
 
             if (x[i-1] == y[j-1])
             {
@@ -171,7 +171,6 @@ void printTree(struct node *head)
 
 int main()
 {
-
     int x = 10;
     int size = 4;
 
@@ -191,12 +190,17 @@ int main()
         m = strlen(newWord)+1;
         n = strlen(rootWord)+1;
 
-        cout << "M: " << m << ", N: " << n << endl;
+        // cout << "M: " << m << ", N: " << n << endl;
 
         ED(newWord, rootWord, m, n);
 
         int edgeValue = c[m-1][n-1];
         addNode(root, edgeValue, newWord);
+        tolerance = max(edgeValue, tolerance);
     }
+
+    
     printTree(root);
+
+    
 }
