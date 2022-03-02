@@ -1,4 +1,4 @@
-#include <bits/stdc++.h>
+#include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
 #define DELETE -1
@@ -8,7 +8,7 @@
 using namespace std;
 
 int c[100][100], b[100][100], tolerance=-1;
-int m, n;
+int m, n, totalCommandCount = 0;
 
 size_t strlen(const char *str)
 {
@@ -21,6 +21,38 @@ size_t strlen(const char *str)
     }
 
     return len;
+}
+
+char **readCMDOutput(char *cmd)
+{
+    FILE *p;
+    int ch, buffer_size = 100024;
+    size_t length = 0;
+    ssize_t read;
+
+    char *line = (char *) malloc (sizeof(char)*1024);
+    char **wordArr = (char **)malloc(sizeof(char) * buffer_size);
+
+    p = popen(cmd, "r"); /* Unix */
+
+    if (p == NULL)
+    {
+        puts("Unable to open process");
+    }
+
+    int i = 0;
+    while ((read = getline(&line, &length, p)) != -1)
+    {
+        //printf("%s", line);
+        wordArr[i++] = line;
+        line = (char *) malloc (sizeof(char)*1024);
+    }
+
+    wordArr[i] = NULL;
+    totalCommandCount = i;
+    pclose(p);
+
+    return wordArr;
 }
 
 void ED(char *x, char *y, int row, int col)
@@ -128,7 +160,7 @@ void addNode(struct node *parent, int value, char * info)
         {
             struct node *leftnode = createNode(value, info);
             parent->left = leftnode;
-            printf("LEFT NODE ADDED >> %d---P: %d\n", value, parent->data);
+            if(value<=3) printf("LEFT NODE ADDED >> %d === %s ==== ---P: %d\n", value, info, parent->data);
         }
         else
         {
@@ -141,7 +173,7 @@ void addNode(struct node *parent, int value, char * info)
         {
             struct node *rightnode = createNode(value, info);
             parent->right = rightnode;
-            printf("RIGHT NODE ADDED >> %d---P: %d\n", value, parent->data);
+            if(value<=3) printf("RIGHT NODE ADDED >> %d === %s ==== ---P: %d\n", value, info, parent->data);
         }
         else
         {
@@ -152,20 +184,20 @@ void addNode(struct node *parent, int value, char * info)
     return;
 }
 
-void printTree(struct node *head)
+void printTree(struct node *head, int lim)
 {
-    if (head == NULL)
+    if (head == NULL or lim <= 0)
     {
         return;
     }
 
     else
     {
-        printTree(head->left);
+        printTree(head->left, --lim);
 
         printf("--%s(%d)--\n", head->word, head->data);
 
-        printTree(head->right);
+        printTree(head->right, --lim);
     }
 }
 
@@ -180,27 +212,49 @@ int main()
 
     struct node *root = createNode(x, rootWord);
 
-    while (size--)
+    // while (size--)
+    // {
+    //     char * newWord = (char *) malloc (1024);
+
+    //     cout << "Enter Word: " ;
+    //     scanf("%s", newWord);
+
+    //     m = strlen(newWord)+1;
+    //     n = strlen(rootWord)+1;
+
+    //     // cout << "M: " << m << ", N: " << n << endl;
+
+    //     ED(newWord, rootWord, m, n);
+
+    //     int edgeValue = c[m-1][n-1];
+    //     addNode(root, edgeValue, newWord);
+    //     tolerance = max(edgeValue, tolerance);
+    // }
+
+    char ** allCMDs = readCMDOutput("ls /usr/bin");
+
+    char **temp = allCMDs; // temp is a pointer to a *pointer*, not a pointer to a *char*
+
+    int t = 0;
+    while (*temp)
     {
-        char * newWord = (char *) malloc (1024);
-
-        cout << "Enter Word: " ;
-        scanf("%s", newWord);
-
-        m = strlen(newWord)+1;
+        m = strlen(*temp)+1;
         n = strlen(rootWord)+1;
 
         // cout << "M: " << m << ", N: " << n << endl;
 
-        ED(newWord, rootWord, m, n);
+        ED(*temp, rootWord, m, n);
 
         int edgeValue = c[m-1][n-1];
-        addNode(root, edgeValue, newWord);
-        tolerance = max(edgeValue, tolerance);
+        addNode(root, edgeValue, *temp);
+
+        temp++;
+        // t++;
+        // if(t>15) break;
     }
 
-    
-    printTree(root);
+    int lim = 5;
+    printTree(root, lim);
 
     
 }
