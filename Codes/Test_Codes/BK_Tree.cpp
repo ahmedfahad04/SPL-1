@@ -5,9 +5,10 @@
 #define INSERT -2
 #define SUBSTITUE -3
 #define UNCHANGED -4
+#define MAXSIZE 10005
 using namespace std;
 
-int c[100][100], b[100][100], tolerance=-1;
+int c[MAXSIZE][MAXSIZE], b[MAXSIZE][MAXSIZE], tolerance = -1;
 int m, n, totalCommandCount = 0;
 
 size_t strlen(const char *str)
@@ -30,7 +31,7 @@ char **readCMDOutput(char *cmd)
     size_t length = 0;
     ssize_t read;
 
-    char *line = (char *) malloc (sizeof(char)*1024);
+    char *line = (char *)malloc(sizeof(char) * 1024);
     char **wordArr = (char **)malloc(sizeof(char) * buffer_size);
 
     p = popen(cmd, "r"); /* Unix */
@@ -43,9 +44,9 @@ char **readCMDOutput(char *cmd)
     int i = 0;
     while ((read = getline(&line, &length, p)) != -1)
     {
-        //printf("%s", line);
+        // printf("%s", line);
         wordArr[i++] = line;
-        line = (char *) malloc (sizeof(char)*1024);
+        line = (char *)malloc(sizeof(char) * 1024);
     }
 
     wordArr[i] = NULL;
@@ -91,7 +92,7 @@ void ED(char *x, char *y, int row, int col)
 
             // cout << "X: " << x[i-1] << ", Y: " << y[i-1] << endl;
 
-            if (x[i-1] == y[j-1])
+            if (x[i - 1] == y[j - 1])
             {
                 c[i][j] = c[i - 1][j - 1];
                 b[i][j] = UNCHANGED;
@@ -134,12 +135,12 @@ void ED(char *x, char *y, int row, int col)
 struct node
 {
     int data;
-    char * word;
+    char *word;
     struct node *left;
     struct node *right;
 };
 
-struct node *createNode(int value, char * info)
+struct node *createNode(int value, char *info)
 {
     struct node *p = (struct node *)malloc(sizeof(struct node));
 
@@ -151,7 +152,7 @@ struct node *createNode(int value, char * info)
     return p;
 }
 
-void addNode(struct node *parent, int value, char * info)
+void addNode(struct node *parent, int value, char *info)
 {
 
     if (value <= parent->data)
@@ -160,7 +161,8 @@ void addNode(struct node *parent, int value, char * info)
         {
             struct node *leftnode = createNode(value, info);
             parent->left = leftnode;
-            if(value<=3) printf("LEFT NODE ADDED >> %d === %s ==== ---P: %d\n", value, info, parent->data);
+            if (value <= 3)
+                printf("LEFT NODE ADDED >> %d === %s ==== ---P: %d\n", value, info, parent->data);
         }
         else
         {
@@ -173,7 +175,8 @@ void addNode(struct node *parent, int value, char * info)
         {
             struct node *rightnode = createNode(value, info);
             parent->right = rightnode;
-            if(value<=3) printf("RIGHT NODE ADDED >> %d === %s ==== ---P: %d\n", value, info, parent->data);
+            if (value <= 3)
+                printf("RIGHT NODE ADDED >> %d === %s ==== ---P: %d\n", value, info, parent->data);
         }
         else
         {
@@ -184,20 +187,21 @@ void addNode(struct node *parent, int value, char * info)
     return;
 }
 
-void printTree(struct node *head, int lim)
+void printTree(struct node *head, char *keyword, int lim)
 {
-    if (head == NULL or lim <= 0)
+    if (head == NULL)
     {
         return;
     }
 
     else
     {
-        printTree(head->left, --lim);
+        printTree(head->left, keyword, --lim);
 
-        printf("--%s(%d)--\n", head->word, head->data);
+        if ( head->data <= 3 && (strlen(head->word) >= strlen(keyword)) )
+            printf("--%s(%d)--\n", head->word, head->data);
 
-        printTree(head->right, --lim);
+        printTree(head->right, keyword, --lim);
     }
 }
 
@@ -206,47 +210,28 @@ int main()
     int x = 10;
     int size = 4;
 
-    char * rootWord = (char *) malloc (1024);
+    char *rootWord = (char *)malloc(1024);
     cout << "Enter the root word: ";
     scanf("%s", rootWord);
 
     struct node *root = createNode(x, rootWord);
 
-    // while (size--)
-    // {
-    //     char * newWord = (char *) malloc (1024);
-
-    //     cout << "Enter Word: " ;
-    //     scanf("%s", newWord);
-
-    //     m = strlen(newWord)+1;
-    //     n = strlen(rootWord)+1;
-
-    //     // cout << "M: " << m << ", N: " << n << endl;
-
-    //     ED(newWord, rootWord, m, n);
-
-    //     int edgeValue = c[m-1][n-1];
-    //     addNode(root, edgeValue, newWord);
-    //     tolerance = max(edgeValue, tolerance);
-    // }
-
-    char ** allCMDs = readCMDOutput("ls /usr/bin");
+    char **allCMDs = readCMDOutput("ls /usr/bin");
 
     char **temp = allCMDs; // temp is a pointer to a *pointer*, not a pointer to a *char*
 
     int t = 0;
     while (*temp)
     {
-        m = strlen(*temp)+1;
-        n = strlen(rootWord)+1;
+        m = strlen(*temp) + 1;
+        n = strlen(rootWord) + 1;
 
         // cout << "M: " << m << ", N: " << n << endl;
 
         ED(*temp, rootWord, m, n);
 
-        int edgeValue = c[m-1][n-1];
-        addNode(root, edgeValue, *temp);
+        int edgeValue = c[m - 1][n - 1];
+        if (edgeValue <= 3 or (m == n)) addNode(root, edgeValue, *temp);
 
         temp++;
         // t++;
@@ -254,7 +239,5 @@ int main()
     }
 
     int lim = 5;
-    printTree(root, lim);
-
-    
+    printTree(root, rootWord, lim);
 }
