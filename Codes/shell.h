@@ -34,3 +34,4 @@ void launch_nano();
 void execute(char **args);
 bool isBuiltInCmd(char *cmd);
 char *getCurrentDirectory();
+void cmdSuggestion(char * cmd);

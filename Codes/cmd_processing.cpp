@@ -23,7 +23,6 @@ void cmd_execute(char **args)
 
 void change_directory(char *path)
 {
-
     if (chdir(path) != 0)
         printf("ecsh: cd: %s: No such file or directory\n", path);
 }
@@ -146,6 +145,8 @@ void execute(char **args)
 
     char *command = args[0];
 
+
+
     if (strcmp(command, "cd"))
     {
         cmd_execute(args);
@@ -170,14 +171,13 @@ void execute(char **args)
         {
             if (execvp(command, args) == -1)
             {
+                cmdSuggestion(command);
                 perror("Execution failed\n");
             }
-
             exit(EXIT_FAILURE);
         }
         else if (process_id < 1)
         {
-
             perror("Process Forking Failed\n");
         }
 

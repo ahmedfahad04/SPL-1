@@ -1,28 +1,17 @@
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
+#include "shell.h"
 #define DELETE -1
 #define INSERT -2
 #define SUBSTITUE -3
-#define UNCHANGED -4
+#define UNCHANGEditDistance -4
 #define MAXSIZE 10005
 using namespace std;
 
 int c[MAXSIZE][MAXSIZE], b[MAXSIZE][MAXSIZE], tolerance = -1;
 int m, n, totalCommandCount = 0;
 
-size_t strlen(const char *str)
-{
-
-    size_t len = 0;
-
-    while (str[len] != '\0')
-    {
-        len++;
-    }
-
-    return len;
-}
 
 char **readCMDOutput(char *cmd)
 {
@@ -44,7 +33,6 @@ char **readCMDOutput(char *cmd)
     int i = 0;
     while ((read = getline(&line, &length, p)) != -1)
     {
-        // printf("%s", line);
         wordArr[i++] = line;
         line = (char *)malloc(sizeof(char) * 1024);
     }
@@ -56,7 +44,7 @@ char **readCMDOutput(char *cmd)
     return wordArr;
 }
 
-void ED(char *x, char *y, int row, int col)
+void EditDistance(char *x, char *y, int row, int col)
 {
     // initialize
     for (int i = 0; i < row; i++)
@@ -94,7 +82,7 @@ void ED(char *x, char *y, int row, int col)
             if (x[i - 1] == y[j - 1])
             {
                 c[i][j] = c[i - 1][j - 1];
-                b[i][j] = UNCHANGED;
+                b[i][j] = UNCHANGEditDistance;
             }
 
             else
@@ -160,8 +148,6 @@ void addNode(struct node *parent, int value, char *info)
         {
             struct node *leftnode = createNode(value, info);
             parent->left = leftnode;
-            if (value <= 3)
-                printf("LEFT NODE ADDED >> %d === %s ==== ---P: %d\n", value, info, parent->data);
         }
         else
         {
@@ -174,8 +160,6 @@ void addNode(struct node *parent, int value, char *info)
         {
             struct node *rightnode = createNode(value, info);
             parent->right = rightnode;
-            if (value <= 3)
-                printf("RIGHT NODE ADDED >> %d === %s ==== ---P: %d\n", value, info, parent->data);
         }
         else
         {
@@ -197,41 +181,47 @@ void printTree(struct node *head, char *keyword)
     {
         printTree(head->left, keyword);
 
-        if ( head->data <= 3 && (strlen(head->word) >= strlen(keyword)) )
-            printf("--%s(%d)--\n", head->word, head->data);
+        if (head->data <= 3 && (strlen(head->word) >= strlen(keyword)))
+            printf("command -> %s", head->word);
 
         printTree(head->right, keyword);
     }
 }
 
-int main()
+void cmdSuggestion(char * rootWord)
 {
+    // char *rootWord = (char *)malloc(1024);
+    // cout << "Enter the root word: ";
+    // scanf("%s", rootWord);
 
-    char *rootWord = (char *)malloc(1024);
-    cout << "Enter the root word: ";
-    scanf("%s", rootWord);
-
-    struct node *root = createNode(10, rootWord);    // root value
+    struct node *root = createNode(10, rootWord); // root value
 
     char **allCMDs = readCMDOutput("ls /usr/bin");
 
-    char **temp = allCMDs; 
+    char **temp = allCMDs;
 
     while (*temp)
     {
         m = strlen(*temp) + 1;
         n = strlen(rootWord) + 1;
 
-        // cout << "M: " << m << ", N: " << n << endl;
+        EditDistance(*temp, rootWord, m, n);
 
-        ED(*temp, rootWord, m, n);
+        int EdgeValue = c[m - 1][n - 1];
 
-        int edgeValue = c[m - 1][n - 1];
-        if (edgeValue <= 3 or (m == n)) addNode(root, edgeValue, *temp);
+        if (EdgeValue <= 3 or (m == n))
+
+            addNode(root, EdgeValue, *temp);
 
         temp++;
     }
 
-    
+    printf("Command \'%s\' not found, did you mean: \n", rootWord);
     printTree(root, rootWord);
+    exit(EXIT_FAILURE);
 }
+
+// int main()
+// {
+//     cmdSuggestion("pdd");
+// }
