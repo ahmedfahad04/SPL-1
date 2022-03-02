@@ -6,3 +6,4 @@ In Simple terms, I have desinged the system prompt/ bash prompt..
 3. Conventional way of executing commands (without using any perser/AST) [It'll be changed and 
 we'll execute command through parsing->tokenizing->using AST/command Table InSha Allah]
 4. Implemented simple built-in command (cd, pwd, clear, exit)
+5. Show tentative command suggestion for entering wrong commands

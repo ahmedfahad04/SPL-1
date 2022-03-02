@@ -18,7 +18,7 @@
 	> The function will list up most close related commands according to ED and sort them
 	> Show the suggestion of correct command
 	>> "Some approaches to best match file searching" https://iq.opengenus.org/burkhard-keller-tree/
-	[ here I'll allow to ignore upper case character ... ]
+	[ here I'll allow to ignore upper case character ... ]===> [DONE]
 	>> Will Also use KMP Algorithm for pattern searching..
 	[ for example... if your search 'brave' the result would be 'brave-browser'.....means it
 	would detect the pattern]
