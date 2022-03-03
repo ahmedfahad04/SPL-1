@@ -117,6 +117,7 @@ string closest_words[100];
 //     }
 
 // }
+<<<<<<< HEAD
 
 char **str_tokenize(char *ch, char sep)
 {
@@ -170,6 +171,8 @@ char **environmentVariablePath()
 
     return paths;
 }
+=======
+>>>>>>> 963edb8c1d462c154a0f886b201345dc7ff45f88
 
 char ** readCMDPath()
 {
@@ -182,7 +185,18 @@ char ** readCMDPath()
     char ** path = (char **) malloc (sizeof(char) * MAXSIZE);  
     int i = 0;
     int cnt = 0;
+<<<<<<< HEAD
     while (*envPath)
+=======
+    char *text = "code";
+
+    printf("Enter directory path: ");
+    scanf("%s", ch);
+
+    folder = opendir(ch);
+
+    if (folder == NULL)
+>>>>>>> 963edb8c1d462c154a0f886b201345dc7ff45f88
     {
        
         //cout << "==============> " << *envPath << endl;
@@ -195,6 +209,7 @@ char ** readCMDPath()
 
         else
         {
+<<<<<<< HEAD
             while (files = readdir(folder))
             {
                 cnt++;
@@ -203,6 +218,15 @@ char ** readCMDPath()
             }
 
             //printf("Total Files: %d\n", cnt);
+=======
+            char *t = strstr(files->d_name, text); // will manually implement
+
+            if (t)
+            {
+                printf("> %s\n", files->d_name);
+                cnt++;
+            }
+>>>>>>> 963edb8c1d462c154a0f886b201345dc7ff45f88
         }
 
         closedir(folder);
