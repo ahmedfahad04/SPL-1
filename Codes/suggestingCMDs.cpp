@@ -12,7 +12,6 @@ using namespace std;
 int c[MAXSIZE][MAXSIZE], b[MAXSIZE][MAXSIZE], tolerance = -1;
 int m, n, totalCommandCount = 0;
 
-
 char **readCMDOutput(char *cmd)
 {
     FILE *p;
@@ -188,7 +187,7 @@ void printTree(struct node *head, char *keyword)
     }
 }
 
-void cmdSuggestion(char * rootWord)
+void cmdSuggestion(char *rootWord)
 {
     // char *rootWord = (char *)malloc(1024);
     // cout << "Enter the root word: ";
@@ -220,8 +219,3 @@ void cmdSuggestion(char * rootWord)
     printTree(root, rootWord);
     exit(EXIT_FAILURE);
 }
-
-// int main()
-// {
-//     cmdSuggestion("pdd");
-// }
