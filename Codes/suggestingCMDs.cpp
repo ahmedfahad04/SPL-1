@@ -188,6 +188,7 @@ void printTree(struct node *head, char *keyword)
     }
 }
 
+
 void cmdSuggestion(char * rootWord)
 {
     // char *rootWord = (char *)malloc(1024);
@@ -196,7 +197,9 @@ void cmdSuggestion(char * rootWord)
 
     struct node *root = createNode(10, rootWord); // root value
 
-    char **allCMDs = readCMDOutput("ls /usr/bin");
+    // char **allCMDs = readCMDOutput("ls /usr/bin");
+    char **allCMDs = readCMDOutput("ls /usr/bin; ls /bin");
+
 
     char **temp = allCMDs;
 
@@ -220,8 +223,3 @@ void cmdSuggestion(char * rootWord)
     printTree(root, rootWord);
     exit(EXIT_FAILURE);
 }
-
-// int main()
-// {
-//     cmdSuggestion("pdd");
-// }

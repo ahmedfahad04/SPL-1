@@ -22,3 +22,4 @@
 	>> Will Also use KMP Algorithm for pattern searching..
 	[ for example... if your search 'brave' the result would be 'brave-browser'.....means it
 	would detect the pattern]
+	>> Will track the history for better word suggestion

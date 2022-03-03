@@ -18,3 +18,6 @@ suggestingCMDs.o: suggestingCMDs.cpp shell.h
 
 clean:
 	rm *.o run 
+
+line:
+	wc -l *.*
