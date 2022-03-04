@@ -171,7 +171,8 @@ void execute(char **args)
         {
             if (execvp(command, args) == -1)
             {
-                cmdSuggestion(command);
+                // cmdSuggestion(command);
+                findExeFileName(command);
                 perror("Execution failed\n");
             }
             exit(EXIT_FAILURE);

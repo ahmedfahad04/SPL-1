@@ -12,7 +12,6 @@ using namespace std;
 int c[MAXSIZE][MAXSIZE], b[MAXSIZE][MAXSIZE], tolerance = -1;
 int m, n, totalCommandCount = 0;
 
-
 char **readCMDOutput(char *cmd)
 {
     FILE *p;
@@ -188,18 +187,11 @@ void printTree(struct node *head, char *keyword)
     }
 }
 
-
-void cmdSuggestion(char * rootWord)
+void cmdSuggestion(char *rootWord)
 {
-    // char *rootWord = (char *)malloc(1024);
-    // cout << "Enter the root word: ";
-    // scanf("%s", rootWord);
-
     struct node *root = createNode(10, rootWord); // root value
 
-    // char **allCMDs = readCMDOutput("ls /usr/bin");
     char **allCMDs = readCMDOutput("ls /usr/bin; ls /bin");
-
 
     char **temp = allCMDs;
 
@@ -221,5 +213,23 @@ void cmdSuggestion(char * rootWord)
 
     printf("Command \'%s\' not found, did you mean: \n", rootWord);
     printTree(root, rootWord);
+    exit(EXIT_FAILURE);
+}
+
+void findExeFileName(char *cmd)
+{
+    printf("Executable file(s) of \"%s\" are: \n", cmd);
+
+    char **exeFilePath = readCMDOutput("ls /usr/bin; ls /bin; ls /usr/local/sbin; ls /usr/local/bin; ls /usr/sbin; ls /sbin; ls /usr/games; ls /usr/local/games; ls /snap/bin; ls /snap/bin");
+    
+    while(*exeFilePath){
+
+        int flag = strsubstr(cmd, *exeFilePath);
+        // printf("F: %d\n", flag);
+        if(flag>=0) printf("%s", *exeFilePath);
+        // printf("%s (%d)", *exeFilePath, strlen(*exeFilePath));
+        exeFilePath++;
+    }
+
     exit(EXIT_FAILURE);
 }

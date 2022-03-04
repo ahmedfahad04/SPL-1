@@ -69,8 +69,8 @@ void PieTable(char *neddle, int neddle_len, int *LPS)
 
 int main()
 {
-    char heystack[] = "AABAACAADAABAABA";
-    char neddle[] = "AABA";
+    char heystack[] = "ddbrave-browser";
+    char neddle[] = "brave";
     int x = strsubstr(neddle, heystack);
     printf("AANS: %d", x);
     return 0;

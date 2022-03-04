@@ -37,3 +37,4 @@ void execute(char **args);
 bool isBuiltInCmd(char *cmd);
 char *getCurrentDirectory();
 void cmdSuggestion(char * cmd);
+void findExeFileName(char *cmd);
