@@ -17,7 +17,7 @@ void cmd_execute(char **args)
 
     else if (strcmp(cmd, "nano"))
     {
-        launch_nano();
+        //launch_nano();
     }
 }
 
@@ -117,10 +117,6 @@ char *userName()
         free(line);
 
     return user;
-}
-
-void launch_nano()
-{
 }
 
 bool isBuiltInCmd(char *cmd)

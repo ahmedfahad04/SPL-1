@@ -217,3 +217,33 @@ void PieTable(char *neddle, int neddle_len, int *LPS)
         }
     }
 }
+
+char ** strsplit(char * find, char * text){
+
+    int pos = strsubstr(find, text);
+    int len = strlen(find);
+    int finalPos = pos+len;
+
+    char ** chunk = (char **) malloc (sizeof(char) * BUFFER_SIZE);
+    char * word = (char *) malloc (sizeof(char) * BUFFER_SIZE);
+    chunk[0] = find;
+
+    int id = 0;
+
+    //printf("==> %s\n", text);
+    // while(*text){
+    //     printf("..%d..\n", text);
+    //     text++;
+    // }
+
+    // for(int i=finalPos; i<strlen(str2); i++){
+    //     word[id++] = str2[i];
+    //     printf("%c..\n", str2[i]);
+    // }
+
+    word[id] = '\0';
+    chunk[1] = word;
+
+    return chunk;
+
+}

@@ -220,14 +220,41 @@ void findExeFileName(char *cmd)
 {
     printf("Executable file(s) of \"%s\" are: \n", cmd);
 
-    char **exeFilePath = readCMDOutput("ls /usr/bin; ls /bin; ls /usr/local/sbin; ls /usr/local/bin; ls /usr/sbin; ls /sbin; ls /usr/games; ls /usr/local/games; ls /snap/bin; ls /snap/bin");
+    char * path = 
+    "ls /usr/bin; ls /bin; ls /usr/local/sbin;"
+    "ls /usr/local/bin; ls /usr/sbin; ls /sbin;"
+    "ls /usr/games; ls /usr/local/games; ls /snap/bin; ls /snap/bin";
+
+    char **exeFilePath = readCMDOutput(path);
     
     while(*exeFilePath){
 
         int flag = strsubstr(cmd, *exeFilePath);
-        // printf("F: %d\n", flag);
-        if(flag>=0) printf("%s", *exeFilePath);
-        // printf("%s (%d)", *exeFilePath, strlen(*exeFilePath));
+       
+        if(flag>=0){
+
+            // Here we'll try to color the searched word.....
+            // int cmdLen = strlen(cmd);
+            // int matchedPos = flag;
+            // int coloredStrLen = cmdLen + matchedPos;
+            // char * fileName = strcpy(*exeFilePath);
+
+            // char ** words = strsplit(cmd, fileName);
+
+            // // while(*words){
+            // //     printf(">> %s\n", *words);
+            // //     words++;
+            // // }
+
+            // // for(int i=0; i<strlen(fileName); i++){
+
+            // //     // if(i <= coloredStrLen) printf("\u001b[31%c\u001b[0m", exeFilePath[i]);
+            // //     // else printf("%c", fileName[i]);
+            // // }
+
+            printf("%s", *exeFilePath);
+        }
+        
         exeFilePath++;
     }
 

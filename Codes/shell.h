@@ -23,6 +23,7 @@ bool strcontain(const char *data, const char *substr);
 char **removeWhiteSpace(char **raw_data);
 void PieTable(char *neddle, int neddle_len, int *LPS);
 int strsubstr(char *neddle, char *heystack);
+char ** strsplit(char * find, char * str2);
 
 
 
@@ -32,7 +33,6 @@ void change_directory(char *path);
 char* current_directory();
 char* hostName();
 char* userName();
-void launch_nano();
 void execute(char **args);
 bool isBuiltInCmd(char *cmd);
 char *getCurrentDirectory();
