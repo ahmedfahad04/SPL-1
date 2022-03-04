@@ -21,6 +21,8 @@ char* strcatt(const char *with, const char *str);
 char* strreplace(const char *info, const char *with, const char *str);
 bool strcontain(const char *data, const char *substr);
 char **removeWhiteSpace(char **raw_data);
+void PieTable(char *neddle, int neddle_len, int *LPS);
+int strsubstr(char *neddle, char *heystack);
 
 
 
