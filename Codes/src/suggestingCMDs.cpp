@@ -223,8 +223,8 @@ void findExeFileName(char *cmd)
 
     char *path =
         "ls /usr/bin;";
-        // "ls /usr/sbin; ls /sbin; ls /usr/local/sbin; ls /bin;"
-        // "ls /usr/games; ls /usr/local/games; ls /snap/bin; ls /snap/bin";
+    // "ls /usr/sbin; ls /sbin; ls /usr/local/sbin; ls /bin;"
+    // "ls /usr/games; ls /usr/local/games; ls /snap/bin; ls /snap/bin";
 
     char **exeFilePath = readCMDOutput(path);
 
@@ -237,16 +237,14 @@ void findExeFileName(char *cmd)
         {
 
             // Here we'll try to color the searched word.....
-           
+
             char *newword = strip(*exeFilePath);
-            char ** words = strsplit (cmd, newword);
+            //char **words = strsplit(cmd, newword);
 
             // while(*words){
             //     printf(">> %s\n", *words);
             //     words++;
             // }
-
-            printf("TEST...\n");
 
             // // for(int i=0; i<strlen(fileName); i++){
 

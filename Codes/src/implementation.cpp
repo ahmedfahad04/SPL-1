@@ -218,7 +218,7 @@ int strsubstr(char *neddle, char *heystack)
     return -1;
 }
 
-char ** strsplit(char *find, char *text)
+char **strsplit(char *find, char *text)
 {
 
     int pos = strsubstr(find, text);
@@ -232,8 +232,9 @@ char ** strsplit(char *find, char *text)
     chunk[0] = find;
 
     int id = 0;
-    
-    for(int i=finalPos; i<strlen(text); i++){
+
+    for (int i = finalPos; i < strlen(text); i++)
+    {
         word[id++] = text[i];
     }
 

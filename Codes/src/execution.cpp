@@ -34,14 +34,13 @@ void change_directory(char *path)
             printf("slsh: cd: %s: No such file or directory\n", newPath);
     }
 
-    else if (strcontain(path, tilde)){
+    else if (strcontain(path, tilde))
+    {
 
         newPath = strcatt("/home/", userName());
-        char ** splittedWords = strsplit(tilde, path);
-        
+        char **splittedWords = strsplit(tilde, path);
 
-        char * finalPath = strcatt(newPath, splittedWords[1]);  
-        printf("DIR: %s..\n", finalPath);
+        char *finalPath = strcatt(newPath, splittedWords[1]);
 
         if (chdir(finalPath) != 0)
             printf("slsh: cd: %s: No such file or directory\n", newPath);
