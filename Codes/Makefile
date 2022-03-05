@@ -1,5 +1,6 @@
-run: main.o prompt.o implementation.o cmd_processing.o suggestingCMDs.o
-	g++ main.o prompt.o implementation.o cmd_processing.o suggestingCMDs.o -o run
+run: main.o prompt.o implementation.o execution.o suggestingCMDs.o
+	g++ main.o prompt.o implementation.o execution.o suggestingCMDs.o -o run
+	mv *.o Obj
 
 main.o: main.cpp
 	g++ -c main.cpp
@@ -10,14 +11,17 @@ prompt.o: prompt.cpp shell.h
 implementation.o: implementation.cpp shell.h
 	g++ -c implementation.cpp
 
-cmd_processing.o: cmd_processing.cpp shell.h
-	g++ -c cmd_processing.cpp
+execution.o: execution.cpp shell.h
+	g++ -c execution.cpp
 
 suggestingCMDs.o: suggestingCMDs.cpp shell.h
 	g++ -c suggestingCMDs.cpp
 
-clean:
-	rm *.o run 
+clean: 
+	rm run
+	rm -r Obj
+	mkdir Obj
+	
 
 line:
 	wc -l *.*

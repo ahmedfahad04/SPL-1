@@ -25,10 +25,8 @@ int main()
         if (strcmp(tokens[0], "clear"))
             fprintf(stdout, "\e[1;1H\e[2J"); // ansi code to clear the console
 
-        
-        //printf("%s\n", commandLine);
-        execute(filtered_tokens);            
-        
+        // printf("%s\n", commandLine);
+        execute(filtered_tokens);
 
         free(tokens);
         free(filtered_tokens);

@@ -1,6 +1,6 @@
 1. Terminate upon ctrl+d (controlling the signals)
 2. Customized Color ***
-3. cd ~ => should change the directory to root directory [DONE]
+3. cd ~ => should change the directory to root directory [Partially DONE]
 4. Keyboard navigation + Tab Completion (optional) + backspace must be fixed.
 5. Implementing the following commands:
 	- history
@@ -8,8 +8,8 @@
 	- cd [DONE]
 	- type 
 	- eval.....(will discover more of builtin commands to be executed)
-6. Command Correction
-7. suggesting tentative commands ***
+6. Command Correction [DONE]
+7. suggesting tentative commands [DONE]
 8. executing command from scratch {VVI}
 9. Ami /etc/passwd theke home directory gula fetch kore oita match korbo and then oita replaec korbo ~ diye....[DONE]
 10. Command Correction suggestion- [Working.....]
@@ -21,5 +21,10 @@
 	[ here I'll allow to ignore upper case character ... ]===> [DONE]
 	>> Will Also use KMP Algorithm for pattern searching..
 	[ for example... if your search 'brave' the result would be 'brave-browser'.....means it
-	would detect the pattern]
+	would detect the pattern] ===> [DONE]
 	>> Will track the history for better word suggestion
+	
+11. whlile cd /usr/bin is given as command, user name shows wrong..[DONE]
+12. careful about free();
+13. duplicate handler 
+14. uname problem need to solve...[DONE]

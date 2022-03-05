@@ -15,16 +15,43 @@ void cmd_execute(char **args)
     if (strcmp(cmd, "cd"))
         change_directory(args[1]);
 
-    else if (strcmp(cmd, "nano"))
-    {
-        //launch_nano();
-    }
+    if (strcmp(cmd, "apropos"))
+        findExeFileName(args[1]);
 }
 
 void change_directory(char *path)
 {
-    if (chdir(path) != 0)
-        printf("ecsh: cd: %s: No such file or directory\n", path);
+    char *tilde = "~";
+    bool tildeStatus = strcmp(tilde, path);
+    char *newPath;
+
+    if (tildeStatus)
+    {
+        newPath = strcatt("/home/", userName());
+        printf("NEW: %s\n", newPath);
+
+        if (chdir(newPath) != 0)
+            printf("slsh: cd: %s: No such file or directory\n", newPath);
+    }
+
+    else if (strcontain(path, tilde)){
+
+        newPath = strcatt("/home/", userName());
+        char ** splittedWords = strsplit(tilde, path);
+        
+
+        char * finalPath = strcatt(newPath, splittedWords[1]);  
+        printf("DIR: %s..\n", finalPath);
+
+        if (chdir(finalPath) != 0)
+            printf("slsh: cd: %s: No such file or directory\n", newPath);
+    }
+
+    else
+    {
+        if (chdir(path) != 0)
+            printf("slsh: cd: %s: No such file or directory\n", path);
+    }
 }
 
 char *current_directory()
@@ -65,7 +92,6 @@ char *hostName()
         host = a;
     }
 
-
     fclose(fp);
 
     return host;
@@ -73,22 +99,19 @@ char *hostName()
 
 char *userName()
 {
-
     // we need to use character array instead of pointers.
     // as pointer array of character lost the input after reading the whole file.
     char *currdir = current_directory();
-    char *user = (char *)malloc(sizeof(char) * BUFFER_SIZE);
+    static char *user = (char *)malloc(sizeof(char) * BUFFER_SIZE);
     char *line = NULL;
     size_t length = 0;
     ssize_t read;
     FILE *fp;
 
-
     if ((fp = fopen("/etc/passwd", "r")) == NULL)
     {
         printf("Failed to open /etc/passwd\n");
     }
-
 
     // I need to use getline becuase it can handle line with spaces easily
     // other file function is malfunctioning in many cases
@@ -101,7 +124,7 @@ char *userName()
         {
             // this following two condition is a must.
             // it's because if I don't add the first condition
-            // it matches '/' with currentdi and that produce faulty results
+            // it matches '/' with currentdir and that produce faulty results
             if (strcontain(chunk[5], "/home/") && strcontain(currdir, chunk[5]))
             {
                 user = chunk[0];
@@ -109,9 +132,7 @@ char *userName()
         }
     }
 
-
     fclose(fp);
-
 
     if (line)
         free(line);
@@ -141,9 +162,12 @@ void execute(char **args)
 
     char *command = args[0];
 
-
-
     if (strcmp(command, "cd"))
+    {
+        cmd_execute(args);
+    }
+
+    else if (strcmp(command, "apropos"))
     {
         cmd_execute(args);
     }
@@ -167,8 +191,8 @@ void execute(char **args)
         {
             if (execvp(command, args) == -1)
             {
-                // cmdSuggestion(command);
-                findExeFileName(command);
+                cmdSuggestion(command);
+                // findExeFileName(command);
                 perror("Execution failed\n");
             }
             exit(EXIT_FAILURE);

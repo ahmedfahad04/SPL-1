@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
 #include "shell.h"
 using namespace std;
 
 void prompt()
 {
-
     char *path = getCurrentDirectory();
     char *myuser = userName();
     char *myhost = hostName();
@@ -18,7 +18,6 @@ void prompt()
     printf("\u001b[31;1m%s@%s:\u001b[31;1m\u001b[0m", myuser, myhost);
     fflush(stdin);
     printf("\u001b[1m\u001b[36;1m%s$ \u001b[36;1m\u001b[1m\u001b[0m", getCurrentDirectory());
-
 }
 
 char *take_user_input()
@@ -130,4 +129,25 @@ char **str_tokenize(char *ch, char sep)
     raw_words[k] = NULL;
 
     return raw_words;
+}
+
+char *strip (char *word)
+{
+
+    
+    int id = 0;
+    char *demo = (char *)malloc(sizeof(char) * 1024);
+
+    for (int i = 0; i < strlen(word); i++)
+    {
+        // if ( isalpha(word[i]) || isalnum(word[i]) || ispunct(word[i]) ){
+        if( isgraph(word[i])){
+            demo[id++] = word[i];
+        }
+    }
+
+    demo[id] = '\0';
+    
+
+    return demo;
 }

@@ -153,6 +153,35 @@ bool strcontain(const char *data, const char *substr)
     return flag;
 }
 
+void PieTable(char *neddle, int neddle_len, int *LPS)
+{
+
+    int len = 0;
+    LPS[0] = 0;
+    int i = 1;
+    while (i < neddle_len)
+    {
+        if (neddle[i] == neddle[len])
+        {
+            len++;
+            LPS[i] = len;
+            i++;
+        }
+        else
+        {
+            if (len != 0)
+            {
+                len = LPS[len - 1];
+            }
+            else
+            {
+                LPS[i] = 0;
+                i++;
+            }
+        }
+    }
+}
+
 int strsubstr(char *neddle, char *heystack)
 {
     int neddle_len = strlen(neddle);
@@ -189,61 +218,27 @@ int strsubstr(char *neddle, char *heystack)
     return -1;
 }
 
-void PieTable(char *neddle, int neddle_len, int *LPS)
+char ** strsplit(char *find, char *text)
 {
-
-    int len = 0;
-    LPS[0] = 0;
-    int i = 1;
-    while (i < neddle_len)
-    {
-        if (neddle[i] == neddle[len])
-        {
-            len++;
-            LPS[i] = len;
-            i++;
-        }
-        else
-        {
-            if (len != 0)
-            {
-                len = LPS[len - 1];
-            }
-            else
-            {
-                LPS[i] = 0;
-                i++;
-            }
-        }
-    }
-}
-
-char ** strsplit(char * find, char * text){
 
     int pos = strsubstr(find, text);
     int len = strlen(find);
-    int finalPos = pos+len;
+    int finalPos = pos + len;
 
-    char ** chunk = (char **) malloc (sizeof(char) * BUFFER_SIZE);
-    char * word = (char *) malloc (sizeof(char) * BUFFER_SIZE);
+    char **chunk = (char **)malloc(sizeof(char) * 1024);
+    char *word = (char *)malloc(sizeof(char) * 1024);
+    // char *str2 = (char *)malloc(sizeof(char) * 1024);
+
     chunk[0] = find;
 
     int id = 0;
-
-    //printf("==> %s\n", text);
-    // while(*text){
-    //     printf("..%d..\n", text);
-    //     text++;
-    // }
-
-    // for(int i=finalPos; i<strlen(str2); i++){
-    //     word[id++] = str2[i];
-    //     printf("%c..\n", str2[i]);
-    // }
+    
+    for(int i=finalPos; i<strlen(text); i++){
+        word[id++] = text[i];
+    }
 
     word[id] = '\0';
     chunk[1] = word;
 
     return chunk;
-
 }

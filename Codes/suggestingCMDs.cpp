@@ -181,7 +181,7 @@ void printTree(struct node *head, char *keyword)
         printTree(head->left, keyword);
 
         if (head->data <= 3 && (strlen(head->word) >= strlen(keyword)))
-            printf("command -> %s", head->word);
+            printf("    command -> %s", head->word);
 
         printTree(head->right, keyword);
     }
@@ -191,7 +191,7 @@ void cmdSuggestion(char *rootWord)
 {
     struct node *root = createNode(10, rootWord); // root value
 
-    char **allCMDs = readCMDOutput("ls /usr/bin; ls /bin");
+    char **allCMDs = readCMDOutput("ls /usr/bin");
 
     char **temp = allCMDs;
 
@@ -213,6 +213,7 @@ void cmdSuggestion(char *rootWord)
 
     printf("Command \'%s\' not found, did you mean: \n", rootWord);
     printTree(root, rootWord);
+    printf("Try: sudo apt install <deb name>\n");
     exit(EXIT_FAILURE);
 }
 
@@ -220,31 +221,32 @@ void findExeFileName(char *cmd)
 {
     printf("Executable file(s) of \"%s\" are: \n", cmd);
 
-    char * path = 
-    "ls /usr/bin; ls /bin; ls /usr/local/sbin;"
-    "ls /usr/local/bin; ls /usr/sbin; ls /sbin;"
-    "ls /usr/games; ls /usr/local/games; ls /snap/bin; ls /snap/bin";
+    char *path =
+        "ls /usr/bin;";
+        // "ls /usr/sbin; ls /sbin; ls /usr/local/sbin; ls /bin;"
+        // "ls /usr/games; ls /usr/local/games; ls /snap/bin; ls /snap/bin";
 
     char **exeFilePath = readCMDOutput(path);
-    
-    while(*exeFilePath){
+
+    while (*exeFilePath)
+    {
 
         int flag = strsubstr(cmd, *exeFilePath);
-       
-        if(flag>=0){
+
+        if (flag >= 0)
+        {
 
             // Here we'll try to color the searched word.....
-            // int cmdLen = strlen(cmd);
-            // int matchedPos = flag;
-            // int coloredStrLen = cmdLen + matchedPos;
-            // char * fileName = strcpy(*exeFilePath);
+           
+            char *newword = strip(*exeFilePath);
+            char ** words = strsplit (cmd, newword);
 
-            // char ** words = strsplit(cmd, fileName);
+            // while(*words){
+            //     printf(">> %s\n", *words);
+            //     words++;
+            // }
 
-            // // while(*words){
-            // //     printf(">> %s\n", *words);
-            // //     words++;
-            // // }
+            printf("TEST...\n");
 
             // // for(int i=0; i<strlen(fileName); i++){
 
@@ -253,10 +255,9 @@ void findExeFileName(char *cmd)
             // // }
 
             printf("%s", *exeFilePath);
+            break;
         }
-        
+
         exeFilePath++;
     }
-
-    exit(EXIT_FAILURE);
 }
