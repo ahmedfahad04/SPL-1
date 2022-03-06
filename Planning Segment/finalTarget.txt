@@ -1,0 +1,12 @@
+Have to Complete at any COST: 
+------------------------------
+
+* Parsing and Tokenizing complex commands (eg. ls -al | wc *.cpp -l)
+* Implementing some common builtin & external commands (history, apropos, alias)
+* Customizing text and background colors.
+* Command auto-completion.
+
+Increase Code Complexity: 
+--------------------------
+
+* function pointer

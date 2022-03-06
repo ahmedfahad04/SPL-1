@@ -1,0 +1,11 @@
+structure in c
+pointer [DONE]
+Revisit the linked list
+realloc and malloc [DONE]
+Lexical Analyzer
+Parser
+Semantic
+AST
+process and threads
+Hash Table/Linked list(**)/Binary search tree
+Function Pointer and Callback Function***

@@ -1,0 +1,119 @@
+In this project what I'll implement the Three basic parts of a shell:
+	
+	* The Parser
+		- Lexical Analyzer (take user input and convert it into token)
+		- Parser (Process the token according to grammer and build the Command Table)
+		- Command/Symbol Table (mainly used for handling mulitple commands separated by pipeline)
+	
+	* The Executor
+		- Builtin Commands
+		- External Commands
+		
+	
+	* Shell Subsystem
+	
+---------------------------------------------------------------
+	
+	
+*** SIMPLE LINUX SHELL (BASH) *** 
+
+# What (1-2 sentences) 
+Building a simple Linux shell (BASH) that performs basic operations of BASH. I'll implement command executions(due to time limitation I'll be implement this this commands), wrong command suggestions, color coded text, simple inbuilt text editor, customizing commands.
+
+# Why (1-2 sentences) 
+• I choose this project in order to know the implementation of system process creation, process control, pipelines, I/O redirection etc that work behind the screen in executing any application in Linux. 
+• In addition, it'll enhance my knowledge of system level programming. 
+• One can easy also learn about the working methodology of UNIX shells using C. 
+
+# How (rest of the space) 
+REPL 
+Diagram 
+
+
+## Initial Planning: 
+
+As far I have studied, I have planned to implement the follows features: 
+
+1. Basic Shell Environment. 
+• Taking User Input 
+• Tokenization 
+• Parsing (Word Expansion, I/0 Redirection)
+• Execution of Function (both external and built-in but not all built-ins) 
+• Wait till the user exit/reboot/shutdown (REPL)
+
+2. Customizable Command / Wildcard cmds
+• User should have the facility to customize command mnemonic ( Eg. User might change the cmd 'ls' with his desired name like 'list'. So that, while user type 'list', he/she should observe the directory's contents. 
+
+3. Command Suggestion / Correct word suggestion
+• If any user try to enter any wrong command, he would be suggested several possible command name so that one can pick the desired command. For example: If the user type c and press enter. 
+Command cc in package clang
+Command cat in package coreutils
+Command ci in package rcs
+
+However providing the facility of installing new packages like "sudo apt install clang" won't be available in that project. 
+
+4. Color coded text.
+• User can change colors of codes as they wish
+
+
+
+## Features (Tentative)
+
+1. Show correct output. 
+2. Input redirection.
+3. 
+4. Show suggestion for wrong commands
+5. Different color codes of command
+6. Customize your commands name [implementing alias builtin command] (cd -> chngdir)
+7. Tab completion (GNU readline lib)
+8. Learn about threads
+
+
+## Challenges 
+
+1. I had to learn about how OS works and how their process take places.
+2. How the parser and lexical analyzer works to fetch correct command sequence. 
+3. I'll have to provide command's executable file which I can't built right now.
+(For example: ls -l; list of all the file name along with their read,write,execute
+permission. Here what that command does is not defined in my code, rather it's 
+defined.)
+4. Have to learn about Metric Space, BK tree
+
+
+---------------------------------------------------------------
+
+
+
+
+### Why I need it?
+
+As most GNU/Linux shells are open-sourced, if you want to learn the inner workings of the shell, 
+you can search online for the source code and start digging in (that's what I actually did). 
+But this advice is actually easier said than done. For example, where exactly should you start 
+reading the code from? Which source files contain the code that implements I/O redirection? 
+Where can I find the code that parses user commands? I guess you got the point.
+
+This is why I’ve decided to write this tutorial, to help Linux users and programmers gain a 
+better understanding of their shells. Together, we are going to implement a fully functional 
+Linux shell, from scratch. Along the way, we'll see how a Linux shell manages to parse and 
+execute commands, loops, and conditional expressions by actually writing the C code that 
+does the above tasks. We’ll talk about word expansions and I/O redirection, and we’ll see 
+the code that performs features.
+
+Personally I feel the importance of using linux shell while using the windows. So I thought if we
+can run linux terminal (shell) in windows, that would be great beneficial for increasing our productivity.
+
+
+
+
+### What I need to KNOW:
+* Shell builtins (https://www.gnu.org/software/bash/manual/html_node/Shell-Builtin-Commands.html)
+* Simple commands (https://www.gnu.org/software/bash/manual/html_node/Simple-Commands.html)
+* Basic Shell Features (https://www.gnu.org/software/bash/manual/html_node/Basic-Shell-Features.html)
+* Interactive and non interactive shell (https://www.gnu.org/software/bash/manual/html_node/What-is-an-Interactive-Shell_003f.html)
+*** Shell operation (https://www.gnu.org/software/bash/manual/html_node/Shell-Operation.html)
+
+
+
+
+
