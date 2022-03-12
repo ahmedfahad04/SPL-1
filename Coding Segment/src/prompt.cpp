@@ -15,13 +15,14 @@ void prompt()
     // => we need to implement parsing
     // username@hostname~..
 
-    
+    // printf("%s", BG_GRN);
+
     printf("\x1B[1;33m%s@%s:\x1B[1;33m\x1B[0m", myuser, myhost);
+    // printf("%s", BG_GRN);
+
     fflush(stdin);
     printf("\u001b[1m\u001b[36;1m%s$ \u001b[36;1m\u001b[1m\u001b[0m", getCurrentDirectory());
-
-
-
+    // printf("%s", BG_GRN);
 }
 
 char *take_user_input()

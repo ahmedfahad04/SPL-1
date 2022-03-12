@@ -245,3 +245,56 @@ char **strsplit(char *find, char *text)
 
     return chunk;
 }
+
+
+char * numToStr(int num){
+	char * result = (char*) malloc(sizeof(char) * 1024);
+	
+	
+	int i=0;
+	while(num>0){
+		int x = num%10;
+		num /= 10;
+		result[i++] = x + '0';
+
+	}
+	
+	result[i] = '\0';
+	
+	char * str = (char*) malloc(sizeof(char) * 1024);
+	
+	int j = 0;
+	for(; j<i; j++){
+		str[j] = result[i-j-1];
+		//printf("%c..\n", result[j]);
+	}
+	
+	str[j] = '\0';	
+	
+	return str;
+	
+}
+
+void colorManager()
+{
+
+    printf("INSIDE COLOR MANAGER");
+
+    for (int i = 0; i < 16; i++)
+    {
+        for (int j = 0; j < 16; j++)
+        {
+
+            int val = ((i*16 + j)%256);
+            char *id = numToStr(val);
+            char * p1 = strcatt("\u001b[38;5;", id);
+            char * code = strcatt(p1, "m");
+
+            // partially done..
+            // printf("\u001b[38;5;%c %d ", val, i*16+j);
+            printf("FA %s.. HAD\t", code);
+        }
+
+        printf("\n");
+    }
+}

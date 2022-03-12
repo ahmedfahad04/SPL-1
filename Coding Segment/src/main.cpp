@@ -6,12 +6,13 @@
 int main()
 {
     fprintf(stdout, "\e[1;1H\e[2J");
+    // printf("%s", BG_GRN);
 
     char *commandLine, **tokens, **filtered_tokens;
 
     do
     {
-        
+
         commandLine = take_user_input();
         tokens = str_tokenize(commandLine, ' ');
         filtered_tokens = removeWhiteSpace(tokens);
@@ -19,7 +20,8 @@ int main()
         // this is a temporary block to exit the loop
         // in final outcome the command will send a termination code
         // for specific command
-        if (strcmp(tokens[0], "exit")){
+        if (strcmp(tokens[0], "exit"))
+        {
             break;
         }
 
@@ -34,7 +36,9 @@ int main()
         free(filtered_tokens);
         free(commandLine);
 
-
-
     } while (1);
+    // printf("%s", BG_GRN);
+    
+
+    
 }

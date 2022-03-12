@@ -17,6 +17,9 @@ void cmd_execute(char **args)
 
     if (strcmp(cmd, "apropos"))
         findExeFileName(args[1]);
+
+    if (strcmp(cmd, "colormgr"))
+        colorManager();
 }
 
 void change_directory(char *path)
@@ -148,6 +151,13 @@ bool isBuiltInCmd(char *cmd)
     {
         status = 1;
     }
+
+    else if (strcmp(cmd, "colormgr"))
+    {
+        status = 1;
+        colorManager();
+    }
+
     else
     {
         status = 0;
@@ -167,6 +177,11 @@ void execute(char **args)
     }
 
     else if (strcmp(command, "apropos"))
+    {
+        cmd_execute(args);
+    }
+
+    else if (strcmp(command, "colormgr"))
     {
         cmd_execute(args);
     }
