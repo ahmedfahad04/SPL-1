@@ -63,6 +63,7 @@ int strsubstr(char *neddle, char *heystack);
 char **strsplit(char *find, char *text);
 char *strip(char *word);
 void colorManager();
+char * numToStr(int num);
 
 // COMMAND EXECUTION
 void cmd_execute(char **args);
