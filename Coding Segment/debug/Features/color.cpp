@@ -54,22 +54,28 @@ char * numToStr(int num){
 
 void colorManager()
 {
-
-    printf("INSIDE COLOR MANAGER\n");
-
+ 
     for (int i = 0; i < 16; i++)
     {
         for (int j = 0; j < 16; j++)
         {
 
             int val = ((i*16 + j)%256);
-            char *id = numToStr(val);
-            char * p1 = strcatt("\u001b[38;5;", id);
-            char * code = strcatt(p1, "m");
+            
+            // font color
+            char * id = numToStr(val);
+            char * f_p1 = strcatt("\u001b[38;5;", id);
+            char * f_code = strcatt(f_p1, "m");
 
-            // partially done..
-            // printf("\u001b[38;5;%c %d ", val, i*16+j);
-            printf("user%s(%d).. host\n", code, val);
+            printf("%s%-5d%s", f_code, val, "\u001b[0m");
+
+
+            // background color
+            char * bg_p1 = strcatt("\u001b[48;5;", id);
+            char * bg_code = strcatt(bg_p1, "m");
+
+
+            printf("%s%-5d%s", bg_code, val, "\u001b[0m");
         }
 
         printf("\n");
