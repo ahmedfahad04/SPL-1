@@ -5,8 +5,10 @@
 
 int main()
 {
+    // char * BG_COLOR_CODE = colorManager();
+    extern char * BG_COLOR;
     fprintf(stdout, "\e[1;1H\e[2J");
-    // printf("%s", BG_GRN);
+    printf("%s", BG_COLOR);
 
     char *commandLine, **tokens, **filtered_tokens;
 
@@ -37,7 +39,7 @@ int main()
         free(commandLine);
 
     } while (1);
-    // printf("%s", BG_GRN);
+    printf("%s", BG_COLOR);
     
 
     

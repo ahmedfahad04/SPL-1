@@ -23,7 +23,6 @@ char *strcatt(const char *with, const char *str)
     return res;
 }
 
-
 char * numToStr(int num){
 	char * result = (char*) malloc(sizeof(char) * 1024);
 	
@@ -52,7 +51,7 @@ char * numToStr(int num){
 	
 }
 
-void colorManager()
+int colorManager()
 {
  
     for (int i = 0; i < 16; i++)
@@ -67,7 +66,9 @@ void colorManager()
             char * f_p1 = strcatt("\u001b[38;5;", id);
             char * f_code = strcatt(f_p1, "m");
 
-            printf("%s%-5d%s", f_code, val, "\u001b[0m");
+            // printf("%s%-5d%s", f_code, val, "\u001b[0m");
+            printf(" %-3d - ", val);
+
 
 
             // background color
@@ -75,13 +76,24 @@ void colorManager()
             char * bg_code = strcatt(bg_p1, "m");
 
 
-            printf("%s%-5d%s", bg_code, val, "\u001b[0m");
+            printf("%s    %s", bg_code, "\u001b[0m");
         }
 
         printf("\n");
     }
+
+    printf("\nEnter color code (eg. 211): ");
+    int color_code;
+    scanf("%d", &color_code);
+
+    return color_code;
 }
 
 int main(){
-	colorManager();
+	int code = colorManager();
+    printf("YOUR CODE: %d", code);
+
+    // int x;
+    // scanf("%d", &x);
+    // printf("Your entered number: %d", x);
 }

@@ -27,4 +27,9 @@
 11. whlile cd /usr/bin is given as command, user name shows wrong..[DONE]
 12. careful about free(); 
 13. duplicate handler 
-14. uname problem need to solve...[DONE]
+14. uname problem need to solve...[DONE] 
+15. Color coded text-
+	> enable coloring the system prompt.
+	> enalbe coloring the terminal background color.
+	> showing a color list and prompt for chosing definite color
+	> different segment for chosing background color and font color

@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-
 #define BUFFER_SIZE 1024
+
 
 // ANSI COLOR CODES
 #define FONT_BLK "\u001b[30m"
@@ -62,7 +62,7 @@ void PieTable(char *neddle, int neddle_len, int *LPS);
 int strsubstr(char *neddle, char *heystack);
 char **strsplit(char *find, char *text);
 char *strip(char *word);
-void colorManager();
+char * colorManager();
 char * numToStr(int num);
 
 // COMMAND EXECUTION

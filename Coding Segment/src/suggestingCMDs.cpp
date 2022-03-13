@@ -12,7 +12,7 @@ using namespace std;
 int c[MAXSIZE][MAXSIZE], b[MAXSIZE][MAXSIZE], tolerance = -1;
 int m, n, totalCommandCount = 0;
 
-char **readCMDOutput(char *cmd)
+char ** readCMDOutput(char *cmd)
 {
     FILE *p;
     int ch, buffer_size = 100024;
@@ -126,7 +126,7 @@ struct node
     struct node *right;
 };
 
-struct node *createNode(int value, char *info)
+struct node * createNode(int value, char *info)
 {
     struct node *p = (struct node *)malloc(sizeof(struct node));
 

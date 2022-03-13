@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include "shell.h"
 
+char * BG_COLOR;
+
+
 size_t strlen(const char *str)
 {
 
@@ -36,7 +39,7 @@ bool strcmp(const char *a, const char *b)
     }
 }
 
-char *strcpy(const char *from)
+char * strcpy(const char *from)
 {
     int len = strlen(from);
     char res[len + 1];
@@ -51,7 +54,7 @@ char *strcpy(const char *from)
     return to;
 }
 
-char *strcatt(const char *with, const char *str)
+char * strcatt(const char *with, const char *str)
 {
     char ans[2000];
     int i = 0;
@@ -73,7 +76,7 @@ char *strcatt(const char *with, const char *str)
     return res;
 }
 
-char *strreplace(const char *data, const char *with, const char *str)
+char * strreplace(const char *data, const char *with, const char *str)
 {
 
     char ans[1024];
@@ -220,7 +223,7 @@ int strsubstr(char *neddle, char *heystack)
     return -1;
 }
 
-char **strsplit(char *find, char *text)
+char ** strsplit(char *find, char *text)
 {
 
     int pos = strsubstr(find, text);
@@ -245,7 +248,6 @@ char **strsplit(char *find, char *text)
 
     return chunk;
 }
-
 
 char * numToStr(int num){
 	char * result = (char*) malloc(sizeof(char) * 1024);
@@ -275,26 +277,45 @@ char * numToStr(int num){
 	
 }
 
-void colorManager()
+char * colorManager()
 {
-
-    printf("INSIDE COLOR MANAGER");
-
+ 
     for (int i = 0; i < 16; i++)
     {
         for (int j = 0; j < 16; j++)
         {
 
             int val = ((i*16 + j)%256);
-            char *id = numToStr(val);
-            char * p1 = strcatt("\u001b[38;5;", id);
-            char * code = strcatt(p1, "m");
+            
+            // font color
+            char * id = numToStr(val);
+            char * f_p1 = strcatt("\u001b[38;5;", id);
+            char * f_code = strcatt(f_p1, "m");
 
-            // partially done..
-            // printf("\u001b[38;5;%c %d ", val, i*16+j);
-            printf("FA %s.. HAD\t", code);
+            // printf("%s%-5d%s", f_code, val, "\u001b[0m");
+            printf(" %-3d - ", val);
+
+
+
+            // background color
+            char * bg_p1 = strcatt("\u001b[48;5;", id);
+            char * bg_code = strcatt(bg_p1, "m");
+
+
+            printf("%s    %s", bg_code, "\u001b[0m");
         }
 
         printf("\n");
     }
+
+    printf("\nEnter color code for background (eg. 211): ");
+    int color_code;
+    scanf("%d", &color_code);
+
+    char * userChoice = numToStr(color_code);
+    char * codeP1 = strcatt("\u001b[38;5;", userChoice);
+    char * BG_COLOR;
+
+    BG_COLOR = strcpy(strcatt(codeP1, "m"));
+
 }

@@ -9,20 +9,18 @@ void prompt()
     char *path = getCurrentDirectory();
     char *myuser = userName();
     char *myhost = hostName();
-    // An important thing is, if you are using the root user,
-    // ~/ will be the /root directory, not /home/user_name.
-    // => convert /home/fahad to ~ [Done]
-    // => we need to implement parsing
-    // username@hostname~..
+    
+    
 
-    // printf("%s", BG_GRN);
+    extern char * BG_COLOR;
+    printf("%s", BG_COLOR);
 
     printf("\x1B[1;33m%s@%s:\x1B[1;33m\x1B[0m", myuser, myhost);
-    // printf("%s", BG_GRN);
+    printf("%s", BG_COLOR);
 
     fflush(stdin);
     printf("\u001b[1m\u001b[36;1m%s$ \u001b[36;1m\u001b[1m\u001b[0m", getCurrentDirectory());
-    // printf("%s", BG_GRN);
+    printf("%s", BG_COLOR);
 }
 
 char *take_user_input()
