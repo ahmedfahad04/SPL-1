@@ -274,6 +274,7 @@ char *numToStr(int num)
     return str;
 }
 
+
 void colorManager()
 {
 

@@ -4,14 +4,13 @@
 
 void eventLoopWithColors(char * code){
 
-    char * colorCode = "\u001b[48;5;146m";
+   
+    char * colorCode = "\u001b[48;5;136m";
     // char * colorCode = code;
     
     if(colorCode != NULL) printf("%s", colorCode);
 
     eventLoop(code);
-
-    if(colorCode != NULL) printf("%s", colorCode);
 
 }
 
@@ -21,9 +20,10 @@ void eventLoop(char * colorFlag){
 
     char *commandLine, **tokens, **filtered_tokens;
 
+    
     do
     {
-
+       
         commandLine = take_user_input(colorFlag);
         tokens = str_tokenize(commandLine, ' ');
         filtered_tokens = removeWhiteSpace(tokens);
@@ -33,7 +33,7 @@ void eventLoop(char * colorFlag){
         // for specific command
         if (strcmp(tokens[0], "exit"))
         {
-            break;
+            exit(EXIT_FAILURE);
         }
 
         // this if block is used to clear the console

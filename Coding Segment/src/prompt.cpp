@@ -10,8 +10,9 @@ void promptWithColors(char *code)
     char *myuser = userName();
     char *myhost = hostName();
 
-    char * colorCode = "\u001b[48;5;146m";
+    char * colorCode = "\u001b[48;5;136m";
     // char *colorCode = code;
+
     if (colorCode != NULL)
         printf("%s", colorCode);
     
@@ -23,6 +24,8 @@ void promptWithColors(char *code)
     printf("%s%s$ %s%s", FONT_CYN, getCurrentDirectory(), FONT_CYN, RESET);
     if (colorCode != NULL)
         printf("%s", colorCode);
+
+    
 }
 
 void prompt()
