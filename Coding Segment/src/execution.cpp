@@ -18,8 +18,11 @@ void cmd_execute(char **args)
     if (strcmp(cmd, "apropos"))
         findExeFileName(args[1]);
 
-    if (strcmp(cmd, "colormgr"))
+    if (strcmp(cmd, "colormgr")){
+        
+        // execution error....==> need to be fixed
         colorManager();
+    }
 }
 
 void change_directory(char *path)

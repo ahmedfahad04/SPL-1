@@ -51,6 +51,21 @@ char * numToStr(int num){
 	
 }
 
+char * strcpy(const char *from)
+{
+    int len = strlen(from);
+    char res[len + 1];
+
+    int i;
+    for (i = 0; i < len; i++)
+        res[i] = from[i];
+
+    res[i] = '\0';
+
+    char *to = res;
+    return to;
+}
+
 int colorManager()
 {
  
@@ -91,9 +106,11 @@ int colorManager()
 
 int main(){
 	int code = colorManager();
-    printf("YOUR CODE: %d", code);
 
-    // int x;
-    // scanf("%d", &x);
-    // printf("Your entered number: %d", x);
+    char * userChoice = numToStr(code);
+    char * codeP1 = strcatt("\u001b[48;5;", userChoice);
+    char * BG_COLOR = strcpy(strcatt(codeP1, "m"));
+
+    printf("YOUR CODE: %s%d\n\n\n",  BG_COLOR, code);
+
 }

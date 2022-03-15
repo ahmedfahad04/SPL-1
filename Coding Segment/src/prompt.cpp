@@ -4,26 +4,38 @@
 #include "shell.h"
 using namespace std;
 
+void promptWithColors(char * code){
+    char *path = getCurrentDirectory();
+    char *myuser = userName();
+    char *myhost = hostName();
+
+    // char * colorCode = "\u001b[48;5;146m";
+    char * colorCode = code;
+    if(colorCode != NULL) printf("%s", colorCode);
+
+    printf("\x1B[1;33m%s@%s:\x1B[1;33m\x1B[0m", myuser, myhost);
+    if(colorCode != NULL) printf("%s", colorCode);
+
+
+    fflush(stdin);
+    printf("\u001b[1m\u001b[36;1m%s$ \u001b[36;1m\u001b[1m\u001b[0m", getCurrentDirectory());
+    if(colorCode != NULL) printf("%s", colorCode);
+}
+
 void prompt()
 {
     char *path = getCurrentDirectory();
     char *myuser = userName();
     char *myhost = hostName();
-    
-    
-
-    extern char * BG_COLOR;
-    printf("%s", BG_COLOR);
 
     printf("\x1B[1;33m%s@%s:\x1B[1;33m\x1B[0m", myuser, myhost);
-    printf("%s", BG_COLOR);
 
     fflush(stdin);
     printf("\u001b[1m\u001b[36;1m%s$ \u001b[36;1m\u001b[1m\u001b[0m", getCurrentDirectory());
-    printf("%s", BG_COLOR);
+
 }
 
-char *take_user_input()
+char *take_user_input(char * C_Code)
 {
     char *buffer, *splitted_words, *path;
     char ch;
@@ -33,7 +45,8 @@ char *take_user_input()
     buffer = (char *)malloc(sizeof(char) * buffer_size);
     splitted_words = (char *)malloc(sizeof(char) * buffer_size);
 
-    prompt();
+    if(strlen(C_Code)!=0) promptWithColors(C_Code);
+    else prompt();
 
     while (1)
     {

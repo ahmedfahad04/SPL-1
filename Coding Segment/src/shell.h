@@ -43,26 +43,31 @@
 #define BG_DARK_WHT "\u001b[47m;1m"
 
 
+// MAIN LOOP
+void eventLoop(char * code = "\0");
+void eventLoopWithColors(char * code);
+
+
 // COMMAND PROMPT
 void prompt();
-char *take_user_input();
+char *take_user_input(char * code);
 char **str_tokenize(char *ch, char sep);
 void sig_handler(int signum);
 
 // BASIC STRING OPERATIONS
 size_t strlen(const char *str);
 bool strcmp(const char *a, const char *b);
-char *strcpy(const char *b);
-char *strchr(const char *a, const char ch);
-char *strcatt(const char *with, const char *str);
-char *strreplace(const char *info, const char *with, const char *str);
+char * strcpy(const char *b);
+char * strchr(const char *a, const char ch);
+char * strcatt(const char *with, const char *str);
+char * strreplace(const char *info, const char *with, const char *str);
 bool strcontain(const char *data, const char *substr);
-char **removeWhiteSpace(char **raw_data);
+char ** removeWhiteSpace(char **raw_data);
 void PieTable(char *neddle, int neddle_len, int *LPS);
 int strsubstr(char *neddle, char *heystack);
-char **strsplit(char *find, char *text);
-char *strip(char *word);
-char * colorManager();
+char ** strsplit(char *find, char *text);
+char * strip(char *word);
+void colorManager();
 char * numToStr(int num);
 
 // COMMAND EXECUTION

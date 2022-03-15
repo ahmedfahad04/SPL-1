@@ -28,8 +28,8 @@
 12. careful about free(); 
 13. duplicate handler 
 14. uname problem need to solve...[DONE] 
-15. Color coded text-
+15. Color coded text-------------------[CURRENTLY WORKING]
 	> enable coloring the system prompt.
 	> enalbe coloring the terminal background color.
-	> showing a color list and prompt for chosing definite color
+	> showing a color list and prompt for chosing definite color [DONE]
 	> different segment for chosing background color and font color
