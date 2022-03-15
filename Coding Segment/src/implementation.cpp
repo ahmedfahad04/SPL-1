@@ -2,8 +2,6 @@
 #include <stdlib.h>
 #include "shell.h"
 
-
-
 size_t strlen(const char *str)
 {
 
@@ -38,7 +36,7 @@ bool strcmp(const char *a, const char *b)
     }
 }
 
-char * strcpy(const char *from)
+char *strcpy(const char *from)
 {
     int len = strlen(from);
     char res[len + 1];
@@ -53,7 +51,7 @@ char * strcpy(const char *from)
     return to;
 }
 
-char * strcatt(const char *with, const char *str)
+char *strcatt(const char *with, const char *str)
 {
     char ans[2000];
     int i = 0;
@@ -75,7 +73,7 @@ char * strcatt(const char *with, const char *str)
     return res;
 }
 
-char * strreplace(const char *data, const char *with, const char *str)
+char *strreplace(const char *data, const char *with, const char *str)
 {
 
     char ans[1024];
@@ -222,7 +220,7 @@ int strsubstr(char *neddle, char *heystack)
     return -1;
 }
 
-char ** strsplit(char *find, char *text)
+char **strsplit(char *find, char *text)
 {
 
     int pos = strsubstr(find, text);
@@ -248,57 +246,57 @@ char ** strsplit(char *find, char *text)
     return chunk;
 }
 
-char * numToStr(int num){
-	char * result = (char*) malloc(sizeof(char) * 1024);
-	
-	
-	int i=0;
-	while(num>0){
-		int x = num%10;
-		num /= 10;
-		result[i++] = x + '0';
+char *numToStr(int num)
+{
+    char *result = (char *)malloc(sizeof(char) * 1024);
 
-	}
-	
-	result[i] = '\0';
-	
-	char * str = (char*) malloc(sizeof(char) * 1024);
-	
-	int j = 0;
-	for(; j<i; j++){
-		str[j] = result[i-j-1];
-		//printf("%c..\n", result[j]);
-	}
-	
-	str[j] = '\0';	
-	
-	return str;
-	
+    int i = 0;
+    while (num > 0)
+    {
+        int x = num % 10;
+        num /= 10;
+        result[i++] = x + '0';
+    }
+
+    result[i] = '\0';
+
+    char *str = (char *)malloc(sizeof(char) * 1024);
+
+    int j = 0;
+    for (; j < i; j++)
+    {
+        str[j] = result[i - j - 1];
+        // printf("%c..\n", result[j]);
+    }
+
+    str[j] = '\0';
+
+    return str;
 }
 
 void colorManager()
 {
- 
+
     for (int i = 0; i < 16; i++)
     {
         for (int j = 0; j < 16; j++)
         {
 
-            int val = ((i*16 + j)%256);
-            
+            int val = ((i * 16 + j) % 256);
+
             // font color
-            char * id = numToStr(val);
-            char * f_p1 = strcatt("\u001b[38;5;", id);
-            char * f_code = strcatt(f_p1, "m");
+            char *id = numToStr(val);
+            char *f_p1 = strcatt("\u001b[38;5;", id);
+            char *f_code = strcatt(f_p1, "m");
 
             // printf("%s%-5d%s", f_code, val, "\u001b[0m");
             printf(" %-3d - ", val);
 
             // background color
-            char * bg_p1 = strcatt("\u001b[48;5;", id);
-            char * bg_code = strcatt(bg_p1, "m");
+            char *bg_p1 = strcatt("\u001b[48;5;", id);
+            char *bg_code = strcatt(bg_p1, "m");
 
-            //printf("CODE: %s ", bg_code);
+            // printf("CODE: %s ", bg_code);
             printf("%s    %s", bg_code, "\u001b[0m");
         }
 
@@ -310,11 +308,10 @@ void colorManager()
     scanf("%d", &color_code);
 
     // ==> need to be solved.
-    char * userChoice = numToStr(color_code);
-    char * codeP1 = strcatt("\u001b[48;5;", userChoice);
-    char * BG_COLOR;
+    char *userChoice = numToStr(color_code);
+    char *codeP1 = strcatt("\u001b[48;5;", userChoice);
+    char *BG_COLOR;
 
     BG_COLOR = strcpy(strcatt(codeP1, "m"));
     eventLoopWithColors(BG_COLOR);
-
 }

@@ -12,7 +12,7 @@ using namespace std;
 int c[MAXSIZE][MAXSIZE], b[MAXSIZE][MAXSIZE], tolerance = -1;
 int m, n, totalCommandCount = 0;
 
-char ** readCMDOutput(char *cmd)
+char **readCMDOutput(char *cmd)
 {
     FILE *p;
     int ch, buffer_size = 100024;
@@ -126,7 +126,7 @@ struct node
     struct node *right;
 };
 
-struct node * createNode(int value, char *info)
+struct node *createNode(int value, char *info)
 {
     struct node *p = (struct node *)malloc(sizeof(struct node));
 
@@ -211,10 +211,15 @@ void cmdSuggestion(char *rootWord)
         temp++;
     }
 
-    printf("Command \'%s\' not found, did you mean: \n", rootWord);
-    printTree(root, rootWord);
-    printf("Try: sudo apt install <deb name>\n");
-    exit(EXIT_FAILURE);
+    if (strlen(rootWord) == 0)
+        exit(EXIT_FAILURE);
+    else
+    {
+        printf("Command \'%s\' not found, did you mean: \n", rootWord);
+        printTree(root, rootWord);
+        printf("Try: sudo apt install <deb name>\n");
+        exit(EXIT_FAILURE);
+    }
 }
 
 void findExeFileName(char *cmd)
@@ -222,9 +227,9 @@ void findExeFileName(char *cmd)
     printf("Executable file(s) of \"%s\" are: \n", cmd);
 
     char *path =
-    "ls /usr/bin;"
-    "ls /usr/sbin; ls /sbin; ls /usr/local/sbin; ls /bin;"
-    "ls /usr/games; ls /usr/local/games; ls /snap/bin; ls /snap/bin";
+        "ls /usr/bin;"
+        "ls /usr/sbin; ls /sbin; ls /usr/local/sbin; ls /bin;"
+        "ls /usr/games; ls /usr/local/games; ls /snap/bin; ls /snap/bin";
 
     char **exeFilePath = readCMDOutput(path);
 
@@ -239,7 +244,7 @@ void findExeFileName(char *cmd)
             // Here we'll try to color the searched word.....
 
             char *newword = strip(*exeFilePath);
-            //char **words = strsplit(cmd, newword);
+            // char **words = strsplit(cmd, newword);
 
             // while(*words){
             //     printf(">> %s\n", *words);
@@ -259,4 +264,3 @@ void findExeFileName(char *cmd)
         exeFilePath++;
     }
 }
-

@@ -4,8 +4,8 @@
 
 void eventLoopWithColors(char * code){
 
-    //char * colorCode = "\u001b[48;5;146m";
-    char * colorCode = code;
+    char * colorCode = "\u001b[48;5;146m";
+    // char * colorCode = code;
     
     if(colorCode != NULL) printf("%s", colorCode);
 

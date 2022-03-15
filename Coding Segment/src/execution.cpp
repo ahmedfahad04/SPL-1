@@ -18,8 +18,9 @@ void cmd_execute(char **args)
     if (strcmp(cmd, "apropos"))
         findExeFileName(args[1]);
 
-    if (strcmp(cmd, "colormgr")){
-        
+    if (strcmp(cmd, "colormgr"))
+    {
+
         // execution error....==> need to be fixed
         colorManager();
     }
@@ -59,7 +60,7 @@ void change_directory(char *path)
     }
 }
 
-char * current_directory()
+char *current_directory()
 {
     char cwd[1024], *addr;
 
@@ -77,7 +78,7 @@ char * current_directory()
     return addr;
 }
 
-char * hostName()
+char *hostName()
 {
     char *host = (char *)malloc(sizeof(char) * BUFFER_SIZE);
 
@@ -102,7 +103,7 @@ char * hostName()
     return host;
 }
 
-char * userName()
+char *userName()
 {
     // we need to use character array instead of pointers.
     // as pointer array of character lost the input after reading the whole file.
@@ -227,7 +228,7 @@ void execute(char **args)
     }
 }
 
-char * getCurrentDirectory()
+char *getCurrentDirectory()
 {
 
     char *dir = current_directory();

@@ -4,22 +4,25 @@
 #include "shell.h"
 using namespace std;
 
-void promptWithColors(char * code){
+void promptWithColors(char *code)
+{
     char *path = getCurrentDirectory();
     char *myuser = userName();
     char *myhost = hostName();
 
-    // char * colorCode = "\u001b[48;5;146m";
-    char * colorCode = code;
-    if(colorCode != NULL) printf("%s", colorCode);
-
-    printf("\x1B[1;33m%s@%s:\x1B[1;33m\x1B[0m", myuser, myhost);
-    if(colorCode != NULL) printf("%s", colorCode);
-
+    char * colorCode = "\u001b[48;5;146m";
+    // char *colorCode = code;
+    if (colorCode != NULL)
+        printf("%s", colorCode);
+    
+    printf("%s%s@%s:%s%s", FONT_RED, myuser, myhost, FONT_RED, RESET);
+    if (colorCode != NULL)
+        printf("%s", colorCode);
 
     fflush(stdin);
-    printf("\u001b[1m\u001b[36;1m%s$ \u001b[36;1m\u001b[1m\u001b[0m", getCurrentDirectory());
-    if(colorCode != NULL) printf("%s", colorCode);
+    printf("%s%s$ %s%s", FONT_CYN, getCurrentDirectory(), FONT_CYN, RESET);
+    if (colorCode != NULL)
+        printf("%s", colorCode);
 }
 
 void prompt()
@@ -28,14 +31,13 @@ void prompt()
     char *myuser = userName();
     char *myhost = hostName();
 
-    printf("\x1B[1;33m%s@%s:\x1B[1;33m\x1B[0m", myuser, myhost);
+    printf("%s%s@%s:%s%s", FONT_RED, myuser, myhost, FONT_RED, RESET);
 
     fflush(stdin);
     printf("\u001b[1m\u001b[36;1m%s$ \u001b[36;1m\u001b[1m\u001b[0m", getCurrentDirectory());
-
 }
 
-char *take_user_input(char * C_Code)
+char *take_user_input(char *C_Code)
 {
     char *buffer, *splitted_words, *path;
     char ch;
@@ -45,8 +47,14 @@ char *take_user_input(char * C_Code)
     buffer = (char *)malloc(sizeof(char) * buffer_size);
     splitted_words = (char *)malloc(sizeof(char) * buffer_size);
 
-    if(strlen(C_Code)!=0) promptWithColors(C_Code);
-    else prompt();
+
+
+    if (strlen(C_Code) != 0)
+        promptWithColors(C_Code);
+    else
+        prompt();
+
+
 
     while (1)
     {

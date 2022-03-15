@@ -3,7 +3,6 @@
 #include <unistd.h>
 #define BUFFER_SIZE 1024
 
-
 // ANSI COLOR CODES
 #define FONT_BLK "\u001b[30m"
 #define FONT_RED "\u001b[31m"
@@ -13,7 +12,7 @@
 #define FONT_MAG "\u001b[35m"
 #define FONT_CYN "\u001b[36m"
 #define FONT_WHT "\u001b[37m"
-#define RESET "\u001b[0m" 
+#define RESET "\u001b[0m"
 
 #define FONT_DARK_BLK "\u001b[30m;1m"
 #define FONT_DARK_RED "\u001b[31m;1m"
@@ -42,33 +41,32 @@
 #define BG_DARK_CYN "\u001b[46m;1m"
 #define BG_DARK_WHT "\u001b[47m;1m"
 
-
 // MAIN LOOP
-void eventLoop(char * code = "\0");
-void eventLoopWithColors(char * code);
-
+void eventLoop(char *code = "");
+void eventLoopWithColors(char *code = "");
 
 // COMMAND PROMPT
 void prompt();
-char *take_user_input(char * code);
+void promptWithColors(char * code);
+char *take_user_input(char *code);
 char **str_tokenize(char *ch, char sep);
 void sig_handler(int signum);
 
 // BASIC STRING OPERATIONS
 size_t strlen(const char *str);
 bool strcmp(const char *a, const char *b);
-char * strcpy(const char *b);
-char * strchr(const char *a, const char ch);
-char * strcatt(const char *with, const char *str);
-char * strreplace(const char *info, const char *with, const char *str);
+char *strcpy(const char *b);
+char *strchr(const char *a, const char ch);
+char *strcatt(const char *with, const char *str);
+char *strreplace(const char *info, const char *with, const char *str);
 bool strcontain(const char *data, const char *substr);
-char ** removeWhiteSpace(char **raw_data);
+char **removeWhiteSpace(char **raw_data);
 void PieTable(char *neddle, int neddle_len, int *LPS);
 int strsubstr(char *neddle, char *heystack);
-char ** strsplit(char *find, char *text);
-char * strip(char *word);
+char **strsplit(char *find, char *text);
+char *strip(char *word);
 void colorManager();
-char * numToStr(int num);
+char *numToStr(int num);
 
 // COMMAND EXECUTION
 void cmd_execute(char **args);
