@@ -22,9 +22,14 @@ void cmd_execute(char **args)
 
     if (strcmp(cmd, "colormgr"))
     {
-
         // execution error....==> need to be fixed
-        colorManager();
+        eventLoopWithColors(args[1]);
+    }
+
+    if (strcmp(cmd, "applychng"))
+    {
+        // execution error....==> need to be fixed
+        fprintf(stdout, "\e[1;1H\e[2J");
     }
 }
 
@@ -158,11 +163,11 @@ bool isBuiltInCmd(char *cmd)
         status = 1;
     }
 
-    else if (strcmp(cmd, "colormgr"))
-    {
-        status = 1;
-        colorManager();
-    }
+    // else if (strcmp(cmd, "colormgr"))
+    // {
+    //     status = 1;
+    //     colorManager();
+    // }
 
     else
     {

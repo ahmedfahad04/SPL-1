@@ -43,7 +43,7 @@
 
 // MAIN LOOP
 void eventLoop(char *code = "");
-void eventLoopWithColors(char *code = "");
+void eventLoopWithColors(char * ch);
 
 // COMMAND PROMPT
 void prompt();
@@ -65,7 +65,7 @@ void PieTable(char *neddle, int neddle_len, int *LPS);
 int strsubstr(char *neddle, char *heystack);
 char **strsplit(char *find, char *text);
 char *strip(char *word);
-void colorManager();
+char * colorManager();
 char *numToStr(int num);
 
 // COMMAND EXECUTION

@@ -10,12 +10,14 @@ void promptWithColors(char *code)
     char *myuser = userName();
     char *myhost = hostName();
 
-    char * colorCode = "\u001b[48;5;136m";
-    // char *colorCode = code;
+    // ==> need to work on manual code input
+
+    // char *colorCode = "\u001b[48;5;230m";
+    char *colorCode = code;
 
     if (colorCode != NULL)
         printf("%s", colorCode);
-    
+
     printf("%s%s@%s:%s%s", FONT_RED, myuser, myhost, FONT_RED, RESET);
     if (colorCode != NULL)
         printf("%s", colorCode);
@@ -24,8 +26,6 @@ void promptWithColors(char *code)
     printf("%s%s$ %s%s", FONT_CYN, getCurrentDirectory(), FONT_CYN, RESET);
     if (colorCode != NULL)
         printf("%s", colorCode);
-
-    
 }
 
 void prompt()
@@ -50,18 +50,16 @@ char *take_user_input(char *C_Code)
     buffer = (char *)malloc(sizeof(char) * buffer_size);
     splitted_words = (char *)malloc(sizeof(char) * buffer_size);
 
-
-
     if (strlen(C_Code) != 0)
         promptWithColors(C_Code);
     else
         prompt();
 
-
-
     while (1)
     {
         scanf("%c", &ch);
+        if (ch == '\r')
+            continue;
 
         if (location > buffer_size)
         {

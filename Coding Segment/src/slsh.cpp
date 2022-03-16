@@ -2,11 +2,13 @@
 #include "shell.h"
 
 
-void eventLoopWithColors(char * code){
+void eventLoopWithColors(char * args){
 
-   
-    char * colorCode = "\u001b[48;5;136m";
-    // char * colorCode = code;
+    char * code, colorCode ;
+
+    if(strcmp(args, "yel")) code = BG_YEL;
+    else code = "\u001b[48;5;230m";
+    // char * colorCode = colorManager();
     
     if(colorCode != NULL) printf("%s", colorCode);
 
@@ -16,6 +18,7 @@ void eventLoopWithColors(char * code){
 
 void eventLoop(char * colorFlag){
 
+   // printf("SURE?\n");
     fprintf(stdout, "\e[1;1H\e[2J");
 
     char *commandLine, **tokens, **filtered_tokens;
@@ -23,7 +26,7 @@ void eventLoop(char * colorFlag){
     
     do
     {
-       
+        // ==> need to remove redundant prompt input
         commandLine = take_user_input(colorFlag);
         tokens = str_tokenize(commandLine, ' ');
         filtered_tokens = removeWhiteSpace(tokens);
@@ -39,13 +42,14 @@ void eventLoop(char * colorFlag){
         // this if block is used to clear the console
         if (strcmp(tokens[0], "clear"))
             fprintf(stdout, "\e[1;1H\e[2J"); // ansi code to clear the console
-
+        
         // printf("%s\n", commandLine);
         execute(filtered_tokens);
 
         free(tokens);
         free(filtered_tokens);
-        free(commandLine);
+        free(commandLine);    
+        
 
     } while (1);
 
