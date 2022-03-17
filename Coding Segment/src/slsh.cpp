@@ -4,15 +4,15 @@
 
 void eventLoopWithColors(char * args){
 
-    char * code, colorCode ;
-
-    if(strcmp(args, "yel")) code = BG_YEL;
-    else code = "\u001b[48;5;230m";
-    // char * colorCode = colorManager();
+    char * colorCode;
+    // if(strcmp(args, "yel")) code = BG_YEL;
+    // else 
+    colorCode = "\u001b[48;5;230m";
+    // colorCode = colorManager();
     
     if(colorCode != NULL) printf("%s", colorCode);
 
-    eventLoop(code);
+    eventLoop(colorCode);
 
 }
 
@@ -36,11 +36,13 @@ void eventLoop(char * colorFlag){
         // for specific command
         if (strcmp(tokens[0], "exit"))
         {
+            puts(RESET);
+            fprintf(stdout, "\e[1;1H\e[2J");
             exit(EXIT_FAILURE);
         }
 
         // this if block is used to clear the console
-        if (strcmp(tokens[0], "clear"))
+        if (strcmp(tokens[0], "clear") || strcmp(tokens[0], "bgclr"))
             fprintf(stdout, "\e[1;1H\e[2J"); // ansi code to clear the console
         
         // printf("%s\n", commandLine);

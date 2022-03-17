@@ -26,6 +26,8 @@ void promptWithColors(char *code)
     printf("%s%s$ %s%s", FONT_CYN, getCurrentDirectory(), FONT_CYN, RESET);
     if (colorCode != NULL)
         printf("%s", colorCode);
+
+    
 }
 
 void prompt()
@@ -50,8 +52,11 @@ char *take_user_input(char *C_Code)
     buffer = (char *)malloc(sizeof(char) * buffer_size);
     splitted_words = (char *)malloc(sizeof(char) * buffer_size);
 
-    if (strlen(C_Code) != 0)
+    if (strlen(C_Code) != 0){ 
+        fprintf(stdout, "\e[1;1H\e[2J");
         promptWithColors(C_Code);
+       
+    }
     else
         prompt();
 

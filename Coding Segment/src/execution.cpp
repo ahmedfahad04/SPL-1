@@ -25,12 +25,6 @@ void cmd_execute(char **args)
         // execution error....==> need to be fixed
         eventLoopWithColors(args[1]);
     }
-
-    if (strcmp(cmd, "applychng"))
-    {
-        // execution error....==> need to be fixed
-        fprintf(stdout, "\e[1;1H\e[2J");
-    }
 }
 
 void change_directory(char *path)

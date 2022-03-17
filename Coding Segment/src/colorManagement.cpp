@@ -40,6 +40,7 @@ char * colorManager()
     char *BG_COLOR;
 
     BG_COLOR = strcpy(strcatt(codeP1, "m"));
+    puts(BG_COLOR);
     return BG_COLOR;
     // eventLoopWithColors(BG_COLOR);
 }
