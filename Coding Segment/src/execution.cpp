@@ -2,9 +2,8 @@
 #include <sys/wait.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <pthread.h>
 #include "shell.h"
-
-
 
 void cmd_execute(char **args)
 {
@@ -20,10 +19,13 @@ void cmd_execute(char **args)
     if (strcmp(cmd, "apropos"))
         findExeFileName(args[1]);
 
-    if (strcmp(cmd, "colormgr"))
+    if (strcmp(cmd, "color"))
     {
-        // execution error....==> need to be fixed
-        eventLoopWithColors(args[1]);
+        if(strcmp(args[1], "--bg")){ 
+            char * bgCode = selectBGColor(args[2]);
+            eventLoopWithColors(bgCode);
+        }
+        
     }
 }
 
@@ -157,7 +159,7 @@ bool isBuiltInCmd(char *cmd)
         status = 1;
     }
 
-    // else if (strcmp(cmd, "colormgr"))
+    // else if (strcmp(cmd, "color"))
     // {
     //     status = 1;
     //     colorManager();
@@ -186,7 +188,7 @@ void execute(char **args)
         cmd_execute(args);
     }
 
-    else if (strcmp(command, "colormgr"))
+    else if (strcmp(command, "color"))
     {
         cmd_execute(args);
     }

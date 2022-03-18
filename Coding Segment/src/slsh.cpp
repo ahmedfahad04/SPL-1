@@ -7,8 +7,10 @@ void eventLoopWithColors(char * args){
     char * colorCode;
     // if(strcmp(args, "yel")) code = BG_YEL;
     // else 
-    colorCode = "\u001b[48;5;230m";
-    // colorCode = colorManager();
+
+    // colorCode = "\u001b[48;5;230m";
+    colorCode = args;
+    //char * tmp = showCode();
     
     if(colorCode != NULL) printf("%s", colorCode);
 
@@ -18,7 +20,7 @@ void eventLoopWithColors(char * args){
 
 void eventLoop(char * colorFlag){
 
-   // printf("SURE?\n");
+    
     fprintf(stdout, "\e[1;1H\e[2J");
 
     char *commandLine, **tokens, **filtered_tokens;
@@ -26,6 +28,7 @@ void eventLoop(char * colorFlag){
     
     do
     {
+        //printf("SURE?\n");
         // ==> need to remove redundant prompt input
         commandLine = take_user_input(colorFlag);
         tokens = str_tokenize(commandLine, ' ');
@@ -34,7 +37,7 @@ void eventLoop(char * colorFlag){
         // this is a temporary block to exit the loop
         // in final outcome the command will send a termination code
         // for specific command
-        if (strcmp(tokens[0], "exit"))
+        if (strcmp(filtered_tokens[0], "exit"))
         {
             puts(RESET);
             fprintf(stdout, "\e[1;1H\e[2J");
@@ -42,10 +45,12 @@ void eventLoop(char * colorFlag){
         }
 
         // this if block is used to clear the console
-        if (strcmp(tokens[0], "clear") || strcmp(tokens[0], "bgclr"))
+        if (strcmp(filtered_tokens[0], "clear"))
             fprintf(stdout, "\e[1;1H\e[2J"); // ansi code to clear the console
         
         // printf("%s\n", commandLine);
+        
+        printf("%s %s %s\n", filtered_tokens[0], filtered_tokens[1], filtered_tokens[2]);
         execute(filtered_tokens);
 
         free(tokens);

@@ -53,9 +53,7 @@ char *take_user_input(char *C_Code)
     splitted_words = (char *)malloc(sizeof(char) * buffer_size);
 
     if (strlen(C_Code) != 0){ 
-        fprintf(stdout, "\e[1;1H\e[2J");
         promptWithColors(C_Code);
-       
     }
     else
         prompt();

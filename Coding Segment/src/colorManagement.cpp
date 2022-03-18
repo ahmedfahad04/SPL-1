@@ -1,9 +1,8 @@
 #include <stdio.h>
 #include "shell.h"
 
-char * colorManager()
+char *showCode()
 {
-
     for (int i = 0; i < 16; i++)
     {
         for (int j = 0; j < 16; j++)
@@ -37,10 +36,39 @@ char * colorManager()
     // ==> need to be solved.
     char *userChoice = numToStr(color_code);
     char *codeP1 = strcatt("\u001b[48;5;", userChoice);
-    char *BG_COLOR;
-
-    BG_COLOR = strcpy(strcatt(codeP1, "m"));
-    puts(BG_COLOR);
+    char *codeP2 = strcpy(strcatt(codeP1, "m"));
+    char *BG_COLOR = strcatt(codeP2, "\0");
     return BG_COLOR;
-    // eventLoopWithColors(BG_COLOR);
+}
+
+char *selectBGColor(char *args)
+{
+    char *bgcolor;
+
+    if (strcmp(args, "red"))
+    {
+        bgcolor = BG_RED;
+    }
+    else if (strcmp(args, "grn"))
+    {
+        bgcolor = BG_GRN;
+    }
+    else if (strcmp(args, "blu"))
+    {
+        bgcolor = BG_BLU;
+    }
+    else if (strcmp(args, "cyn"))
+    {
+        bgcolor = BG_CYN;
+    }
+    else if (strcmp(args, "yel"))
+    {
+        bgcolor = BG_YEL;
+    }
+    else if (strcmp(args, "blk"))
+    {
+        bgcolor = BG_BLK;
+    }
+
+    return bgcolor;
 }

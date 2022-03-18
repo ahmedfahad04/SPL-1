@@ -1,5 +1,5 @@
-run: main.o prompt.o implementation.o execution.o suggestingCMDs.o slsh.o
-	g++ main.o prompt.o implementation.o execution.o suggestingCMDs.o slsh.o -o run
+run: main.o prompt.o implementation.o execution.o suggestingCMDs.o slsh.o colorManagement.o
+	g++ -o run main.o prompt.o implementation.o execution.o suggestingCMDs.o slsh.o colorManagement.o -pthread
 	mv *.o obj
 
 main.o: main.cpp
@@ -20,6 +20,8 @@ execution.o: execution.cpp shell.h
 suggestingCMDs.o: suggestingCMDs.cpp shell.h
 	g++ -c suggestingCMDs.cpp
 
+colorManagement.o: colorManagement.cpp
+	g++ -c colorManagement.cpp
 
 
 clean: 
