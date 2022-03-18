@@ -19,13 +19,23 @@ void cmd_execute(char **args)
     if (strcmp(cmd, "apropos"))
         findExeFileName(args[1]);
 
+    
     if (strcmp(cmd, "color"))
     {
-        if(strcmp(args[1], "--bg")){ 
-            char * bgCode = selectBGColor(args[2]);
+        // ==> need to create a help menu to show how to take input
+        // color --bg red
+        if (strcmp(args[1], "--bg"))
+        {
+            char *bgCode = selectBGColor(args[2]);
             eventLoopWithColors(bgCode);
         }
-        
+
+        // color --fg user cyn
+        else if (strcmp(args[1], "--fg"))
+        {
+            char *fgCode = selectFGColor(args[3]);
+            eventLoopWithColors(fgCode, args[2]);
+        }
     }
 }
 
@@ -158,12 +168,6 @@ bool isBuiltInCmd(char *cmd)
     {
         status = 1;
     }
-
-    // else if (strcmp(cmd, "color"))
-    // {
-    //     status = 1;
-    //     colorManager();
-    // }
 
     else
     {

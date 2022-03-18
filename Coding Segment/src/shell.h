@@ -42,13 +42,13 @@
 #define BG_DARK_WHT "\u001b[47m;1m"
 
 // MAIN LOOP
-void eventLoop(char *code = "");
-void eventLoopWithColors(char * ch = "");
+void eventLoop(char *code = "", char * type = "");
+void eventLoopWithColors(char * ch = "", char * type = "");
 
 // COMMAND PROMPT
 void prompt();
-void promptWithColors(char * code);
-char *take_user_input(char *code);
+void promptWithColors(char * code, char *colorType);
+char *take_user_input(char *code = "", char *colorType = "");
 char **str_tokenize(char *ch, char sep);
 void sig_handler(int signum);
 
@@ -67,6 +67,7 @@ char **strsplit(char *find, char *text);
 char *strip(char *word);
 char *showCode();
 char *selectBGColor(char *args);
+char *selectFGColor(char *args);
 char *numToStr(int num);
 
 // COMMAND EXECUTION

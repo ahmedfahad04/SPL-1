@@ -72,3 +72,35 @@ char *selectBGColor(char *args)
 
     return bgcolor;
 }
+
+char *selectFGColor(char *args)
+{
+    char *fgcolor;
+
+    if (strcmp(args, "red"))
+    {
+        fgcolor = FONT_RED;
+    }
+    else if (strcmp(args, "grn"))
+    {
+        fgcolor = FONT_GRN;
+    }
+    else if (strcmp(args, "blu"))
+    {
+        fgcolor = FONT_BLU;
+    }
+    else if (strcmp(args, "cyn"))
+    {
+        fgcolor = FONT_CYN;
+    }
+    else if (strcmp(args, "yel"))
+    {
+        fgcolor = FONT_YEL;
+    }
+    else if (strcmp(args, "blk"))
+    {
+        fgcolor = FONT_BLK;
+    }
+
+    return fgcolor;
+}

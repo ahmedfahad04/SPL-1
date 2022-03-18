@@ -3,8 +3,9 @@
 #include <ctype.h>
 #include "shell.h"
 using namespace std;
+char *userFontColor = FONT_RED, *bgColor = "\u001b[230;5;m", *hostFontColor = FONT_CYN;
 
-void promptWithColors(char *code)
+void promptWithColors(char *code, char *colorType)
 {
     char *path = getCurrentDirectory();
     char *myuser = userName();
@@ -12,22 +13,31 @@ void promptWithColors(char *code)
 
     // ==> need to work on manual code input
 
-    // char *colorCode = "\u001b[48;5;230m";
-    char *colorCode = code;
+    if (strcmp(colorType, "user"))
+    {
+        userFontColor = code;
+    }
+    else if (strcmp(colorType, "host"))
+    {
+        hostFontColor = code;
+    }
+    else
+    {
+        bgColor = code;
+    }
 
-    if (colorCode != NULL)
-        printf("%s", colorCode);
+    if (bgColor != NULL)
+        printf("%s", bgColor);
 
-    printf("%s%s@%s:%s%s", FONT_RED, myuser, myhost, FONT_RED, RESET);
-    if (colorCode != NULL)
-        printf("%s", colorCode);
+    printf("\u001b[1m%s\u001b[1m%s@%s:\u001b[1m%s\u001b[1m%s", userFontColor, myuser, myhost, userFontColor, RESET);
 
-    fflush(stdin);
-    printf("%s%s$ %s%s", FONT_CYN, getCurrentDirectory(), FONT_CYN, RESET);
-    if (colorCode != NULL)
-        printf("%s", colorCode);
+    if (bgColor != NULL)
+        printf("%s", bgColor);
 
-    
+    printf("\u001b[1m%s\u001b[1m%s$ \u001b[1m%s\u001b[1m%s", hostFontColor, getCurrentDirectory(), hostFontColor, RESET);
+
+    if (bgColor != NULL)
+        printf("%s", bgColor);
 }
 
 void prompt()
@@ -36,13 +46,11 @@ void prompt()
     char *myuser = userName();
     char *myhost = hostName();
 
-    printf("%s%s@%s:%s%s", FONT_RED, myuser, myhost, FONT_RED, RESET);
-
-    fflush(stdin);
-    printf("\u001b[1m\u001b[36;1m%s$ \u001b[36;1m\u001b[1m\u001b[0m", getCurrentDirectory());
+    printf("%s%s@%s:%s%s", userFontColor, myuser, myhost, userFontColor, RESET);
+    printf("%s\u001b[1m%s%s$ %s\u001b[1m%s", RESET, hostFontColor, getCurrentDirectory(), hostFontColor, RESET);
 }
 
-char *take_user_input(char *C_Code)
+char *take_user_input(char *C_Code, char *colorType)
 {
     char *buffer, *splitted_words, *path;
     char ch;
@@ -52,8 +60,9 @@ char *take_user_input(char *C_Code)
     buffer = (char *)malloc(sizeof(char) * buffer_size);
     splitted_words = (char *)malloc(sizeof(char) * buffer_size);
 
-    if (strlen(C_Code) != 0){ 
-        promptWithColors(C_Code);
+    if (strlen(C_Code) != 0)
+    {
+        promptWithColors(C_Code, colorType);
     }
     else
         prompt();
