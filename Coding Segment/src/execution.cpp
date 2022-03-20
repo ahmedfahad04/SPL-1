@@ -11,14 +11,6 @@ void cmd_execute(char **args)
     // in future I'll send the tokenize text for execution
     // cmd_execute(commandLine);
 
-    // int argv = 0;
-
-    // while (*args)
-    // {
-    //     args++;
-    //     argv++;
-    // }
-
     char *cmd = args[0];
 
     if (strcmp(cmd, "cd"))
@@ -31,9 +23,18 @@ void cmd_execute(char **args)
     {
         // ==> need to create a help menu to show how to take input
         // color --bg red
-        if (strcmp(args[1], "--bg"))
+        if (args[1] == NULL){
+            userManual();
+            return;
+        }
+        else if (strcmp(args[1], "--bg"))
         {
-
+            if (args[2] == NULL)
+            {
+                printf("Color Code missing...\n");
+                userManual();
+                return;
+            }
             char *bgCode = selectBGColor(args[2]);
             eventLoopWithColors(bgCode);
         }
@@ -41,14 +42,31 @@ void cmd_execute(char **args)
         // color --fg user cyn
         else if (strcmp(args[1], "--fg"))
         {
+            if (args[3] == NULL || args[2] == NULL)
+            {
+                printf("Color Code missing...\n");
+                userManual();
+                return;
+            }
+
+            if (!strcmp(args[2], "user") && !strcmp(args[2], "host"))
+            {
+                printf("Wrong type declaration...\n");
+                userManual();
+                return;
+            }
+            
             char *fgCode = selectFGColor(args[3]);
             eventLoopWithColors(fgCode, args[2]);
         }
 
         else if (strcmp(args[1], "--help"))
         {
+            printf("Wrong command...\n");
             userManual();
         }
+
+        
     }
 }
 

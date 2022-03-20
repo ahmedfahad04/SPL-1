@@ -45,7 +45,7 @@
 
 void userManual()
 {
-
+    
     printf("color [--fg/--bg] [user/host] [color code]\n");
     printf("Color Codes:\t");
     printf("%s red %s\t", FONT_RED, RESET);
