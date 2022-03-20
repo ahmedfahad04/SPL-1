@@ -11,6 +11,14 @@ void cmd_execute(char **args)
     // in future I'll send the tokenize text for execution
     // cmd_execute(commandLine);
 
+    // int argv = 0;
+
+    // while (*args)
+    // {
+    //     args++;
+    //     argv++;
+    // }
+
     char *cmd = args[0];
 
     if (strcmp(cmd, "cd"))
@@ -19,13 +27,13 @@ void cmd_execute(char **args)
     if (strcmp(cmd, "apropos"))
         findExeFileName(args[1]);
 
-    
     if (strcmp(cmd, "color"))
     {
         // ==> need to create a help menu to show how to take input
         // color --bg red
         if (strcmp(args[1], "--bg"))
         {
+
             char *bgCode = selectBGColor(args[2]);
             eventLoopWithColors(bgCode);
         }
@@ -35,6 +43,11 @@ void cmd_execute(char **args)
         {
             char *fgCode = selectFGColor(args[3]);
             eventLoopWithColors(fgCode, args[2]);
+        }
+
+        else if (strcmp(args[1], "--help"))
+        {
+            userManual();
         }
     }
 }

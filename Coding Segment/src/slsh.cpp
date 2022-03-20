@@ -6,6 +6,11 @@ void eventLoopWithColors(char *args, char *type)
 
     char *BGCode, *FGCode;
 
+    if (args == NULL){
+       // perror("Wrong color code\n");
+        return;
+    } 
+
     if (strcmp(type, "user") || strcmp(type, "host"))
     {
         FGCode = args;
@@ -17,12 +22,10 @@ void eventLoopWithColors(char *args, char *type)
         BGCode = args;
 
         if (BGCode != NULL)
-        printf("%s", BGCode);
+            printf("%s", BGCode);
 
         eventLoop(BGCode);
     }
-
-    
 }
 
 void eventLoop(char *colorFlag, char *colorType)
