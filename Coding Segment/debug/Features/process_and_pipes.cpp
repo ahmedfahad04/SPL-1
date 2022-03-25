@@ -60,7 +60,7 @@ int main()
         int readFromChildProcess;
         char fromChild[500];
 
-        
+       
         if(read(fd[0], &fromChild, sizeof(fromChild)) == -1){
             cout << "\nFiled to read values";
         }
@@ -70,9 +70,7 @@ int main()
 
         // cout << "\nSummation got from the child process is: " << readFromChildProcess << endl;
         // int newsum = sum + readFromChildProcess;
-        // cout << "\nNEW summation: " << newsum << endl;
-
-        
+        // cout << "\nNEW summation: " << newsum << endl;  
     }
 
     cout << "\nSummation: " << sum << endl;
