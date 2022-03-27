@@ -9,16 +9,28 @@ int main(){
 
     if(pid == 0){
 
+
+        // this is output redirection....
         int file = open("STDOUT.txt", O_WRONLY | O_CREAT, 0777);
         if(file == -1){
             puts("Error writing file");
         }
 
-        printf("Previous FD: %d\n", file);
+        // printf("Previous FD: %d\n", file);
         int fdout = dup2(file, 1);  // permanently converted the stdout...
         
-        printf("NEW FD: %d\n", fdout);
+        // printf("NEW FD: %d\n", fdout);
         close(file);
+
+
+        // this is input redirection...
+        int f2 = open("STDIN.txt", O_RDONLY, 0777);
+        if(f2 == -1){
+            puts("Error reading file");
+        }
+
+        int fdin = dup2(f2, 0);
+        close(f2);
         
 
         // we're creating the execution in child process
@@ -29,7 +41,8 @@ int main(){
         // process execution and replace the memory of the process
         // with it's own memory and finally it becomes the ultimate
         // code to be executed.
-        execlp("ls", "ls", "-al", NULL);
+        // execlp("ls", "ls", "-al", NULL);
+        execlp("wc", "wc", "-l", NULL);
         // execlp("ping", "ping", "-c", "2", "google.com", NULL);
         printf("Its a child process....\n.");
     }

@@ -1,11 +1,1 @@
-NEW FD: 1
-total 72
-drwxrwxr-x 2 fahad fahad  4096 Mar 25 10:29 .
-drwxrwxr-x 6 fahad fahad  4096 Mar 25 09:39 ..
--rw-rw-r-- 1 fahad fahad  4288 Mar 25 09:41 prompt.cpp
--rw-rw-r-- 1 fahad fahad    18 Mar 25 10:05 sample.txt
--rwxrwxr-x 1 fahad fahad 20416 Mar 25 10:10 simpleTextRedirection
--rw-rw-r-- 1 fahad fahad  3728 Mar 25 10:11 simpleTextRedirection.cpp
--rwxrwxr-x 1 fahad fahad    10 Mar 25 10:29 STDOUT.txt
--rwxrwxr-x 1 fahad fahad 17056 Mar 25 10:29 testProcess
--rw-rw-r-- 1 fahad fahad  1511 Mar 25 10:29 testProcess.cpp
+12

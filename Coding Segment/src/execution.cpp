@@ -23,7 +23,8 @@ void cmd_execute(char **args)
     {
         // ==> need to create a help menu to show how to take input
         // color --bg red
-        if (args[1] == NULL){
+        if (args[1] == NULL)
+        {
             userManual();
             return;
         }
@@ -55,7 +56,7 @@ void cmd_execute(char **args)
                 userManual();
                 return;
             }
-            
+
             char *fgCode = selectFGColor(args[3]);
             eventLoopWithColors(fgCode, args[2]);
         }
@@ -65,8 +66,6 @@ void cmd_execute(char **args)
             printf("Wrong command...\n");
             userManual();
         }
-
-        
     }
 }
 
@@ -228,40 +227,139 @@ void execute(char **args)
         cmd_execute(args);
     }
 
+    // store process id
+    // check if the process if child or parent
+    // if it's the child process run execv()
+    // if it's parent process then wait for the child process to be terminated
+
+    pid_t status;
+
+    pid_t process_id;
+
+    process_id = fork();
+
+    // child process
+    if (process_id == 0)
+    {
+        if (execvp(command, args) == -1)
+        {
+            cmdSuggestion(command);
+            perror("Execution failed\n");
+        }
+        exit(EXIT_FAILURE);
+    }
+    else if (process_id < 1)
+    {
+        perror("Process Forking Failed\n");
+    }
+
     else
     {
+        status = waitpid(process_id, NULL, 0);
+        // printf("It's a parent proecss\n");
+    }
+}
 
-        // store process id
-        // check if the process if child or parent
-        // if it's the child process run execv()
-        // if it's parent process then wait for the child process to be terminated
+void executePipelinedCommands(int size, char *simpleCMD[])
+{
 
-        pid_t status;
+    pid_t pid[100];
+    int fd[100][2];
 
-        pid_t process_id;
+    for (int i = 0; i < size; i++)
+    {
+        char *currCMD = strip(simpleCMD[i]);
+        char **cmd = str_tokenize(currCMD, ' ');
 
-        process_id = fork();
-
-        // child process
-        if (process_id == 0)
-        {
-            if (execvp(command, args) == -1)
+        if (i == 0)
+        { // first cmd
+            // puts("FIRST");
+            // pipe 1
+            if (pipe(fd[i]) == -1)
             {
-                cmdSuggestion(command);
-                // findExeFileName(command);
-                perror("Execution failed\n");
+                printf("Error creating pipe;");
             }
-            exit(EXIT_FAILURE);
+
+            // cmd 1
+            int x = fork();
+            pid[i] = x;
+            if (pid[i] == 0)
+            {
+                // child process; write end
+                dup2(fd[i][1], STDOUT_FILENO);
+                close(fd[i][1]);
+                close(fd[i][0]);
+
+                if (execvp(cmd[0], cmd) == -1)
+                {
+                    printf("Execution failed..#B: %d", i);
+                }
+                // execlp("ls", "ls", NULL);
+            }
+            waitpid(pid[i], NULL, 0);
         }
-        else if (process_id < 1)
-        {
-            perror("Process Forking Failed\n");
+
+        else if (i == size - 1)
+        { // last cmd
+          // cmd 4
+            // puts("LAST");
+            int x = fork();
+            pid[i] = x;
+            if (pid[i] == 0)
+            {
+                // child process; read end
+                dup2(fd[i - 1][0], STDIN_FILENO);
+                close(fd[i - 1][1]);
+                close(fd[i - 1][0]);
+
+                if (execvp(cmd[0], cmd) == -1)
+                {
+                    printf("Execution failed..#A: %d", i);
+                }
+            }
+
+            close(fd[i - 1][1]);
+            close(fd[i - 1][0]);
+            waitpid(pid[i], NULL, 0);
         }
 
         else
         {
-            status = waitpid(process_id, NULL, 0);
-            // printf("It's a parent proecss\n");
+            // puts("OTHERS");
+            //  pipe 2
+            if (pipe(fd[i]) == -1)
+            {
+                printf("Error creating pipe;");
+            }
+
+            // cmd 2
+            int x = fork();
+            pid[i] = x;
+            if (pid[i] == 0)
+            {
+                // child process; read end
+                dup2(fd[i - 1][0], STDIN_FILENO);
+                close(fd[i - 1][1]);
+                close(fd[i - 1][0]);
+
+                if (i != size - 1)
+                {
+                    // // write end
+                    dup2(fd[i][1], STDOUT_FILENO);
+                    close(fd[i][1]);
+                    close(fd[i][0]);
+                }
+
+                if (execvp(cmd[0], cmd) == -1)
+                {
+                    printf("Execution failed..#C: %d", i);
+                }
+            }
+
+            // erpor ar fd er kaj nai tai etake ekhanei off korte hobe
+            close(fd[i - 1][1]);
+            close(fd[i - 1][0]);
+            waitpid(pid[i], NULL, 0);
         }
     }
 }

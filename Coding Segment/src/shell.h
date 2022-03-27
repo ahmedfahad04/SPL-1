@@ -83,3 +83,4 @@ char *getCurrentDirectory();
 void cmdSuggestion(char *cmd);
 void findExeFileName(char *cmd);
 void saveInfo();
+void executePipelinedCommands(int size, char *simpleCMD[]);

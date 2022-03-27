@@ -1,11 +1,26 @@
-
-
-#include <bits/stdc++.h>
+#include <fcntl.h>
 #include <unistd.h>
-#include <fcntl.h> 
+#include <stdlib.h>
+#include <stdio.h>
+#include <sys/wait.h>
+#include <unistd.h>
+#include <ctype.h>
 
 #define BUFFER_SIZE 1024
 using namespace std;
+
+size_t strlen(const char *str)
+{
+
+    size_t len = 0;
+
+    while (str[len] != '\0')
+    {
+        len++;
+    }
+
+    return len;
+}
 
 char *take_user_input()
 {
@@ -16,7 +31,6 @@ char *take_user_input()
     // dynamically allocate memory to store the user prompt
     buffer = (char *)malloc(sizeof(char) * buffer_size);
     splitted_words = (char *)malloc(sizeof(char) * buffer_size);
-
 
     while (1)
     {
@@ -72,14 +86,14 @@ char **removeWhiteSpace(char **raw_data)
         for (int j = 0; j < strlen(raw_data[i]); j++)
         {
 
-            if (raw_data[i][j] != ' ')
+            if (raw_data[i][j] != ' ' or raw_data[i][j] != '\n')
                 demo[id++] = raw_data[i][j];
         }
 
         words[i] = demo;
     }
 
-    words[i] = NULL;
+    // words[i] = NULL;
 
     return words;
 }
@@ -139,7 +153,8 @@ char **str_tokenize(char *ch, char sep)
     return raw_words;
 }
 
-int main(){
+int main()
+{
 
     // 0 - stdin
     // 1 - stdout
@@ -148,44 +163,38 @@ int main(){
     int tmpin = dup(0);
     int tmpout = dup(1);
 
-
     // input
     printf(">> ");
-    char * data = (char *) malloc(sizeof(char) *1024);
-    char ** cmd = (char **) malloc(sizeof(char) *1024);
+    char *data = (char *)malloc(sizeof(char) * 1024);
+    char **cmd = (char **)malloc(sizeof(char) * 1024);
     data = take_user_input();
-    cmd = str_tokenize(data, '>');
+    cmd = str_tokenize(data, '|');
 
+    int i = 0;
+    pid_t pid[100];
+    int fd[100][2];
 
-    char * infile;
-    int line = 1;
-    while(*cmd){
-        puts(strip(*cmd));
+    while (*cmd)
+    {
+        char **token = str_tokenize(*cmd, ' ');
+        char **singleCMD = removeWhiteSpace(token);
+
+        if (strlen(*singleCMD) != 0)
+        {
+            char *command = strip(singleCMD[0]);
+
+            int pid = fork();
+            if (pid == 0)
+            {
+                printf("child process..%s\n", command);
+                if (execvp(command, singleCMD) == -1)
+                {
+                    perror("Execution failed\n");
+                }
+                exit(EXIT_FAILURE);
+            }
+        }
+
         cmd++;
-        line++;
-        if(line == 2) infile = *cmd;
     }
-
-    // IO redirection
-    int fdin;
-    if(infile != NULL){
-        fdin = open(cmd[1], O_RDONLY, 0777);
-    } else{
-        fdin = dup(tmpin);
-    }
-
-    dup2(fdin, 0);
-    close(fdin);
-
-    char name[18];
-    int c;
-    read(fdin, &c, 1);
-    printf("NAME: %s\n", name);
-
-    // 0 - infile
-    // 1 - stdout
-
-
-
-
 }
