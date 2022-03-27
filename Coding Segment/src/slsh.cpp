@@ -42,6 +42,7 @@ void eventLoop(char *colorFlag, char *colorType)
         //  ==> need to remove redundant prompt input
         commandLine = take_user_input(colorFlag, colorType);
 
+        // checking for pipelined commands
         int flag = 0;
         for (int i = 0; i < strlen(commandLine); i++)
         {
@@ -90,5 +91,5 @@ void eventLoop(char *colorFlag, char *colorType)
             execute(filtered_tokens);
         }
 
-        } while (1);
+    } while (1);
 }

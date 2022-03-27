@@ -56,6 +56,7 @@ void userManual()
     printf("%s mag %s\t", FONT_MAG, RESET);
     printf("%s cyn %s\t", FONT_CYN, RESET);
     puts("");
+    return;
 }
 char *selectBGColor(char *args)
 {

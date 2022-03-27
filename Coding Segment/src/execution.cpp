@@ -63,7 +63,7 @@ void cmd_execute(char **args)
 
         else if (strcmp(args[1], "--help"))
         {
-            printf("Wrong command...\n");
+            // printf("Wrong command...\n");
             userManual();
         }
     }
@@ -231,32 +231,34 @@ void execute(char **args)
     // check if the process if child or parent
     // if it's the child process run execv()
     // if it's parent process then wait for the child process to be terminated
-
-    pid_t status;
-
-    pid_t process_id;
-
-    process_id = fork();
-
-    // child process
-    if (process_id == 0)
-    {
-        if (execvp(command, args) == -1)
-        {
-            cmdSuggestion(command);
-            perror("Execution failed\n");
-        }
-        exit(EXIT_FAILURE);
-    }
-    else if (process_id < 1)
-    {
-        perror("Process Forking Failed\n");
-    }
-
     else
     {
-        status = waitpid(process_id, NULL, 0);
-        // printf("It's a parent proecss\n");
+        pid_t status;
+
+        pid_t process_id;
+
+        process_id = fork();
+
+        // child process
+        if (process_id == 0)
+        {
+            if (execvp(command, args) == -1)
+            {
+                cmdSuggestion(command);
+                perror("Execution failed\n");
+            }
+            exit(EXIT_FAILURE);
+        }
+        else if (process_id < 1)
+        {
+            perror("Process Forking Failed\n");
+        }
+
+        else
+        {
+            status = waitpid(process_id, NULL, 0);
+            // printf("It's a parent proecss\n");
+        }
     }
 }
 
@@ -294,7 +296,6 @@ void executePipelinedCommands(int size, char *simpleCMD[])
                 {
                     printf("Execution failed..#B: %d", i);
                 }
-                // execlp("ls", "ls", NULL);
             }
             waitpid(pid[i], NULL, 0);
         }

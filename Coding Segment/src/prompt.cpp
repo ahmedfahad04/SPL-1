@@ -168,26 +168,6 @@ char **str_tokenize(char *ch, char sep)
     return raw_words;
 }
 
-// char *strip(char *word)
-// {
-
-//     int id = 0;
-//     char *demo = (char *)malloc(sizeof(char) * 1024);
-
-//     for (int i = 0; i < strlen(word); i++)
-//     {
-//         // if ( isalpha(word[i]) || isalnum(word[i]) || ispunct(word[i]) ){
-//         if (isgraph(word[i]))
-//         {
-//             demo[id++] = word[i];
-//         }
-//     }
-
-//     demo[id] = '\0';
-
-//     return demo;
-// }
-
 char *strip(char *word)
 {
 
@@ -196,7 +176,7 @@ char *strip(char *word)
 
     int stflag = 0, endflag = 0;
 
-    printf("LEN: %d\n", strlen(word));
+    
     for (int i = 0; i < strlen(word); i++)
     {
 

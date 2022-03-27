@@ -214,7 +214,10 @@ int main()
     char *data = (char *)malloc(sizeof(char) * 1024);
     char **cmd = (char **)malloc(sizeof(char) * 1024);
     data = take_user_input();
-    cmd = str_tokenize(data, '|');
+    cmd = str_tokenize(data, '<');
+
+    char *infile = "STDIN.txt";
+    char *outfile = "STDOUT.txt";
 
     char *simpleCMD[10];
 
@@ -252,6 +255,19 @@ int main()
             pid[i] = x;
             if (pid[i] == 0)
             {
+
+                if (infile)
+                {
+                    int f2 = open(infile, O_RDONLY, 0777);
+                    if (f2 == -1)
+                    {
+                        puts("Error reading file");
+                    }
+
+                    int fdin = dup2(f2, 0);
+                    close(f2);
+                }
+
                 // child process; write end
                 dup2(fd[i][1], STDOUT_FILENO);
                 close(fd[i][1]);
@@ -274,6 +290,22 @@ int main()
             pid[i] = x;
             if (pid[i] == 0)
             {
+
+                if (outfile)
+                {
+                    // this is output redirection....
+                    int file = open(outfile, O_WRONLY | O_CREAT, 0777);
+                    if (file == -1)
+                    {
+                        puts("Error writing file");
+                    }
+
+                    // printf("Previous FD: %d\n", file);
+                    int fdout = dup2(file, 1); // permanently converted the stdout...
+
+                    // printf("NEW FD: %d\n", fdout);
+                    close(file);
+                }
                 // child process; read end
                 dup2(fd[i - 1][0], STDIN_FILENO);
                 close(fd[i - 1][1]);

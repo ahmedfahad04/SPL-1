@@ -9,7 +9,6 @@ int main(){
 
     if(pid == 0){
 
-
         // this is output redirection....
         int file = open("STDOUT.txt", O_WRONLY | O_CREAT, 0777);
         if(file == -1){
