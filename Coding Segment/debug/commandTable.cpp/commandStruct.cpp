@@ -207,43 +207,197 @@ char **strcpy2(char **str)
     return words;
 }
 
+bool strcontain(const char *data, const char *substr)
+{
+
+    int j = 0, len = 0, flag = 0;
+    for (int i = 0; i < strlen(data); i++)
+    {
+        if (data[i] == substr[j])
+        {
+            j++;
+            len++;
+        }
+        else
+        {
+            if (len == strlen(substr))
+            {
+                flag = 1;
+                break;
+            }
+            j = 0;
+            len = 0;
+        }
+    }
+
+    if (len == strlen(substr))
+        flag = 1;
+
+    return flag;
+}
+
+struct ShellCommands
+{
+    char *simpleCommand[50];
+    char *infile;
+    char *outfile;
+    char *background;
+};
+
 int main()
 {
 
     printf(">> ");
     char *data = (char *)malloc(sizeof(char) * 1024);
     char **cmd = (char **)malloc(sizeof(char) * 1024);
+    char **red = (char **)malloc(sizeof(char) * 1024);
     data = take_user_input();
-    cmd = str_tokenize(data, '<');
 
-    char *infile = "STDIN.txt";
-    char *outfile = "STDOUT.txt";
-
-    char *simpleCMD[10];
-
-    // for (int i = 0; i < 10; i++)
-    // {
-    //     simpleCMD[i] = (char *)malloc(sizeof(char) * 1024);
-    // }
+    struct ShellCommands command;
     int size = 0;
+
+    command.outfile = NULL;
+    command.infile = NULL;
+
+    // pipelined command
+    if (strcontain(data, "|"))
+    {
+        cmd = str_tokenize(data, '|');
+    }
+    else
+        *cmd = data; // only a single command
 
     while (*cmd)
     {
-        simpleCMD[size++] = *cmd;
+        if (strcontain(*cmd, ">") or strcontain(*cmd, "<"))
+        {
+
+            // cat > infile < outfile
+            // cat > infile  ------------------ Output redirection
+            if (strcontain(*cmd, "<"))
+            {
+                red = str_tokenize(*cmd, '<');
+                char *p1 = red[0];
+                char *p2 = red[1];
+
+                // case 1 -------- echo hello < infile > outfile
+                if (strcontain(p2, ">"))
+                {
+                    red = str_tokenize(p2, '>');
+                    command.infile = red[0];
+                    command.outfile = red[1];
+                }
+                else
+                {
+                    command.infile = p2;
+                }
+
+                // case2 ---------- echo hello > infile < outfile
+                if (strcontain(p1, ">"))
+                {
+                    red = str_tokenize(p1, '>');
+                    command.simpleCommand[size++] = red[0];
+                    command.outfile = red[1];
+                }
+                else
+                {
+                    command.simpleCommand[size++] = p1;
+                }
+            }
+
+            else if (strcontain(*cmd, ">"))
+            {
+                red = str_tokenize(*cmd, '>');
+                char *p1 = red[0];
+                char *p2 = red[1];
+
+                // case 1---------- echo hello > infile < outfile
+                if (strcontain(p2, "<"))
+                {
+                    red = str_tokenize(p2, '<');
+                    command.outfile = red[0];
+                    command.infile = red[1];
+                }
+                else
+                {
+                    command.outfile = p2;
+                }
+
+                // case 2 -------- echo hello < infile > outfile
+                if (strcontain(p1, ">"))
+                {
+                    red = str_tokenize(p1, '>');
+                    command.simpleCommand[size++] = red[0];
+                    command.outfile = red[1];
+                }
+                else
+                {
+                    command.simpleCommand[size++] = p1;
+                }
+            }
+
+            else
+            {
+                command.infile = NULL;
+                command.outfile = NULL;
+            }
+        }
+        else
+        {
+            command.simpleCommand[size++] = *cmd;
+        }
         cmd++;
     }
+
+    // parsing ends.....
+
+    printf("STDOUT: %s\n", command.infile);
+    printf("STDIN: %s\n", command.outfile);
+    printf("SIZE: %d\n", size);
 
     pid_t pid[100];
     int fd[100][2];
 
     for (int i = 0; i < size; i++)
     {
-        char *currCMD = strip(simpleCMD[i]);
+        char *currCMD = strip(command.simpleCommand[i]);
         char **cmd = str_tokenize(currCMD, ' ');
 
         if (i == 0)
-        { // first cmd
-            puts("FIRST");
+        {
+            // puts("FIRST");
+
+            // this is input redirection...
+            if (command.infile)
+            {
+                printf("READING>>>\n");
+                int f2 = open(command.infile, O_RDONLY, 0777);
+                if (f2 == -1)
+                {
+                    puts("Error reading file");
+                }
+
+                int fdin = dup2(f2, 0);
+                close(f2);
+            }
+
+            // this is output redirection....
+            if (command.outfile)
+            {
+                printf("WRITING>>>\n");
+                int file = open(command.outfile, O_WRONLY | O_CREAT, 0777);
+                if (file == -1)
+                {
+                    puts("Error writing file");
+                }
+
+                // printf("Previous FD: %d\n", file);
+                int fdout = dup2(file, 1); // permanently converted the stdout...
+
+                // printf("NEW FD: %d\n", fdout);
+                close(file);
+            }
+
             // pipe 1
             if (pipe(fd[i]) == -1)
             {
@@ -255,29 +409,18 @@ int main()
             pid[i] = x;
             if (pid[i] == 0)
             {
-
-                if (infile)
+                if (i != size - 1) // if we enter only a single command
                 {
-                    int f2 = open(infile, O_RDONLY, 0777);
-                    if (f2 == -1)
-                    {
-                        puts("Error reading file");
-                    }
-
-                    int fdin = dup2(f2, 0);
-                    close(f2);
+                    // child process; write end
+                    dup2(fd[i][1], STDOUT_FILENO);
+                    close(fd[i][1]);
+                    close(fd[i][0]);
                 }
-
-                // child process; write end
-                dup2(fd[i][1], STDOUT_FILENO);
-                close(fd[i][1]);
-                close(fd[i][0]);
 
                 if (execvp(cmd[0], cmd) == -1)
                 {
                     printf("Execution failed..#B: %d", i);
                 }
-                // execlp("ls", "ls", NULL);
             }
             waitpid(pid[i], NULL, 0);
         }
@@ -285,27 +428,28 @@ int main()
         else if (i == size - 1)
         { // last cmd
           // cmd 4
-            puts("LAST");
+            // puts("LAST");
+
+            if (command.outfile)
+            {
+                // this is output redirection....
+                int file = open(command.outfile, O_WRONLY | O_CREAT, 0777);
+                if (file == -1)
+                {
+                    puts("Error writing file");
+                }
+
+                // printf("Previous FD: %d\n", file);
+                int fdout = dup2(file, 1); // permanently converted the stdout...
+
+                // printf("NEW FD: %d\n", fdout);
+                close(file);
+            }
+
             int x = fork();
             pid[i] = x;
             if (pid[i] == 0)
             {
-
-                if (outfile)
-                {
-                    // this is output redirection....
-                    int file = open(outfile, O_WRONLY | O_CREAT, 0777);
-                    if (file == -1)
-                    {
-                        puts("Error writing file");
-                    }
-
-                    // printf("Previous FD: %d\n", file);
-                    int fdout = dup2(file, 1); // permanently converted the stdout...
-
-                    // printf("NEW FD: %d\n", fdout);
-                    close(file);
-                }
                 // child process; read end
                 dup2(fd[i - 1][0], STDIN_FILENO);
                 close(fd[i - 1][1]);

@@ -28,8 +28,14 @@
 12. careful about free(); 
 13. duplicate handler 
 14. uname problem need to solve...[DONE] 
-15. Color coded text-------------------[CURRENTLY WORKING]
-	> enable coloring the system prompt.
-	> enalbe coloring the terminal background color.
+15. Color coded text-------------------[DONE]
+	> enable coloring the system prompt. [DONE]
+	> enalbe coloring the terminal background color. [DONE]
 	> showing a color list and prompt for chosing definite color [DONE]
-	> different segment for chosing background color and font color
+	> different segment for chosing background color and font color [DONE in a different way]
+	
+16. Pipeline [DONE]
+	> Need to do something different. (we can show the initial output and then show the updated output)
+	
+17. I/O Redirection [WORKING..]
+	> I may notify the user from which cmd we're taking input and where we're putting the output
