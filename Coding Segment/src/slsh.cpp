@@ -38,7 +38,6 @@ void eventLoop(char *colorFlag, char *colorType)
 
     do
     {
-        // printf("SURE?\n");
         //  ==> need to remove redundant prompt input
         commandLine = take_user_input(colorFlag, colorType);
 
@@ -56,7 +55,6 @@ void eventLoop(char *colorFlag, char *colorType)
         if (flag)
         {
             filtered_tokens = str_tokenize(commandLine, '|');
-            // filtered_tokens = checkForWildCards(filtered_tokens);
 
             char *simpleCMD[100];
             int size = 0;
@@ -75,6 +73,7 @@ void eventLoop(char *colorFlag, char *colorType)
             tokens = str_tokenize(commandLine, ' ');
             filtered_tokens = removeWhiteSpace(tokens);
             filtered_tokens = checkForWildCards(filtered_tokens);
+            // filtered_tokens = checkForAliasing(filtered_tokens);
 
             // this is a temporary block to exit the loop
             // in final outcome the command will send a termination code

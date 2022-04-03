@@ -1,5 +1,5 @@
-run: main.o prompt.o implementation.o execution.o suggestingCMDs.o slsh.o colorManagement.o
-	g++ -o run main.o prompt.o implementation.o execution.o suggestingCMDs.o slsh.o colorManagement.o -pthread
+run: main.o prompt.o implementation.o execution.o commandAliasing.o suggestingCMDs.o slsh.o colorManagement.o prompt.o 
+	g++ -o run main.o prompt.o commandAliasing.o implementation.o execution.o suggestingCMDs.o slsh.o colorManagement.o -pthread
 	mv *.o obj
 
 main.o: main.cpp
@@ -22,6 +22,9 @@ suggestingCMDs.o: suggestingCMDs.cpp shell.h
 
 colorManagement.o: colorManagement.cpp
 	g++ -c colorManagement.cpp
+
+commandAliasing.o: commandAliasing.cpp
+	g++ -c commandAliasing.cpp
 
 
 clean: 

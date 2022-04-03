@@ -183,8 +183,8 @@ char *userName()
 
     fclose(fp);
 
-    if (line)
-        free(line);
+    // if (line)
+    //     free(line);
 
     return user;
 }
@@ -227,22 +227,24 @@ void execute(char **args)
         cmd_execute(args);
     }
 
+    else if (strcmp(command, "alias")){
+        aliasCommands(args);
+    }
     // store process id
     // check if the process if child or parent
     // if it's the child process run execv()
     // if it's parent process then wait for the child process to be terminated
     else
     {
-        pid_t status;
-
-        pid_t process_id;
-
+        pid_t status, process_id;
+        args = checkForAliasing(args);
+        
         process_id = fork();
 
         // child process
         if (process_id == 0)
         {
-            if (execvp(command, args) == -1)
+            if (execvp(args[0], args) == -1)
             {
                 cmdSuggestion(command);
                 perror("Execution failed\n");
@@ -251,6 +253,7 @@ void execute(char **args)
         }
         else if (process_id < 1)
         {
+            puts("Parent process");
             perror("Process Forking Failed\n");
         }
 

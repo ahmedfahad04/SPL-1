@@ -86,3 +86,7 @@ void findExeFileName(char *cmd);
 void saveInfo();
 void executePipelinedCommands(int size, char *simpleCMD[]);
 char ** checkForWildCards(char ** data);
+void setAlias(char *cmd, char *alias);
+void aliasCommands(char **words);
+char **checkForAliasing(char **cmd);
+char *getAlias(char *data);
