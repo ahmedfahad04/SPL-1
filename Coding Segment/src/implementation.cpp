@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <dirent.h>
 #include <stdlib.h>
 #include "shell.h"
 
@@ -272,4 +273,115 @@ char *numToStr(int num)
     str[j] = '\0';
 
     return str;
+}
+
+bool wildcardmatching(char *str, char *pat, int slen, int plen)
+{
+
+    if (plen == 0)
+    {
+        if (plen == 0)
+            return 0;
+        else
+            return 1;
+    }
+
+    bool table[slen + 1][plen + 1];
+
+    for (int i = 0; i <= slen; i++)
+    {
+        for (int j = 0; j <= plen; j++)
+        {
+            table[i][j] = false;
+        }
+    }
+
+    // initially empty stirng mathches with empty pattern
+    table[0][0] = true;
+
+    // only * can match with empty sequence
+    for (int j = 1; j <= plen; j++)
+    {
+        if (pat[j - 1] == '*')
+        {
+            table[0][j] = table[0][j - 1];
+        }
+    }
+
+    for (int i = 1; i <= slen; i++)
+    {
+        for (int j = 1; j <= plen; j++)
+        {
+
+            if (pat[j - 1] == '*')
+            {
+                table[i][j] = table[i - 1][j] || table[i][j - 1];
+            }
+
+            else if (pat[j - 1] == '?' || (str[i - 1] == pat[j - 1]))
+            {
+                table[i][j] = table[i - 1][j - 1];
+            }
+
+            else
+                table[i][j] = false;
+        }
+    }
+
+    return table[slen][plen];
+}
+
+char **checkForWildCards(char **data)
+{
+    char **newargs = (char **)malloc(sizeof(char) * 1024);
+    int id = 0;
+
+    while (*data)
+    {
+        if (strcontain(*data, "*"))
+        {
+            char *args = (char *)malloc(sizeof(char) * 1024);
+
+            DIR *folder;
+            struct dirent *entry;
+            int files = 0;
+
+            folder = opendir(".");
+
+            if (folder == NULL)
+            {
+                perror("Unable to read directory");
+            }
+
+            while ((entry = readdir(folder)))
+            {
+                char *dname = entry->d_name;
+
+                if (wildcardmatching(dname, *data, strlen(dname), strlen(*data)))
+                {
+                    // puts(dname);
+                    args = strcatt(args, dname);
+                    args = strcatt(args, " ");
+                }
+            }
+
+            closedir(folder);
+
+            char **dirs = str_tokenize(args, ' ');
+            while (*dirs)
+            {
+                if (strlen(*dirs) != 0)
+                    newargs[id++] = *dirs;
+                dirs++;
+            }
+        }
+        else
+        {
+            newargs[id++] = *data;
+        }
+
+        data++;
+    }
+
+    return newargs;
 }

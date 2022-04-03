@@ -56,12 +56,14 @@ void eventLoop(char *colorFlag, char *colorType)
         if (flag)
         {
             filtered_tokens = str_tokenize(commandLine, '|');
+            // filtered_tokens = checkForWildCards(filtered_tokens);
 
-            char *simpleCMD[10];
+            char *simpleCMD[100];
             int size = 0;
 
             while (*filtered_tokens)
             {
+                // filtered_tokens = checkForWildCards(filtered_tokens);
                 simpleCMD[size++] = *filtered_tokens;
                 filtered_tokens++;
             }
@@ -72,6 +74,7 @@ void eventLoop(char *colorFlag, char *colorType)
         {
             tokens = str_tokenize(commandLine, ' ');
             filtered_tokens = removeWhiteSpace(tokens);
+            filtered_tokens = checkForWildCards(filtered_tokens);
 
             // this is a temporary block to exit the loop
             // in final outcome the command will send a termination code
@@ -82,10 +85,6 @@ void eventLoop(char *colorFlag, char *colorType)
                 fprintf(stdout, "\e[1;1H\e[2J");
                 exit(EXIT_FAILURE);
             }
-
-            // this if block is used to clear the console
-            if (strcmp(filtered_tokens[0], "clear"))
-                fprintf(stdout, "\e[1;1H\e[2J"); // ansi code to clear the console
 
             // printf("%s\n", commandLine);
             execute(filtered_tokens);

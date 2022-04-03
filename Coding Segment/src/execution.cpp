@@ -272,6 +272,7 @@ void executePipelinedCommands(int size, char *simpleCMD[])
     {
         char *currCMD = strip(simpleCMD[i]);
         char **cmd = str_tokenize(currCMD, ' ');
+        cmd = checkForWildCards(cmd);   // checking if any wildcard pattern is available or not
 
         if (i == 0)
         { // first cmd

@@ -115,6 +115,7 @@ int main()
    char ** p = readCMDPath();
    int k =0;
    while(*p){
+       
        p++;       
    }
 }

@@ -70,6 +70,7 @@ char *selectBGColor(char *args);
 char *selectFGColor(char *args);
 char *numToStr(int num);
 void userManual();
+bool wildcardmatching(char * str, char * pat, int slen, int plen);
 
 // COMMAND EXECUTION
 void cmd_execute(char **args);
@@ -84,3 +85,4 @@ void cmdSuggestion(char *cmd);
 void findExeFileName(char *cmd);
 void saveInfo();
 void executePipelinedCommands(int size, char *simpleCMD[]);
+char ** checkForWildCards(char ** data);

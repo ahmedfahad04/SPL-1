@@ -8,3 +8,4 @@ we'll execute command through parsing->tokenizing->using AST/command Table InSha
 4. Implemented simple built-in command (cd, pwd, clear, exit)
 5. Show tentative command suggestion for entering wrong commands
 6. Sub string matching and exe file finding done.
+7. Wildcard Feature implemented.

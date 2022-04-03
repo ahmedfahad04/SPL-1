@@ -1,0 +1,12 @@
+Total 96
+drwxrwxr-x 2 fahad fahad  4096 Mar 25 18:54 .
+drwxrwxr-x 6 fahad fahad  4096 Mar 25 11:53 ..
+-rw-rw-r-- 1 fahad fahad  4288 Mar 25 09:41 prompt.cpp
+-rw-rw-r-- 1 fahad fahad    18 Mar 25 10:05 sample.txt
+-rwxrwxr-x 1 fahad fahad 17064 Mar 25 18:54 simpleTextRedirection
+-rw-rw-r-- 1 fahad fahad  1560 Mar 25 11:32 simpleTextRedirection.cpp
+-rwxrwxr-x 1 fahad fahad 17024 Mar 25 11:51 simulatePipeOperator
+-rw-rw-r-- 1 fahad fahad  1261 Mar 25 11:52 simulatePipeOperator.cpp
+-rwxrwxr-x 1 fahad fahad   529 Mar 25 18:54 STDOUT.txt
+-rwxrwxr-x 1 fahad fahad 17056 Mar 25 10:29 testProcess
+-rw-rw-r-- 1 fahad fahad  3737 Mar 25 11:32 testProcess.cpp
