@@ -210,7 +210,9 @@ bool isBuiltInCmd(char *cmd)
 void execute(char **args)
 {
 
+    args = checkForAliasing(args);
     char *command = args[0];
+
 
     if (strcmp(command, "cd"))
     {
@@ -230,6 +232,10 @@ void execute(char **args)
     else if (strcmp(command, "alias")){
         aliasCommands(args);
     }
+
+    else if(strcmp(command, "history")){
+        readHistory();
+    }
     // store process id
     // check if the process if child or parent
     // if it's the child process run execv()
@@ -237,7 +243,6 @@ void execute(char **args)
     else
     {
         pid_t status, process_id;
-        args = checkForAliasing(args);
         
         process_id = fork();
 
@@ -249,7 +254,7 @@ void execute(char **args)
                 cmdSuggestion(command);
                 perror("Execution failed\n");
             }
-            exit(EXIT_FAILURE);
+            exit(0);
         }
         else if (process_id < 1)
         {
@@ -276,6 +281,7 @@ void executePipelinedCommands(int size, char *simpleCMD[])
         char *currCMD = strip(simpleCMD[i]);
         char **cmd = str_tokenize(currCMD, ' ');
         cmd = checkForWildCards(cmd);   // checking if any wildcard pattern is available or not
+        cmd = checkForAliasing(cmd); 
 
         if (i == 0)
         { // first cmd

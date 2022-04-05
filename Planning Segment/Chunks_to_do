@@ -39,3 +39,15 @@
 	
 17. I/O Redirection [WORKING..]
 	> I may notify the user from which cmd we're taking input and where we're putting the output
+	
+18. CMD Aliasing [Working..\
+	> Basic Aliasing done
+	> mycd creating segmentation error.
+	
+18. Command Aliasing [Working ...]
+	> Basic implementation done
+	> Error cheking remains.
+	
+19. History Management [Working...]
+	> Basic history writing and reading done
+	> !5 type command execution done

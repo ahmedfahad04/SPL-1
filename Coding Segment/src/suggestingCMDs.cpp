@@ -169,7 +169,7 @@ void addNode(struct node *parent, int value, char *info)
     return;
 }
 
-void printTree(struct node *head, char *keyword)
+void printTree(struct node *head, char *keyword, FILE *fp)
 {
     if (head == NULL)
     {
@@ -178,12 +178,15 @@ void printTree(struct node *head, char *keyword)
 
     else
     {
-        printTree(head->left, keyword);
+        printTree(head->left, keyword, fp);
 
         if (head->data <= 3 && (strlen(head->word) >= strlen(keyword)))
+        {
             printf("    command -> %s", head->word);
+            fprintf(fp, "%s", head->word);
+        }
 
-        printTree(head->right, keyword);
+        printTree(head->right, keyword, fp);
     }
 }
 
@@ -192,7 +195,6 @@ void cmdSuggestion(char *rootWord)
     struct node *root = createNode(10, rootWord); // root value
 
     char **allCMDs = readCMDOutput("ls /usr/bin");
-
     char **temp = allCMDs;
 
     while (*temp)
@@ -215,9 +217,15 @@ void cmdSuggestion(char *rootWord)
         exit(EXIT_FAILURE);
     else
     {
+        FILE *fp;
+        fp = fopen(".autoCmd", "a+");
+
         printf("Command \'%s\' not found, did you mean: \n", rootWord);
-        printTree(root, rootWord);
+        printTree(root, rootWord, fp);
         printf("Try: sudo apt install <deb name>\n");
+
+        fclose(fp);
+        
         exit(EXIT_FAILURE);
     }
 }

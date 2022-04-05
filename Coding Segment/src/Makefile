@@ -1,5 +1,5 @@
-run: main.o prompt.o implementation.o execution.o commandAliasing.o suggestingCMDs.o slsh.o colorManagement.o prompt.o 
-	g++ -o run main.o prompt.o commandAliasing.o implementation.o execution.o suggestingCMDs.o slsh.o colorManagement.o -pthread
+run: main.o prompt.o implementation.o execution.o commandAliasing.o suggestingCMDs.o slsh.o colorManagement.o prompt.o historyManagement.o
+	g++ -o run main.o prompt.o commandAliasing.o implementation.o execution.o suggestingCMDs.o slsh.o colorManagement.o historyManagement.o -pthread
 	mv *.o obj
 
 main.o: main.cpp
@@ -26,6 +26,8 @@ colorManagement.o: colorManagement.cpp
 commandAliasing.o: commandAliasing.cpp
 	g++ -c commandAliasing.cpp
 
+historyManagement.o: historyManagement.cpp
+	g++ -c historyManagement.cpp
 
 clean: 
 	rm run

@@ -41,6 +41,16 @@
 #define BG_DARK_CYN "\u001b[46m;1m"
 #define BG_DARK_WHT "\u001b[47m;1m"
 
+// HISTORY
+struct history{
+    char * cmd;
+    int order;
+};
+int historySerialLocator();
+void writeHistory(int size, struct history ht[]);
+char * readHistory(int serial = -1);
+char * showParticularHistory(char * cmd);
+
 // MAIN LOOP
 void eventLoop(char *code = "", char *type = "");
 void eventLoopWithColors(char *ch = "", char *type = "");
@@ -48,7 +58,7 @@ void eventLoopWithColors(char *ch = "", char *type = "");
 // COMMAND PROMPT
 void prompt();
 void promptWithColors(char *code, char *colorType);
-char *take_user_input(char *code = "", char *colorType = "");
+char *take_user_input(char *code = "", char *colorType = "", int fsl = 0, FILE *fp = NULL);
 char **str_tokenize(char *ch, char sep);
 void sig_handler(int signum);
 

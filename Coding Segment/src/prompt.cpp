@@ -50,11 +50,12 @@ void prompt()
     printf("%s\u001b[1m%s%s$ %s\u001b[1m%s", RESET, hostFontColor, getCurrentDirectory(), hostFontColor, RESET);
 }
 
-char *take_user_input(char *C_Code, char *colorType)
+char *take_user_input(char *C_Code, char *colorType, int fsl, FILE *fp)
 {
     char *buffer, *splitted_words, *path;
     char ch;
     int location = 0, buffer_size = BUFFER_SIZE;
+    // FILE *fp = fopen(".history", "a+");
 
     // dynamically allocate memory to store the user prompt
     buffer = (char *)malloc(sizeof(char) * buffer_size);
@@ -102,7 +103,6 @@ char *take_user_input(char *C_Code, char *colorType)
 
     // splitted_words = splitstr(buffer);
     // return splitted_words;
-
     return buffer;
 }
 
