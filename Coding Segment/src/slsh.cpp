@@ -32,16 +32,18 @@ void eventLoopWithColors(char *args, char *type)
 
 void eventLoop(char *colorFlag, char *colorType)
 {
-
     fprintf(stdout, "\e[1;1H\e[2J");
 
     char *commandLine, **tokens, **filtered_tokens;
     commandLine = (char *)malloc(sizeof(char) * 500);
 
     // history
+
     struct history ht[1000];
     int id = 0;
+
     int sl = historySerialLocator() + 1;
+
 
     int save_in, save_out;
 
@@ -59,6 +61,7 @@ void eventLoop(char *colorFlag, char *colorType)
         commandLine = take_user_input(colorFlag, colorType);
         ht[id].cmd = commandLine;
         ht[id++].order = sl++;
+
 
         // ------ NEW CHANGE -------
 
@@ -111,7 +114,12 @@ void eventLoop(char *colorFlag, char *colorType)
             tokens = str_tokenize(commandLine, ' ');
             filtered_tokens = removeWhiteSpace(tokens);
             filtered_tokens = checkForWildCards(filtered_tokens);
-            // filtered_tokens = checkForAliasing(filtered_tokens);
+            filtered_tokens = checkForAliasing(filtered_tokens);
+
+            // while(*test){
+            //     puts(*test);
+            //     test++;
+            // }
 
             // this is a temporary block to exit the loop
             // in final outcome the command will send a termination code

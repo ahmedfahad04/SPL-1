@@ -82,6 +82,19 @@ char *strcatt(const char *with, const char *str)
     return res;
 }
 
+int strlen2(char **str)
+{
+    int len = 0;
+
+    while (*str)
+    {
+        len++;
+        str++;
+    }
+
+    return len;
+}
+
 char *strreplace(const char *data, const char *with, const char *str)
 {
 
@@ -422,6 +435,8 @@ struct ShellCommands parse(char *data)
     }
     else
         *cmd = data; // only a single command
+
+
 
     while (*cmd)
     {

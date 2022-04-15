@@ -4,19 +4,26 @@
 #include <math.h>
 #include "shell.h"
 
+char *myTilde = strcatt("/home/", userName());
+char *historyFileName = strcatt(myTilde, "/.slsh_history");
+
 int historySerialLocator()
 {
-    if (access(".history", F_OK) != 0)
+    puts(historyFileName);
+    if (access(historyFileName, F_OK) != 0)
     {
         FILE *fp;
-        fp = fopen(".history", "w");
+        if ((fp = fopen(historyFileName, "w")) == NULL)
+        {
+            puts("Failed to create History files");
+        }
         fclose(fp);
     }
     else
     {
 
         FILE *fp;
-        fp = fopen(".history", "r+");
+        fp = fopen(historyFileName, "r+");
 
         char *line = NULL;
         size_t len = 0;
@@ -37,7 +44,7 @@ int historySerialLocator()
             }
         }
 
-        //printf("CUR: %d\n", serial);
+        // printf("CUR: %d\n", serial);
         fclose(fp);
         return serial;
     }
@@ -46,7 +53,7 @@ int historySerialLocator()
 void writeHistory(int size, struct history ht[])
 {
 
-    FILE *fhist = fopen(".history", "a+");
+    FILE *fhist = fopen(historyFileName, "a+");
 
     for (int i = 0; i < size; i++)
     {
@@ -62,7 +69,7 @@ void writeHistory(int size, struct history ht[])
 char *readHistory(int order)
 {
 
-    FILE *fp = fopen(".history", "r"); ///~/Desktop/SPL-1.2/Coding Segment/src/.history
+    FILE *fp = fopen(historyFileName, "r"); ///~/Desktop/SPL-1.2/Coding Segment/src/.history
 
     char *line = NULL;
     size_t len = 0;

@@ -18,7 +18,8 @@ void cmd_execute(char **args)
 
     char *cmd = args[0];
 
-    if (strcmp(cmd, "cd")){
+    if (strcmp(cmd, "cd"))
+    {
         change_directory(args[1]);
     }
 
@@ -216,7 +217,7 @@ void execute(char **args)
 {
 
     // ==X this is the breakpoint for not working CD option
-    //args = checkForAliasing(args);
+    // args = checkForAliasing(args);
     char *command = args[0];
 
     if (strcmp(command, "cd"))
@@ -281,21 +282,20 @@ void execute(char **args)
 void executePipelinedCommands(int size, char *simpleCMD[], struct ShellCommands command)
 {
 
-
     pid_t pid[100];
     int fd[100][2];
 
     size = command.size;
-
 
     for (int i = 0; i < size; i++)
     {
         char *currCMD = strip(command.simpleCommand[i]);
         char **cmd = str_tokenize(currCMD, ' ');
         cmd = checkForWildCards(cmd); // checking if any wildcard pattern is available or not
+        cmd = checkForAliasing(cmd);
 
         // ==X this is the breakpoint
-        //cmd = checkForAliasing(cmd);  // checking if any alias is available or not
+        // cmd = checkForAliasing(cmd);  // checking if any alias is available or not
         int fdout, file;
 
         // this is input redirection...

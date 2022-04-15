@@ -41,8 +41,6 @@
 #define BG_DARK_CYN "\u001b[46m;1m"
 #define BG_DARK_WHT "\u001b[47m;1m"
 
-
-
 // COMMAND STRUCT
 struct ShellCommands
 {
@@ -51,31 +49,31 @@ struct ShellCommands
     char *outfile;
     char *background;
     char size = 0;
-}; 
+};
 void executenew(int size, struct ShellCommands command);
 
-
-
 // COMMAND AUTOCOMPLETION
-struct cmdFreq{
-    char * cmd;
+struct cmdFreq
+{
+    char *cmd;
     int freq;
     int prev;
 };
 void frequencyCalculator(char *command, FILE *save);
 void assembleFreqOutput();
-bool generateAutoCommand(char * cmd);
-void showValue(char * value);
+bool generateAutoCommand(char *cmd);
+void showValue(char *value);
 
 // HISTORY
-struct history{
-    char * cmd;
+struct history
+{
+    char *cmd;
     int order;
 };
 int historySerialLocator();
 void writeHistory(int size, struct history ht[]);
-char * readHistory(int serial = -1);
-char * showParticularHistory(char * cmd);
+char *readHistory(int serial = -1);
+char *showParticularHistory(char *cmd);
 
 // MAIN LOOP
 void eventLoop(char *code = "", char *type = "");
@@ -91,6 +89,7 @@ void sig_handler(int signum);
 // BASIC STRING OPERATIONS
 size_t strlen(const char *str);
 bool strcmp(const char *a, const char *b);
+int strlen2(char **str);
 char *strcpy(const char *b);
 char *strchr(const char *a, const char ch);
 char *strcatt(const char *with, const char *str);
@@ -106,7 +105,7 @@ char *selectBGColor(char *args);
 char *selectFGColor(char *args);
 char *numToStr(int num);
 void userManual();
-bool wildcardmatching(char * str, char * pat, int slen, int plen);
+bool wildcardmatching(char *str, char *pat, int slen, int plen);
 
 // COMMAND EXECUTION
 void cmd_execute(char **args);
@@ -121,7 +120,7 @@ void cmdSuggestion(char *cmd);
 void findExeFileName(char *cmd);
 void saveInfo();
 void executePipelinedCommands(int size, char *simpleCMD[], struct ShellCommands command);
-char ** checkForWildCards(char ** data);
+char **checkForWildCards(char **data);
 void setAlias(char *cmd, char *alias);
 void aliasCommands(char **words);
 char **checkForAliasing(char **cmd);

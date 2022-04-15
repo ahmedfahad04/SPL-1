@@ -53,3 +53,8 @@
 46 clear
 46 clear
 62 clear
+63 clear
+7 head
+101 ls
+5 wc
+8 rm
