@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include <cstdio>
 #include <dirent.h>
 #include <stdlib.h>
 #include <math.h>
@@ -37,7 +37,7 @@ int historySerialLocator()
             }
         }
 
-        printf("CUR: %d\n", serial);
+        //printf("CUR: %d\n", serial);
         fclose(fp);
         return serial;
     }
@@ -62,7 +62,7 @@ void writeHistory(int size, struct history ht[])
 char *readHistory(int order)
 {
 
-    FILE *fp = fopen(".history", "r");
+    FILE *fp = fopen(".history", "r"); ///~/Desktop/SPL-1.2/Coding Segment/src/.history
 
     char *line = NULL;
     size_t len = 0;

@@ -1,8 +1,13 @@
-#include <stdio.h>
-#include <sys/wait.h>
-#include <stdlib.h>
+#include <sys/socket.h>
+#include <thread>
+#include <fcntl.h>
 #include <unistd.h>
-#include <pthread.h>
+#include <stdlib.h>
+#include <cstdio>
+#include <sys/wait.h>
+#include <unistd.h>
+#include <ctype.h>
+#include <iostream>
 #include "shell.h"
 
 void cmd_execute(char **args)
@@ -13,8 +18,9 @@ void cmd_execute(char **args)
 
     char *cmd = args[0];
 
-    if (strcmp(cmd, "cd"))
+    if (strcmp(cmd, "cd")){
         change_directory(args[1]);
+    }
 
     if (strcmp(cmd, "apropos"))
         findExeFileName(args[1]);
@@ -89,7 +95,6 @@ void change_directory(char *path)
 
         newPath = strcatt("/home/", userName());
         char **splittedWords = strsplit(tilde, path);
-
         char *finalPath = strcatt(newPath, splittedWords[1]);
 
         if (chdir(finalPath) != 0)
@@ -210,12 +215,13 @@ bool isBuiltInCmd(char *cmd)
 void execute(char **args)
 {
 
-    args = checkForAliasing(args);
+    // ==X this is the breakpoint for not working CD option
+    //args = checkForAliasing(args);
     char *command = args[0];
-
 
     if (strcmp(command, "cd"))
     {
+
         cmd_execute(args);
     }
 
@@ -229,11 +235,13 @@ void execute(char **args)
         cmd_execute(args);
     }
 
-    else if (strcmp(command, "alias")){
+    else if (strcmp(command, "alias"))
+    {
         aliasCommands(args);
     }
 
-    else if(strcmp(command, "history")){
+    else if (strcmp(command, "history"))
+    {
         readHistory();
     }
     // store process id
@@ -243,7 +251,7 @@ void execute(char **args)
     else
     {
         pid_t status, process_id;
-        
+
         process_id = fork();
 
         // child process
@@ -270,22 +278,61 @@ void execute(char **args)
     }
 }
 
-void executePipelinedCommands(int size, char *simpleCMD[])
+void executePipelinedCommands(int size, char *simpleCMD[], struct ShellCommands command)
 {
+
 
     pid_t pid[100];
     int fd[100][2];
 
+    size = command.size;
+
+
     for (int i = 0; i < size; i++)
     {
-        char *currCMD = strip(simpleCMD[i]);
+        char *currCMD = strip(command.simpleCommand[i]);
         char **cmd = str_tokenize(currCMD, ' ');
-        cmd = checkForWildCards(cmd);   // checking if any wildcard pattern is available or not
-        cmd = checkForAliasing(cmd); 
+        cmd = checkForWildCards(cmd); // checking if any wildcard pattern is available or not
+
+        // ==X this is the breakpoint
+        //cmd = checkForAliasing(cmd);  // checking if any alias is available or not
+        int fdout, file;
+
+        // this is input redirection...
+        if (command.infile)
+        {
+            printf("READING>>>\n");
+            int f2 = open(strip(command.infile), O_RDONLY, 0777);
+            if (f2 == -1)
+            {
+                puts("Error reading file");
+            }
+
+            int fdin = dup2(f2, 0);
+            close(f2);
+        }
+
+        // this is output redirection....
+        if (command.outfile)
+        {
+            printf("WRITING>>>\n");
+            file = open(strip(command.outfile), O_WRONLY | O_CREAT, 0777);
+            if (file == -1)
+            {
+                puts("Error writing file");
+            }
+
+            // printf("Previous FD: %d\n", file);
+
+            fdout = dup2(file, 1); // permanently converted the stdout...
+
+            close(file);
+        }
 
         if (i == 0)
-        { // first cmd
+        {
             // puts("FIRST");
+
             // pipe 1
             if (pipe(fd[i]) == -1)
             {
@@ -297,10 +344,14 @@ void executePipelinedCommands(int size, char *simpleCMD[])
             pid[i] = x;
             if (pid[i] == 0)
             {
-                // child process; write end
-                dup2(fd[i][1], STDOUT_FILENO);
-                close(fd[i][1]);
-                close(fd[i][0]);
+
+                if (i != size - 1) // if we enter only a single command
+                {
+                    // child process; write end
+                    dup2(fd[i][1], STDOUT_FILENO);
+                    close(fd[i][1]);
+                    close(fd[i][0]);
+                }
 
                 if (execvp(cmd[0], cmd) == -1)
                 {
@@ -314,6 +365,7 @@ void executePipelinedCommands(int size, char *simpleCMD[])
         { // last cmd
           // cmd 4
             // puts("LAST");
+
             int x = fork();
             pid[i] = x;
             if (pid[i] == 0)
@@ -373,6 +425,8 @@ void executePipelinedCommands(int size, char *simpleCMD[])
             waitpid(pid[i], NULL, 0);
         }
     }
+
+    return;
 }
 
 char *getCurrentDirectory()

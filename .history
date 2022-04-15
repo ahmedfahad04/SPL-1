@@ -1,0 +1,7 @@
+420: ls
+421: cd ..
+422: cd ...
+423: cd ..
+424: head < /etc/passwd
+425: clear
+426: exit

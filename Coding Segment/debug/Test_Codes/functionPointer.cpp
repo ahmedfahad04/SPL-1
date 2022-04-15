@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include <cstdio>
 
 int sum (int a, int b){
     return a+b;

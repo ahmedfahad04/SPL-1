@@ -1,5 +1,5 @@
 #include <iostream>
-#include <stdio.h>
+#include <cstdio>
 #include <stdlib.h>
 #define DELETE -1
 #define INSERT -2

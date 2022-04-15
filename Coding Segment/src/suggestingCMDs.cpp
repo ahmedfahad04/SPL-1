@@ -1,5 +1,5 @@
 #include <iostream>
-#include <stdio.h>
+#include <cstdio>
 #include <stdlib.h>
 #include "shell.h"
 #define DELETE -1
@@ -182,8 +182,15 @@ void printTree(struct node *head, char *keyword, FILE *fp)
 
         if (head->data <= 3 && (strlen(head->word) >= strlen(keyword)))
         {
-            printf("    command -> %s", head->word);
-            fprintf(fp, "%s", head->word);
+            // ==> changes here
+            // printf("    command -> %s", head->word);
+
+            frequencyCalculator(head->word, fp);
+            if (generateAutoCommand(head->word))
+            {
+                //printf("    command -> %s", head->word);
+                showValue(head->word);
+            }
         }
 
         printTree(head->right, keyword, fp);
@@ -205,9 +212,7 @@ void cmdSuggestion(char *rootWord)
         EditDistance(*temp, rootWord, m, n);
 
         int EdgeValue = c[m - 1][n - 1];
-
         if (EdgeValue <= 3 or (m == n))
-
             addNode(root, EdgeValue, *temp);
 
         temp++;
@@ -215,17 +220,23 @@ void cmdSuggestion(char *rootWord)
 
     if (strlen(rootWord) == 0)
         exit(EXIT_FAILURE);
+
     else
     {
+
+        struct cmdFreq freq[100];
+        int id = 0;
         FILE *fp;
         fp = fopen(".autoCmd", "a+");
 
-        printf("Command \'%s\' not found, did you mean: \n", rootWord);
+        //printf("Command \'%s\' not found, did you mean: \n", rootWord);
         printTree(root, rootWord, fp);
-        printf("Try: sudo apt install <deb name>\n");
+        //printf("Try: sudo apt install <deb name>\n");
+
+        assembleFreqOutput();
 
         fclose(fp);
-        
+
         exit(EXIT_FAILURE);
     }
 }

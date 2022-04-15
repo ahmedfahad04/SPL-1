@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include <cstdio>
 #include <stdlib.h>
 #include "shell.h"
 #define BUFFER_SIZE 1024
@@ -10,7 +10,7 @@ void setAlias(char *cmd, char *alias)
     FILE *f1;
 
     f1 = fopen(".slshAlias", "a");
-    fprintf(f1, "%s %s\n", cmd, alias);
+    fprintf(f1, "\n%s %s", cmd, alias);
     fclose(f1);
 }
 

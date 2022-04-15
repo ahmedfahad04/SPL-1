@@ -1,503 +1,1306 @@
-cpan
-code
-clear
-chage
-clear
-sleep
-free
-code
-cjet
-xgc
-tic
-tac
-sync
-pic
-mtr
-man
-gcc
-xgc
-tic
-tac
-sync
-pic
-mtr
-man
-gcc
-cpan
-code
-clear
-chage
-last
-test
-luit
-link
-less
-lastb
-host
-top
-zip
-tty
-true
-toe
-time
-tic
-tee
-tbl
-tar
-tac
-scp
-rcp
-ftp
-dwp
-cpp
-cmp
-clear
-toe
-tee
-see
-lpr
-file
-cvt
-cut
-cpp
-col
-code
-cmp
-cjet
-cat
-cal
-c99
-c89
-c++
-wc
-nc
-ico
-ex
-ed
-echo
-dc
-cc
-bc
-yes
-xz
-xgc
-xev
-who
-vi
-ul
-ucf
-tr
-tic
-tee
-tac
-su
-ss
-sh
-sg
-seq
-see
-sed
-scp
-rm
-rev
-red
-rcp
-ps
-pr
-pico
-pic
-od
-nm
-nl
-mv
-mt
-ls
-lp
-ln
-ld
-lcf
-ip
-id
-hd
-gs
-gio
-gcov
-gcc
-eqn
-eog
-env
-du
-df
-dd
-cp
-col
-as
-ar
-7z
-wc
-nc
-ico
-ex
-ed
-echo
-dc
-cc
-bc
-yes
-xz
-xgc
-xev
-who
-vi
-ul
-ucf
-tr
-tic
-tee
-tac
-su
-ss
-sh
-sg
-seq
-see
-sed
-scp
-rm
-rev
-red
-rcp
-ps
-pr
-pico
-pic
-od
-nm
-nl
-mv
-mt
-ls
-lp
-ln
-ld
-lcf
-ip
-id
-hd
-gs
-gio
-gcov
-gcc
-eqn
-eog
-env
-du
-df
-dd
-cp
-col
-as
-ar
-7z
-gcc
-echo
-xgc
-ucf
-tic
-tac
-scp
-rcp
-pico
-pic
-lcf
-ico
-eqn
-eog
-env
-X
-w
-ul
-nl
-ls
-lp
-ln
-ld
-[
-xz
-wc
-wall
-vi
-tr
-tbl
-su
-ss
-sh
-sg
-rm
-ps
-pr
-od
-nm
-nc
-mv
-mt
-lz4
-lpr
-lpq
-ldd
-lcf
-kill
-ip
-id
-hd
-gs
-ex
-ed
-du
-df
-dd
-dc
-cp
-col
-cc
-cal
-bc
-as
-ar
-7z
-X
-w
-ul
-nl
-ls
-lp
-ln
-ld
-[
-xz
-wc
-wall
-vi
-tr
-tbl
-su
-ss
-sh
-sg
-rm
-ps
-pr
-od
-nm
-nc
-mv
-mt
-lz4
-lpr
-lpq
-ldd
-lcf
-kill
-ip
-id
-hd
-gs
-ex
-ed
-du
-df
-dd
-dc
-cp
-col
-cc
-cal
-bc
-as
-ar
-7z
-yelp
-wall
-perl
-kill
-head
-delv
-python3
-cpan
-code
-clear
-chage
-cpan
-code
-clear
-chage
-X
-w
-ps
-pr
-lp
-ip
-cp
-[
-zip
-xz
-wc
-vi
-ul
-tr
-top
-tar
-tac
-su
-ss
-sh
-sg
-scp
-rm
-rcp
-pwd
-ptx
-ptar
-pon
-pmap
-pic
-od
-nm
-nl
-nc
-mv
-mt
-man
-ls
-lpr
-lpq
-ln
-ld
-id
-hd
-gs
-gpg
-ftp
-ex
-ed
-dwp
-du
-df
-dd
-dc
-cpp
-cpan
-cmp
-cc
-cat
-cal
-bc
-as
-ar
-apt
-apg
-7za
-7z
-cpan
-code
-clear
-chage
-cpan
-code
-clear
-chage
-cpan
-code
-clear
-chage
-xprop
-ppdpo
-lprm
-apropos
-clear
-toe
-tee
-see
-lpr
-file
-cvt
-cut
-cpp
-col
-code
-cmp
-cjet
-cat
-cal
-c99
-c89
-c++
-zip
-vim
-tic
-ptx
-pic
-git
-gio
-eqn
-eog
-env
-edit
-dir
-dig
-compose
-ex
-ed
-yes
-xz
-xxd
-xev
-wc
-vi
-ul
-tr
-tee
-su
-ss
-sh
-sg
-seq
-see
-sed
-rm
-rev
-red
-ptx
-ps
-pr
-od
-nm
-nl
-nc
-mv
-mt
-ls
-lp
-ln
-ld
-ip
-id
-hd
-gs
-expr
-eqn
-eog
-env
-edit
-du
-df
-dd
-dc
-cp
-cc
-bc
-as
-ar
-7z
-clear
-cjet
+0 cpan
+0 code
+11 clear
+0 chage
+0 apropos
+1 apropos
+0 X
+0 w
+0 ul
+0 nl
+8 ls
+0 lp
+0 ln
+0 ld
+0 [
+0 xz
+0 wc
+0 wall
+0 vi
+0 tr
+0 tbl
+0 su
+0 ss
+0 sh
+0 sg
+0 rm
+0 ps
+0 pr
+0 od
+0 nm
+0 nc
+0 mv
+0 mt
+0 lz4
+0 lpr
+0 lpq
+0 ldd
+0 lcf
+0 kill
+0 ip
+0 id
+0 hd
+0 gs
+0 ex
+0 ed
+0 du
+0 df
+0 dd
+0 dc
+0 cp
+0 col
+0 cc
+0 cal
+0 bc
+0 as
+0 ar
+0 7z
+0 cpan
+0 code
+14 clear
+0 chage
+8 ls
+0 ss
+0 ps
+0 lsns
+0 lp
+0 ln
+0 less
+0 ld
+0 gs
+0 as
+0 zless
+0 yes
+0 xz
+0 xsm
+0 wc
+0 vi
+0 ul
+0 tr
+0 su
+0 ssh
+0 sh
+0 sg
+0 rsh
+0 rm
+0 pr
+0 od
+0 obs
+0 nm
+0 nl
+0 nc
+0 mv
+0 mt
+0 lz4
+0 lsusb
+0 lsof
+0 lshw
+0 lpr
+0 lpq
+0 ldd
+0 lcf
+0 last
+0 ip
+0 id
+0 hd
+0 gjs
+0 ex
+0 ed
+0 du
+0 df
+0 dd
+0 dc
+0 cp
+0 cc
+0 bc
+0 ar
+0 7z
+10 ls
+0 ss
+0 ps
+0 lp
+0 ln
+0 ld
+0 gs
+0 as
+0 yes
+0 xz
+0 xsm
+0 wc
+0 vi
+0 ul
+0 tr
+0 su
+0 ssh
+0 sh
+0 sg
+0 rsh
+0 rm
+0 pr
+0 od
+0 obs
+0 nm
+0 nl
+0 nc
+0 mv
+0 mt
+0 lz4
+0 luit
+0 lspci
+0 lsof
+0 lsns
+0 lsipc
+0 lshw
+0 lpr
+0 lpq
+0 less
+0 ldd
+0 lcf
+0 last
+0 ip
+0 id
+0 hd
+0 gjs
+0 ex
+0 ed
+0 du
+0 df
+0 dd
+0 dc
+0 cp
+0 cc
+0 bc
+0 ar
+0 7z
+0 vi
+10 ls
+0 lp
+0 ln
+0 ld
+0 zip
+0 yes
+0 xz
+0 wc
+0 vim
+0 ul
+0 tr
+0 tic
+0 su
+0 ss
+0 sh
+0 sg
+0 rm
+0 ps
+0 pr
+0 pic
+0 od
+0 obs
+0 nm
+0 nl
+0 nc
+0 mv
+0 mt
+0 lz4
+0 luit
+0 lsns
+0 lpr
+0 lpq
+0 link
+0 less
+0 ldd
+0 lcf
+0 last
+0 ip
+0 id
+0 hd
+0 gs
+0 gjs
+0 git
+0 gio
+0 ex
+0 ed
+0 du
+0 dir
+0 dig
+0 df
+0 dd
+0 dc
+0 cp
+0 cc
+0 bc
+0 as
+0 ar
+0 7z
+0 cpan
+0 code
+19 clear
+0 chage
+0 cpan
+0 code
+19 clear
+0 chage
+0 cpan
+0 code
+19 clear
+0 chage
+11 ls
+0 ss
+0 ps
+0 lp
+0 ln
+0 ld
+0 gs
+0 as
+0 yes
+0 xz
+0 xsm
+0 wc
+0 vi
+0 ul
+0 tr
+0 su
+0 ssh
+0 sh
+0 sg
+0 rsh
+0 rm
+0 pr
+0 od
+0 obs
+0 nm
+0 nl
+0 nc
+0 mv
+0 mt
+0 lz4
+0 luit
+0 lspci
+0 lsof
+0 lsns
+0 lsipc
+0 lshw
+0 lpr
+0 lpq
+0 less
+0 ldd
+0 lcf
+0 last
+0 ip
+0 id
+0 hd
+0 gjs
+0 ex
+0 ed
+0 du
+0 df
+0 dd
+0 dc
+0 cp
+0 cc
+0 bc
+0 ar
+0 7z
+0 vi
+12 ls
+0 lp
+0 ln
+0 ld
+0 zip
+0 yes
+0 xz
+0 wc
+0 vim
+0 ul
+0 tr
+0 tic
+0 su
+0 ss
+0 sh
+0 sg
+0 rm
+0 ps
+0 pr
+0 pic
+0 od
+0 obs
+0 nm
+0 nl
+0 nc
+0 mv
+0 mt
+0 lz4
+0 luit
+0 lsns
+0 lpr
+0 lpq
+0 link
+0 less
+0 ldd
+0 lcf
+0 last
+0 ip
+0 id
+0 hd
+0 gs
+0 gjs
+0 git
+0 gio
+0 ex
+0 ed
+0 du
+0 dir
+0 dig
+0 df
+0 dd
+0 dc
+0 cp
+0 cc
+0 bc
+0 as
+0 ar
+0 7z
+13 ls
+0 ss
+0 ps
+0 lp
+0 ln
+0 ld
+0 gs
+0 as
+0 yes
+0 xz
+0 xsm
+0 wc
+0 vi
+0 ul
+0 tr
+0 su
+0 ssh
+0 sh
+0 sg
+0 rsh
+0 rm
+0 pr
+0 od
+0 obs
+0 nm
+0 nl
+0 nc
+0 mv
+0 mt
+0 lz4
+0 luit
+0 lspci
+0 lsof
+0 lsns
+0 lsipc
+0 lshw
+0 lpr
+0 lpq
+0 less
+0 ldd
+0 lcf
+0 last
+0 ip
+0 id
+0 hd
+0 gjs
+0 ex
+0 ed
+0 du
+0 df
+0 dd
+0 dc
+0 cp
+0 cc
+0 bc
+0 ar
+0 7z
+13 ls
+0 ss
+0 ps
+0 lp
+0 ln
+0 ld
+0 gs
+0 as
+0 yes
+0 xz
+0 xsm
+0 wc
+0 vi
+0 ul
+0 tr
+0 su
+0 ssh
+0 sh
+0 sg
+0 rsh
+0 rm
+0 pr
+0 od
+0 obs
+0 nm
+0 nl
+0 nc
+0 mv
+0 mt
+0 lz4
+0 luit
+0 lspci
+0 lsof
+0 lsns
+0 lsipc
+0 lshw
+0 lpr
+0 lpq
+0 less
+0 ldd
+0 lcf
+0 last
+0 ip
+0 id
+0 hd
+0 gjs
+0 ex
+0 ed
+0 du
+0 df
+0 dd
+0 dc
+0 cp
+0 cc
+0 bc
+0 ar
+0 7z
+0 cpan
+0 code
+23 clear
+0 chage
+13 ls
+0 ss
+0 ps
+0 lp
+0 ln
+0 ld
+0 gs
+0 as
+0 yes
+0 xz
+0 xsm
+0 wc
+0 vi
+0 ul
+0 tr
+0 su
+0 ssh
+0 sh
+0 sg
+0 rsh
+0 rm
+0 pr
+0 od
+0 obs
+0 nm
+0 nl
+0 nc
+0 mv
+0 mt
+0 lz4
+0 luit
+0 lspci
+0 lsof
+0 lsns
+0 lsipc
+0 lshw
+0 lpr
+0 lpq
+0 less
+0 ldd
+0 lcf
+0 last
+0 ip
+0 id
+0 hd
+0 gjs
+0 ex
+0 ed
+0 du
+0 df
+0 dd
+0 dc
+0 cp
+0 cc
+0 bc
+0 ar
+0 7z
+13 ls
+0 ss
+0 ps
+0 lp
+0 ln
+0 ld
+0 gs
+0 as
+0 yes
+0 xz
+0 xsm
+0 wc
+0 vi
+0 ul
+0 tr
+0 su
+0 ssh
+0 sh
+0 sg
+0 rsh
+0 rm
+0 pr
+0 od
+0 obs
+0 nm
+0 nl
+0 nc
+0 mv
+0 mt
+0 lz4
+0 luit
+0 lspci
+0 lsof
+0 lsns
+0 lsipc
+0 lshw
+0 lpr
+0 lpq
+0 less
+0 ldd
+0 lcf
+0 last
+0 ip
+0 id
+0 hd
+0 gjs
+0 ex
+0 ed
+0 du
+0 df
+0 dd
+0 dc
+0 cp
+0 cc
+0 bc
+0 ar
+0 7z
+13 ls
+0 ss
+0 ps
+0 lp
+0 ln
+0 ld
+0 gs
+0 as
+0 yes
+0 xz
+0 xsm
+0 wc
+0 vi
+0 ul
+0 tr
+0 su
+0 ssh
+0 sh
+0 sg
+0 rsh
+0 rm
+0 pr
+0 od
+0 obs
+0 nm
+0 nl
+0 nc
+0 mv
+0 mt
+0 lz4
+0 luit
+0 lspci
+0 lsof
+0 lsns
+0 lsipc
+0 lshw
+0 lpr
+0 lpq
+0 less
+0 ldd
+0 lcf
+0 last
+0 ip
+0 id
+0 hd
+0 gjs
+0 ex
+0 ed
+0 du
+0 df
+0 dd
+0 dc
+0 cp
+0 cc
+0 bc
+0 ar
+0 7z
+13 ls
+0 ss
+0 ps
+0 lp
+0 ln
+0 ld
+0 gs
+0 as
+0 yes
+0 xz
+0 xsm
+0 wc
+0 vi
+0 ul
+0 tr
+0 su
+0 ssh
+0 sh
+0 sg
+0 rsh
+0 rm
+0 pr
+0 od
+0 obs
+0 nm
+0 nl
+0 nc
+0 mv
+0 mt
+0 lz4
+0 luit
+0 lspci
+0 lsof
+0 lsns
+0 lsipc
+0 lshw
+0 lpr
+0 lpq
+0 less
+0 ldd
+0 lcf
+0 last
+0 ip
+0 id
+0 hd
+0 gjs
+0 ex
+0 ed
+0 du
+0 df
+0 dd
+0 dc
+0 cp
+0 cc
+0 bc
+0 ar
+0 7z
+1 apropos
+1 apropos
+1 apropos
+0 cpan
+0 code
+27 clear
+0 chage
+13 ls
+0 ss
+0 ps
+0 lp
+0 ln
+0 ld
+0 gs
+0 as
+0 yes
+0 xz
+0 xsm
+0 wc
+0 vi
+0 ul
+0 tr
+0 su
+0 ssh
+0 sh
+0 sg
+0 rsh
+0 rm
+0 pr
+0 od
+0 obs
+0 nm
+0 nl
+0 nc
+0 mv
+0 mt
+0 lz4
+0 luit
+0 lspci
+0 lsof
+0 lsns
+0 lsipc
+0 lshw
+0 lpr
+0 lpq
+0 less
+0 ldd
+0 lcf
+0 last
+0 ip
+0 id
+0 hd
+0 gjs
+0 ex
+0 ed
+0 du
+0 df
+0 dd
+0 dc
+0 cp
+0 cc
+0 bc
+0 ar
+0 7z
+1 apropos
+13 ls
+0 ss
+0 ps
+0 lp
+0 ln
+0 ld
+0 gs
+0 as
+0 yes
+0 xz
+0 xsm
+0 wc
+0 vi
+0 ul
+0 tr
+0 su
+0 ssh
+0 sh
+0 sg
+0 rsh
+0 rm
+0 pr
+0 od
+0 obs
+0 nm
+0 nl
+0 nc
+0 mv
+0 mt
+0 lz4
+0 luit
+0 lspci
+0 lsof
+0 lsns
+0 lsipc
+0 lshw
+0 lpr
+0 lpq
+0 less
+0 ldd
+0 lcf
+0 last
+0 ip
+0 id
+0 hd
+0 gjs
+0 ex
+0 ed
+0 du
+0 df
+0 dd
+0 dc
+0 cp
+0 cc
+0 bc
+0 ar
+0 7z
+13 ls
+0 ss
+0 ps
+0 lp
+0 ln
+0 ld
+0 gs
+0 as
+0 yes
+0 xz
+0 xsm
+0 wc
+0 vi
+0 ul
+0 tr
+0 su
+0 ssh
+0 sh
+0 sg
+0 rsh
+0 rm
+0 pr
+0 od
+0 obs
+0 nm
+0 nl
+0 nc
+0 mv
+0 mt
+0 lz4
+0 luit
+0 lspci
+0 lsof
+0 lsns
+0 lsipc
+0 lshw
+0 lpr
+0 lpq
+0 less
+0 ldd
+0 lcf
+0 last
+0 ip
+0 id
+0 hd
+0 gjs
+0 ex
+0 ed
+0 du
+0 df
+0 dd
+0 dc
+0 cp
+0 cc
+0 bc
+0 ar
+0 7z
+0 cpan
+0 code
+29 clear
+0 chage
+1 apropos
+0 zcat
+0 xxd
+0 stat
+0 expr
+0 eqn
+0 eog
+0 env
+0 edit
+2 cat
+0 7za
+0 zcat
+0 xxd
+0 stat
+0 expr
+0 eqn
+0 eog
+0 env
+0 edit
+2 cat
+0 7za
+0 xcalc
+0 wall
+0 pager
+0 ncal
+5 make
+0 locale
+0 file
+0 false
+0 date
+0 code
+34 clear
+0 chage
+13 ls
+0 ss
+0 ps
+0 lp
+0 ln
+0 ld
+0 gs
+0 as
+0 yes
+0 xz
+0 xsm
+0 wc
+0 vi
+0 ul
+0 tr
+0 su
+0 ssh
+0 sh
+0 sg
+0 rsh
+0 rm
+0 pr
+0 od
+0 obs
+0 nm
+0 nl
+0 nc
+0 mv
+0 mt
+0 lz4
+0 luit
+0 lspci
+0 lsof
+0 lsns
+0 lsipc
+0 lshw
+0 lpr
+0 lpq
+0 less
+0 ldd
+0 lcf
+0 last
+0 ip
+0 id
+0 hd
+0 gjs
+0 ex
+0 ed
+0 du
+0 df
+0 dd
+0 dc
+0 cp
+0 cc
+0 bc
+0 ar
+0 7z
+13 ls
+0 ss
+0 ps
+0 lp
+0 ln
+0 ld
+0 gs
+0 as
+0 yes
+0 xz
+0 xsm
+0 wc
+0 vi
+0 ul
+0 tr
+0 su
+0 ssh
+0 sh
+0 sg
+0 rsh
+0 rm
+0 pr
+0 od
+0 obs
+0 nm
+0 nl
+0 nc
+0 mv
+0 mt
+0 lz4
+0 luit
+0 lspci
+0 lsof
+0 lsns
+0 lsipc
+0 lshw
+0 lpr
+0 lpq
+0 less
+0 ldd
+0 lcf
+0 last
+0 ip
+0 id
+0 hd
+0 gjs
+0 ex
+0 ed
+0 du
+0 df
+0 dd
+0 dc
+0 cp
+0 cc
+0 bc
+0 ar
+0 7z
+14 ls
+0 ss
+0 ps
+0 lp
+0 ln
+0 ld
+0 gs
+0 as
+0 yes
+0 xz
+0 xsm
+0 wc
+0 vi
+0 ul
+0 tr
+0 su
+0 ssh
+0 sh
+0 sg
+0 rsh
+0 rm
+0 pr
+0 od
+0 obs
+0 nm
+0 nl
+0 nc
+0 mv
+0 mt
+0 lz4
+0 luit
+0 lspci
+0 lsof
+0 lsns
+0 lsipc
+0 lshw
+0 lpr
+0 lpq
+0 less
+0 ldd
+0 lcf
+0 last
+0 ip
+0 id
+0 hd
+0 gjs
+0 ex
+0 ed
+0 du
+0 df
+0 dd
+0 dc
+0 cp
+0 cc
+0 bc
+0 ar
+0 7z
+0 cpan
+0 code
+36 clear
+0 chage
+15 ls
+0 ss
+0 ps
+0 lp
+0 ln
+0 ld
+0 gs
+0 as
+0 yes
+0 xz
+0 xsm
+0 wc
+0 vi
+0 ul
+0 tr
+0 su
+0 ssh
+0 sh
+0 sg
+0 rsh
+0 rm
+0 pr
+0 od
+0 obs
+0 nm
+0 nl
+0 nc
+0 mv
+0 mt
+0 lz4
+0 luit
+0 lspci
+0 lsof
+0 lsns
+0 lsipc
+0 lshw
+0 lpr
+0 lpq
+0 less
+0 ldd
+0 lcf
+0 last
+0 ip
+0 id
+0 hd
+0 gjs
+0 ex
+0 ed
+0 du
+0 df
+0 dd
+0 dc
+0 cp
+0 cc
+0 bc
+0 ar
+0 7z
+36 clear
+0 toe
+0 tee
+0 see
+0 lpr
+0 file
+0 cvt
+0 cut
+0 cpp
+0 col
+0 code
+0 cmp
+0 cjet
+2 cat
+0 cal
+0 c99
+0 c89
+0 c++
+0 cpan
+0 code
+36 clear
+0 chage
+36 clear
+0 toe
+0 tee
+0 see
+0 lpr
+0 file
+0 cvt
+0 cut
+0 cpp
+0 col
+0 code
+0 cmp
+0 cjet
+2 cat
+0 cal
+0 c99
+0 c89
+0 c++
+0 cpan
+0 code
+37 clear
+0 chage
+15 ls
+0 ss
+0 ps
+0 lp
+0 ln
+0 ld
+0 gs
+0 as
+0 yes
+0 xz
+0 xsm
+0 wc
+0 vi
+0 ul
+0 tr
+0 su
+0 ssh
+0 sh
+0 sg
+0 rsh
+0 rm
+0 pr
+0 od
+0 obs
+0 nm
+0 nl
+0 nc
+0 mv
+0 mt
+0 lzma
+0 lz4
+0 lsof
+0 lsns
+0 lshw
+0 lpr
+0 lpq
+0 less
+0 ldd
+0 lcf
+0 last
+0 ip
+0 id
+0 hd
+0 gjs
+0 ex
+0 ed
+0 du
+0 df
+0 dd
+0 dc
+0 cp
+0 cc
+0 bc
+0 ar
+0 7za
+0 7z
+37 clear
+0 toe
+0 tee
+0 see
+0 lpr
+0 file
+0 cvt
+0 cut
+0 cpp
+0 col
+0 code
+0 cmp
+0 cjet
+2 cat
+0 cal
+0 c99
+0 c89
+0 c++
+0 cpan
+0 code
+37 clear
+0 chage
+37 clear
+0 tar
+0 ptar
+0 lpr
+0 cvt
+0 cut
+0 cpp
+0 cpan
+0 col
+0 cmp
+2 cat
+0 cal
+0 c99
+0 c89
+0 c++
+0 7za
+0 cpan
+0 code
+37 clear
+0 chage
+45 clear
+0 cjet
+46 clear
+0 cjet
+46 clear
+0 cpan
+0 code
+62 clear
+0 chage

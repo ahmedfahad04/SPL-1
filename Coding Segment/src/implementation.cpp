@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include <cstdio>
 #include <dirent.h>
 #include <stdlib.h>
 #include "shell.h"
@@ -44,7 +44,15 @@ char *strcpy(const char *from)
 
     int i;
     for (i = 0; i < len; i++)
-        res[i] = from[i];
+    {
+        if (from[i] == '\n')
+        {
+            res[i] = '\0';
+            break;
+        }
+        else
+            res[i] = from[i];
+    }
 
     res[i] = '\0';
 
@@ -277,7 +285,7 @@ char *numToStr(int num)
 
 bool wildcardmatching(char *str, char *pat, int slen, int plen)
 {
-
+    // ==> need to check null character before . operator
     if (plen == 0)
     {
         if (plen == 0)
@@ -386,3 +394,124 @@ char **checkForWildCards(char **data)
     return newargs;
 }
 
+void showValue(char *val)
+{
+
+    prompt();
+    printf("%s", val);
+}
+
+struct ShellCommands parse(char *data)
+{
+
+
+    char **cmd = (char **)malloc(sizeof(char) * 1024);
+    char **red = (char **)malloc(sizeof(char) * 1024);
+
+    struct ShellCommands command;
+    int size = 0;
+
+    command.outfile = NULL;
+    command.infile = NULL;
+
+
+    // pipelined command
+    if (strcontain(data, "|"))
+    {
+        cmd = str_tokenize(data, '|');
+    }
+    else
+        *cmd = data; // only a single command
+
+    while (*cmd)
+    {
+        if (strcontain(*cmd, ">") or strcontain(*cmd, "<"))
+        {
+
+            // cat > infile < outfile
+            // cat > infile  ------------------ Output redirection
+            if (strcontain(*cmd, "<"))
+            {
+                red = str_tokenize(*cmd, '<');
+                char *p1 = strip(red[0]);
+                char *p2 = strip(red[1]);
+
+                // case 1 -------- echo hello < infile > outfile
+                if (strcontain(p2, ">"))
+                {
+                    red = str_tokenize(p2, '>');
+                    command.infile = red[0];
+                    command.outfile = red[1];
+                }
+                else
+                {
+                    command.infile = p2;
+                }
+
+                // case2 ---------- echo hello > infile < outfile
+                if (strcontain(p1, ">"))
+                {
+                    red = str_tokenize(p1, '>');
+                    command.simpleCommand[size++] = red[0];
+                    command.outfile = red[1];
+                }
+                else
+                {
+                    command.simpleCommand[size++] = p1;
+                }
+            }
+
+            else if (strcontain(*cmd, ">"))
+            {
+                red = str_tokenize(*cmd, '>');
+                char *p1 = strip(red[0]);
+                char *p2 = strip(red[1]);
+
+                // case 1---------- echo hello > infile < outfile
+                if (strcontain(p2, "<"))
+                {
+                    red = str_tokenize(p2, '<');
+                    command.outfile = red[0];
+                    command.infile = red[1];
+                }
+                else
+                {
+                    command.outfile = p2;
+                }
+
+                // case 2 -------- echo hello < infile > outfile
+                if (strcontain(p1, ">"))
+                {
+                    red = str_tokenize(p1, '>');
+                    command.simpleCommand[size++] = red[0];
+                    command.outfile = red[1];
+                }
+                else
+                {
+                    command.simpleCommand[size++] = p1;
+                }
+            }
+
+            else
+            {
+                command.infile = NULL;
+                command.outfile = NULL;
+            }
+        }
+        else
+        {
+            command.simpleCommand[size++] = *cmd;
+        }
+        cmd++;
+    }
+
+    // parsing ends.....
+
+    // printf("STDOUT: %s\n", command.infile);
+    // printf("STDIN: %s\n", command.outfile);
+    // printf("SIZE: %d\n", size);
+
+    command.size = size;
+
+    return command;
+}

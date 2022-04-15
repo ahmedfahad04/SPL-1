@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include <cstdio>
 #include <sys/wait.h>
 #include <stdlib.h>
 #include <unistd.h>

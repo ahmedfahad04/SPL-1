@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include <cstdio>
 #include <stdlib.h>
 #include <ctype.h>
 #include "shell.h"
@@ -176,7 +176,6 @@ char *strip(char *word)
 
     int stflag = 0, endflag = 0;
 
-    
     for (int i = 0; i < strlen(word); i++)
     {
 
@@ -192,4 +191,3 @@ char *strip(char *word)
 
     return demo;
 }
-

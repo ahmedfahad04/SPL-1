@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include <cstdio>
 #include "shell.h"
 
 void userManual()
@@ -16,6 +16,7 @@ void userManual()
     puts("");
     return;
 }
+
 char *selectBGColor(char *args)
 {
     char *bgcolor;

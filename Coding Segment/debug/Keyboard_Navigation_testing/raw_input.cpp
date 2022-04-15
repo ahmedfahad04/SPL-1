@@ -1,5 +1,5 @@
 #include <bits/stdc++.h>
-#include <stdio.h>
+#include <cstdio>
 #include <stdlib.h>
 #include <pthread.h>
 #include <unistd.h>

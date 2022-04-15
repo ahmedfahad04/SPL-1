@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include <cstdio>
 
 int display(int (*ptr)(int, int), int a, int b);
 int sum (int a, int b);

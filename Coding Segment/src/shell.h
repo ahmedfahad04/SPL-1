@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include <cstdio>
 #include <stdlib.h>
 #include <unistd.h>
 #define BUFFER_SIZE 1024
@@ -40,6 +40,32 @@
 #define BG_DARK_MAG "\u001b[45m;1m"
 #define BG_DARK_CYN "\u001b[46m;1m"
 #define BG_DARK_WHT "\u001b[47m;1m"
+
+
+
+// COMMAND STRUCT
+struct ShellCommands
+{
+    char *simpleCommand[50];
+    char *infile;
+    char *outfile;
+    char *background;
+    char size = 0;
+}; 
+void executenew(int size, struct ShellCommands command);
+
+
+
+// COMMAND AUTOCOMPLETION
+struct cmdFreq{
+    char * cmd;
+    int freq;
+    int prev;
+};
+void frequencyCalculator(char *command, FILE *save);
+void assembleFreqOutput();
+bool generateAutoCommand(char * cmd);
+void showValue(char * value);
 
 // HISTORY
 struct history{
@@ -94,9 +120,10 @@ char *getCurrentDirectory();
 void cmdSuggestion(char *cmd);
 void findExeFileName(char *cmd);
 void saveInfo();
-void executePipelinedCommands(int size, char *simpleCMD[]);
+void executePipelinedCommands(int size, char *simpleCMD[], struct ShellCommands command);
 char ** checkForWildCards(char ** data);
 void setAlias(char *cmd, char *alias);
 void aliasCommands(char **words);
 char **checkForAliasing(char **cmd);
 char *getAlias(char *data);
+struct ShellCommands parse(char *data);

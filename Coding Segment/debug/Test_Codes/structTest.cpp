@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 #include <stdlib.h>
-#include <stdio.h>
+#include <cstdio>
 using namespace std;
 
 struct student

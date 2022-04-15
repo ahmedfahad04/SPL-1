@@ -1,5 +1,5 @@
-run: main.o prompt.o implementation.o execution.o commandAliasing.o suggestingCMDs.o slsh.o colorManagement.o prompt.o historyManagement.o
-	g++ -o run main.o prompt.o commandAliasing.o implementation.o execution.o suggestingCMDs.o slsh.o colorManagement.o historyManagement.o -pthread
+run: main.o prompt.o implementation.o execution.o commandAliasing.o suggestingCMDs.o slsh.o colorManagement.o prompt.o historyManagement.o commandAutoCompletion.o
+	g++ -o run main.o prompt.o commandAliasing.o implementation.o execution.o suggestingCMDs.o slsh.o colorManagement.o historyManagement.o commandAutoCompletion.o -pthread
 	mv *.o obj
 
 main.o: main.cpp
@@ -29,11 +29,13 @@ commandAliasing.o: commandAliasing.cpp
 historyManagement.o: historyManagement.cpp
 	g++ -c historyManagement.cpp
 
+commandAutoCompletion.o: commandAutoCompletion.cpp
+	g++ -c commandAutoCompletion.cpp
+
 clean: 
 	rm run
 	rm -r obj
 	mkdir obj
 	
-
 line:
 	wc -l *.*

@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include <cstdio>
 
 #define SH_NRM  "\x1B[0m"
 #define SH_RED  "\x1B[1;31m"

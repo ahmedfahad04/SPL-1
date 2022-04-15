@@ -1,2 +1,4 @@
 ls list
 pwd curDir
+echo print
+findnow grep

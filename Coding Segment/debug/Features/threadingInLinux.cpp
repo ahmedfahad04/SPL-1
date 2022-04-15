@@ -1,5 +1,5 @@
 #include <pthread.h>
-#include <stdio.h>
+#include <cstdio>
 #include <stdlib.h>
 
 void *worker_thread(void *arg)

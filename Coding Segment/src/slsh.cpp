@@ -1,4 +1,5 @@
-#include <stdio.h>
+#include <cstdio>
+#include <thread>
 #include "shell.h"
 
 void eventLoopWithColors(char *args, char *type)
@@ -35,31 +36,48 @@ void eventLoop(char *colorFlag, char *colorType)
     fprintf(stdout, "\e[1;1H\e[2J");
 
     char *commandLine, **tokens, **filtered_tokens;
+    commandLine = (char *)malloc(sizeof(char) * 500);
 
     // history
     struct history ht[1000];
     int id = 0;
     int sl = historySerialLocator() + 1;
 
+    int save_in, save_out;
+
+    save_in = dup(STDIN_FILENO);
+    save_out = dup(STDOUT_FILENO);
+
     do
     {
+
+        dup2(save_in, STDIN_FILENO);
+        dup2(save_out, STDOUT_FILENO);
+
         // printf("HIST: %d\n", sl);
         //   ==> need to remove redundant prompt input
         commandLine = take_user_input(colorFlag, colorType);
         ht[id].cmd = commandLine;
         ht[id++].order = sl++;
 
+        // ------ NEW CHANGE -------
+
+        // executenew(parsedCommand);
+
+        // ------ NEW CHANGE -------
+
         // checking for pipelined commands
         int flag = 0;
         for (int i = 0; i < strlen(commandLine); i++)
         {
-            if (commandLine[i] == '|')
+            if (commandLine[i] == '|' or commandLine[i] == '>' or commandLine[i] == '<')
             {
                 flag = 1;
                 break;
             }
         }
 
+        // ==> will start from here
         if (flag)
         {
             filtered_tokens = str_tokenize(commandLine, '|');
@@ -71,20 +89,24 @@ void eventLoop(char *colorFlag, char *colorType)
             while (*filtered_tokens)
             {
                 // filtered_tokens = checkForWildCards(filtered_tokens);
-                puts(*filtered_tokens);
+                // puts(*filtered_tokens);
                 simpleCMD[size++] = *filtered_tokens;
                 filtered_tokens++;
             }
 
-            executePipelinedCommands(size, simpleCMD);
+            struct ShellCommands command = parse(commandLine);
+
+            executePipelinedCommands(size, simpleCMD, command);
         }
         else
         {
-
+            
+            // ==> ----- CAREFUL -----
             if (commandLine[0] == '!')
             {
                 commandLine = showParticularHistory(commandLine);
             }
+            // ----- CAREFUL -----
 
             tokens = str_tokenize(commandLine, ' ');
             filtered_tokens = removeWhiteSpace(tokens);
@@ -94,6 +116,7 @@ void eventLoop(char *colorFlag, char *colorType)
             // this is a temporary block to exit the loop
             // in final outcome the command will send a termination code
             // for specific command
+
             if (strcmp(filtered_tokens[0], "exit"))
             {
                 puts(RESET);
@@ -101,6 +124,7 @@ void eventLoop(char *colorFlag, char *colorType)
                 break;
             }
 
+          
             // printf("%s\n", commandLine);
             execute(filtered_tokens);
         }

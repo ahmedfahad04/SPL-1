@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include <cstdio>
 #include <signal.h>
 #include <unistd.h>
 #include <bits/stdc++.h>

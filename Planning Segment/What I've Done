@@ -12,3 +12,4 @@ we'll execute command through parsing->tokenizing->using AST/command Table InSha
 8. Command aliasing [error checking must be done]
 [ Segmentation Fault - When you declare any array index wrongly or your index doesn't increase accordingly .... watch my checkforaliasing command]
 9. History Management done
+10. Command auto completion almost done. [99%]
