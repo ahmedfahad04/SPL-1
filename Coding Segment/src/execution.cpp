@@ -10,6 +10,9 @@
 #include <iostream>
 #include "shell.h"
 
+int flag = 0;
+
+
 void cmd_execute(char **args)
 {
     // temporarily I'll send the pure text
@@ -24,7 +27,10 @@ void cmd_execute(char **args)
     }
 
     if (strcmp(cmd, "apropos"))
+    {
+
         findExeFileName(args[1]);
+    }
 
     if (strcmp(cmd, "color"))
     {
@@ -217,7 +223,6 @@ void execute(char **args)
 {
 
     // ==X this is the breakpoint for not working CD option
-    // args = checkForAliasing(args);
     char *command = args[0];
 
     if (strcmp(command, "cd"))
@@ -228,6 +233,13 @@ void execute(char **args)
 
     else if (strcmp(command, "apropos"))
     {
+
+        if (strlen2(args) == 1)
+        {
+            printf("Provide argument after apropos..\napropos [options..]\n");
+            return;
+        }
+
         cmd_execute(args);
     }
 
@@ -245,12 +257,24 @@ void execute(char **args)
     {
         readHistory();
     }
+
+    else if (strcmp(command, "autocomplete"))
+    {
+        if (strcmp(args[1], "on"))
+            flag = 1;
+        else
+            flag = 0;
+        
+    }
+
+// ==> will start from here
     // store process id
     // check if the process if child or parent
     // if it's the child process run execv()
     // if it's parent process then wait for the child process to be terminated
     else
     {
+    
         pid_t status, process_id;
 
         process_id = fork();
@@ -260,8 +284,16 @@ void execute(char **args)
         {
             if (execvp(args[0], args) == -1)
             {
-                cmdSuggestion(command);
-                perror("Execution failed\n");
+                //printf("NEWF: %d\n", flag);
+                if (flag)
+                    char *CMD = AutoCommandCompletion(flag, args[0]);
+                else
+                    commandSuggestion(flag, args);
+
+                // puts(CMD);
+
+                // mergeAndExecute(CMD, args);
+                // perror("Execution failed\n");
             }
             exit(0);
         }

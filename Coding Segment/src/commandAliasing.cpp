@@ -7,11 +7,12 @@
 // char *aliasfp = strcatt(myTilde2, "/.slshAlias");
 
 // ==> will work on that
-char *aliasfp = "/home/fahad/.slsh_alias";
+char *aliasfp = "/home/ahmedfahad/.slsh_alias";
 
 void setAlias(char *cmd, char *alias)
 {
     // error checking....
+    // ==> also group command aliasing
     // need to check if user given name already exists or not
     // first create the file if it's not been created
     if (access(aliasfp, F_OK) != 0)

@@ -378,6 +378,7 @@ char **checkForWildCards(char **data)
             {
                 char *dname = entry->d_name;
 
+
                 if (wildcardmatching(dname, *data, strlen(dname), strlen(*data)))
                 {
                     // puts(dname);

@@ -41,6 +41,16 @@
 #define BG_DARK_CYN "\u001b[46m;1m"
 #define BG_DARK_WHT "\u001b[47m;1m"
 
+
+// BK TREE NODE
+struct node
+{
+    int data;
+    char *word;
+    struct node *left;
+    struct node *right;
+};
+
 // COMMAND STRUCT
 struct ShellCommands
 {
@@ -61,8 +71,13 @@ struct cmdFreq
 };
 void frequencyCalculator(char *command, FILE *save);
 void assembleFreqOutput();
-bool generateAutoCommand(char *cmd);
+int generateAutoCommand(char *cmd);
 void showValue(char *value);
+void updateCmdFrequency();
+int count(char *data[], char *info, int size);
+void mergeAndExecute(char *command, char **data);
+void commandSuggestion(int flag, char **args);
+char * AutoCommandCompletion(int flag, char *args);
 
 // HISTORY
 struct history
@@ -116,7 +131,7 @@ char *userName();
 void execute(char **args);
 bool isBuiltInCmd(char *cmd);
 char *getCurrentDirectory();
-void cmdSuggestion(char *cmd);
+void BKTreeGeneration(char *cmd);
 void findExeFileName(char *cmd);
 void saveInfo();
 void executePipelinedCommands(int size, char *simpleCMD[], struct ShellCommands command);

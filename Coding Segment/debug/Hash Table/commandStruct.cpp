@@ -285,11 +285,13 @@ void execute(int size, struct ShellCommands command)
         char **cmd = str_tokenize(currCMD, ' ');
         int fdout, file;
 
+        puts(currCMD);
+
          // this is input redirection...
         if (command.infile)
         {
             printf("READING>>>\n");
-            int f2 = open(command.infile, O_RDONLY, 0777);
+            int f2 = open(strip(command.infile), O_RDONLY, 0777);
             if (f2 == -1)
             {
                 puts("Error reading file");
@@ -303,7 +305,7 @@ void execute(int size, struct ShellCommands command)
         if (command.outfile)
         {
             printf("WRITING>>>\n");
-            file = open(command.outfile, O_WRONLY | O_CREAT, 0777);
+            file = open(strip(command.outfile), O_WRONLY | O_CREAT, 0777);
             if (file == -1)
             {
                 puts("Error writing file");

@@ -26,7 +26,7 @@ void execute(char **args)
         {
             if (execvp(command, args) == -1)
             {
-                //cmdSuggestion(command);
+                //BKTreeGeneration(command);
                 // findExeFileName(command);
                 perror("Execution failed\n");
             }

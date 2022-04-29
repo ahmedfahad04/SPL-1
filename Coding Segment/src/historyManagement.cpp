@@ -9,7 +9,6 @@ char *historyFileName = strcatt(myTilde, "/.slsh_history");
 
 int historySerialLocator()
 {
-    puts(historyFileName);
     if (access(historyFileName, F_OK) != 0)
     {
         FILE *fp;

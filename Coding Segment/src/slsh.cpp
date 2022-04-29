@@ -1,6 +1,13 @@
 #include <cstdio>
+#include <signal.h>
 #include <thread>
 #include "shell.h"
+
+void restart(int sig)
+{
+    puts("Start again");
+    eventLoop();
+}
 
 void eventLoopWithColors(char *args, char *type)
 {
@@ -44,7 +51,6 @@ void eventLoop(char *colorFlag, char *colorType)
 
     int sl = historySerialLocator() + 1;
 
-
     int save_in, save_out;
 
     save_in = dup(STDIN_FILENO);
@@ -62,6 +68,8 @@ void eventLoop(char *colorFlag, char *colorType)
         ht[id].cmd = commandLine;
         ht[id++].order = sl++;
 
+        // ==> control ctrl+C button
+        // signal(SIGINT, &restart);
 
         // ------ NEW CHANGE -------
 
@@ -103,7 +111,7 @@ void eventLoop(char *colorFlag, char *colorType)
         }
         else
         {
-            
+
             // ==> ----- CAREFUL -----
             if (commandLine[0] == '!')
             {
@@ -132,7 +140,6 @@ void eventLoop(char *colorFlag, char *colorType)
                 break;
             }
 
-          
             // printf("%s\n", commandLine);
             execute(filtered_tokens);
         }

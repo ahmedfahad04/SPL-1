@@ -11,6 +11,11 @@ using namespace std;
 
 int c[MAXSIZE][MAXSIZE], b[MAXSIZE][MAXSIZE], tolerance = -1;
 int m, n, totalCommandCount = 0;
+FILE *fp;
+struct cmdFreq suggestions[1000];
+struct node *root;
+char *rootWord;
+char *newargs[100];
 
 char **readCMDOutput(char *cmd)
 {
@@ -118,14 +123,6 @@ void EditDistance(char *x, char *y, int row, int col)
     }
 }
 
-struct node
-{
-    int data;
-    char *word;
-    struct node *left;
-    struct node *right;
-};
-
 struct node *createNode(int value, char *info)
 {
     struct node *p = (struct node *)malloc(sizeof(struct node));
@@ -169,8 +166,9 @@ void addNode(struct node *parent, int value, char *info)
     return;
 }
 
-void printTree(struct node *head, char *keyword, FILE *fp)
+void printTree(struct node *head, char *keyword, FILE *fp, int &id, int flag)
 {
+
     if (head == NULL)
     {
         return;
@@ -178,34 +176,119 @@ void printTree(struct node *head, char *keyword, FILE *fp)
 
     else
     {
-        printTree(head->left, keyword, fp);
+
+        printTree(head->left, keyword, fp, id, flag);
+
 
         if (head->data <= 3 && (strlen(head->word) >= strlen(keyword)))
         {
-            // ==> changes here
-            // printf("    command -> %s", head->word);
+            // printf("***FLAG: %d", flag);
 
-            frequencyCalculator(head->word, fp);
-            if (generateAutoCommand(head->word))
+            if (flag)
             {
-                //printf("    command -> %s", head->word);
-                showValue(head->word);
+                frequencyCalculator(head->word, fp);
+                updateCmdFrequency();    // ==> here is the issue
+                int status = generateAutoCommand(head->word);
+
+                if (status)
+                {
+
+                    // printf("    command -> %s", head->word);
+                    // showValue(head->word);
+                    suggestions[id].cmd = head->word;
+                    suggestions[id++].freq = status;
+
+                }
+            }
+            else
+            {
+                // ==> changes here
+                printf("    command -> %s", head->word);
             }
         }
 
-        printTree(head->right, keyword, fp);
+
+        printTree(head->right, keyword, fp, id, flag);
     }
 }
 
-void cmdSuggestion(char *rootWord)
+void getSuggestedCommand(char *currentCommand, char *&cmd, int size)
 {
-    struct node *root = createNode(10, rootWord); // root value
+    int maxcnt = 0;
+
+    for (int i = 0; i < size; i++)
+    {
+        int cnt = suggestions[i].freq;
+        if (cnt > maxcnt)
+        {
+            maxcnt = cnt;
+            cmd = strcpy(suggestions[i].cmd);
+            printf("slsh: Correct \'%s\' to \'%s\'\n", currentCommand, cmd);
+        }
+
+        //printf("CMD: %s, CNT: %d\n", strcpy(suggestions[i].cmd), suggestions[i].freq);
+    }
+}
+
+void commandSuggestion(int flag, char **args)
+{
+    int cmdID = 0;
+    char *command = args[0];
+    BKTreeGeneration(command);
+
+    printf("Command \'%s\' not found, did you mean: \n", rootWord);
+    printTree(root, rootWord, fp, cmdID, flag);
+    printf("Try: sudo apt install <deb name>\n");
+
+    exit(EXIT_FAILURE);
+}
+
+char *AutoCommandCompletion(int flag, char *args)
+{
+
+    int i = 0, cmdID = 0;
+
+    BKTreeGeneration(args);
+    // printf("CMD: %s\n", args);
+
+    // ==> Will start from HERE
+    struct cmdFreq freq[100];
+
+    if ((fp = fopen(".tempfqr", "a")) == NULL)
+    {
+        puts("Failed to open .tempfqr file");
+    }
+
+    // printf("ROOTWORD: %s\n", rootWord);
+    // printf("FLAG: %d\n", flag);
+    printTree(root, rootWord, fp, cmdID, flag);
+
+    // puts("SECOND");
+
+    char *CMD = (char *)malloc(sizeof(char) * 500);
+    getSuggestedCommand(args, CMD, cmdID);
+    //puts(CMD);
+    
+
+    fclose(fp);
+
+    return CMD;
+}
+
+void BKTreeGeneration(char *allArgs)
+{
+
+    // puts("INSIDE BK TREE");
+    rootWord = allArgs;
+
+    root = createNode(10, rootWord); // root value
 
     char **allCMDs = readCMDOutput("ls /usr/bin");
     char **temp = allCMDs;
 
     while (*temp)
     {
+
         m = strlen(*temp) + 1;
         n = strlen(rootWord) + 1;
 
@@ -218,27 +301,7 @@ void cmdSuggestion(char *rootWord)
         temp++;
     }
 
-    if (strlen(rootWord) == 0)
-        exit(EXIT_FAILURE);
-
-    else
-    {
-
-        struct cmdFreq freq[100];
-        int id = 0;
-        FILE *fp;
-        fp = fopen(".autoCmd", "a+");
-
-        //printf("Command \'%s\' not found, did you mean: \n", rootWord);
-        printTree(root, rootWord, fp);
-        //printf("Try: sudo apt install <deb name>\n");
-
-        assembleFreqOutput();
-
-        fclose(fp);
-
-        exit(EXIT_FAILURE);
-    }
+    // puts(rootWord);
 }
 
 void findExeFileName(char *cmd)
