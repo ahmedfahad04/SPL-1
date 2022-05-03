@@ -78,6 +78,7 @@ However providing the facility of installing new packages like "sudo apt install
 permission. Here what that command does is not defined in my code, rather it's 
 defined.)
 4. Have to learn about Metric Space, BK tree
+5. Debugging a large C file
 
 
 ---------------------------------------------------------------

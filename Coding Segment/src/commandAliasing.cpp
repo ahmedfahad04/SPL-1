@@ -3,18 +3,15 @@
 #include "shell.h"
 #define BUFFER_SIZE 1024
 
-// char *myTilde2 = strcatt("/home/", userName());
-// char *aliasfp = strcatt(myTilde2, "/.slshAlias");
-
-// ==> will work on that
-char *aliasfp = "/home/ahmedfahad/.slsh_alias";
-
 void setAlias(char *cmd, char *alias)
 {
     // error checking....
     // ==> also group command aliasing
     // need to check if user given name already exists or not
     // first create the file if it's not been created
+    char *aliasfp = strcatt(strcatt("/home/", userName()), "/.slsh_alias");
+
+    // printf("ALIAS: %s\n", aliasfp);
     if (access(aliasfp, F_OK) != 0)
     {
         puts("C");
@@ -39,13 +36,13 @@ void setAlias(char *cmd, char *alias)
 
 void aliasCommands(char **words)
 {
+
+    char *aliasfp = strcatt(strcatt("/home/", userName()), "/.slsh_alias");
     char **refactor = (char **)malloc(sizeof(char) * 500);
 
     if (strlen2(words) == 1)
     {
-
         char s;
-  
 
         FILE *fp3;
         if ((fp3 = fopen(aliasfp, "r")) == NULL)
@@ -71,8 +68,27 @@ void aliasCommands(char **words)
     }
 }
 
+char *removeQuotes(char *str)
+{
+    char *editedStr = (char *)malloc(sizeof(char) * BUFFER_SIZE);
+    int i, k=0;
+
+    for (i = 0; str[i]; i++)
+    {
+        if (str[i] == '\'' or str[i] == '\"') continue;
+        else editedStr[k++] = str[i];
+    }
+
+    editedStr[k] = '\0';
+    return editedStr;
+}
+
+
+
 char **checkForAliasing(char **data)
 {
+
+    char *aliasfp = strcatt(strcatt("/home/", userName()), "/.slsh_alias");
 
     if (access(aliasfp, F_OK) != 0)
     {
@@ -100,15 +116,24 @@ char **checkForAliasing(char **data)
             size_t len = 0;
             ssize_t read;
             int flag = 1;
-            // printf("PReV, iDATA: %s----flag: %d\n", *data, flag);
 
             while ((read = getline(&line, &len, f2)) != -1)
             {
                 chunks = str_tokenize(line, ' ');
 
-                if (strcmp(chunks[1], *data))
+                int wordLen = strlen2(chunks);
+
+                if (strcmp(chunks[wordLen - 2], *data))
                 {
-                    newargs[id++] = strip(chunks[0]);
+                    // printf("ANS: %s\n", chunks[wordLen-2]);
+                    // printf(">> %s\n", removeQuotes(chunks[0]));
+
+                    for (int i = 0; i < wordLen - 2; i++)
+                    {
+                        newargs[id++] = chunks[i];
+                        // printf("NEW STR: %s\n", chunks[i]);
+                    }
+
                     flag = 0;
                 }
                 // puts(chunks[0]);
@@ -135,6 +160,8 @@ char **checkForAliasing(char **data)
 
     // free(newargs);
     newargs[id] = NULL;
+    // printf("NEW CMD: %s\n", strtokenize(*newargs, ' '));    // will start from here
     char **ans = newargs;
     return ans;
 }
+

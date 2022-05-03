@@ -1,10 +1,10 @@
 Have to Complete at any COST: 
 ------------------------------
 
-* Parsing and Tokenizing complex commands (eg. ls -al | wc *.cpp -l)
-* Implementing some common builtin & external commands (history, apropos, alias)
-* Customizing text and background colors.
-* Command auto-completion.
+* Parsing and Tokenizing complex commands (eg. ls -al | wc *.cpp -l) [DONE]
+* Implementing some common builtin & external commands (history, apropos, alias) [DONE]
+* Customizing text and background colors.[DONE]
+* Command auto-completion. [DONE - 90%]
 
 Increase Code Complexity: 
 --------------------------
