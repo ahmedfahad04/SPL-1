@@ -406,6 +406,8 @@ char **checkForWildCards(char **data)
         data++;
     }
 
+    newargs[id] = NULL;
+
     return newargs;
 }
 

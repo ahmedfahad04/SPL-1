@@ -164,9 +164,7 @@ char **checkForAliasing(char **data)
         data++;
     }
 
-    // free(newargs);
     newargs[id] = NULL;
-    // printf("NEW CMD: %s\n", strtokenize(*newargs, ' '));    // will start from here
-    char **ans = newargs;
+    char **ans = checkForWildCards(newargs);
     return ans;
 }

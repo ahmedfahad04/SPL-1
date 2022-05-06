@@ -141,3 +141,5 @@ void aliasCommands(char **words);
 char **checkForAliasing(char **cmd);
 char *getAlias(char *data);
 struct ShellCommands parse(char *data);
+int processPipelinedCommand(char *command);
+int porcessSingleCommand(char *command);

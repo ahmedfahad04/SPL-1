@@ -9,6 +9,73 @@ void restart(int sig)
     eventLoop();
 }
 
+int processPipelinedCommand(char *command)
+{
+
+    char **filtered_tokens;
+
+    int flag = 0;
+
+    for (int i = 0; i < strlen(command); i++)
+    {
+        if (command[i] == '|' or command[i] == '>' or command[i] == '<')
+        {
+            flag = 1;
+            break;
+        }
+    }
+
+    // ==> will start from here
+    if (flag)
+    {
+        filtered_tokens = str_tokenize(command, '|');
+        // filtered_tokens = checkForAliasing(filtered_tokens);
+
+        char *simpleCMD[100];
+        int cmdCounter = 0;
+
+        while (*filtered_tokens)
+        {
+            // filtered_tokens = checkForWildCards(filtered_tokens);
+            // puts(*filtered_tokens);
+            simpleCMD[cmdCounter++] = *filtered_tokens;
+            filtered_tokens++;
+        }
+
+        struct ShellCommands parsedCommand = parse(command);
+        executePipelinedCommands(cmdCounter, simpleCMD, parsedCommand);
+        return 1;
+    }
+
+    return 0;
+}
+
+int porcessSingleCommand(char *command)
+{
+
+    char **tokens, **filtered_tokens;
+
+    if (command[0] == '!')
+    {
+        command = showParticularHistory(command);
+    }
+
+    tokens = str_tokenize(command, ' ');
+    filtered_tokens = checkForAliasing(tokens);
+
+    if (strcmp(filtered_tokens[0], "exit"))
+    {
+        puts(RESET);
+        fprintf(stdout, "\e[1;1H\e[2J");
+        return 0;
+    }
+
+    // printf("%s\n", filtered_tokens[0]);
+    // printf("LENGTH: %d\n", strlen2(filtered_tokens));
+    execute(filtered_tokens);
+    return 1;
+}
+
 void eventLoopWithColors(char *cmd, char *type)
 {
 
@@ -48,7 +115,7 @@ void eventLoop(char *colorFlag, char *colorType)
     struct history ht[1000];
     int historyCounter = 0;
     int historySerial = historySerialLocator() + 1;
-    int saveInputFileDescriptor, saveOutputFileDescriptor;
+    int saveInputFileDescriptor, saveOutputFileDescriptor, status;
 
     saveInputFileDescriptor = dup(STDIN_FILENO);
     saveOutputFileDescriptor = dup(STDOUT_FILENO);
@@ -64,67 +131,13 @@ void eventLoop(char *colorFlag, char *colorType)
         ht[historyCounter].cmd = commandLine;
         ht[historyCounter++].order = historySerial++;
 
-        // ==> control ctrl+C button
-        // signal(SIGINT, &restart);
+        // execute commands
+        status = processPipelinedCommand(commandLine);
 
-        // checking for pipelined and IO redirected commands
-        int flag = 0;
-        for (int i = 0; i < strlen(commandLine); i++)
-        {
-            if (commandLine[i] == '|' or commandLine[i] == '>' or commandLine[i] == '<')
-            {
-                flag = 1;
-                break;
-            }
-        }
+        if (status == 0) 
+            status = porcessSingleCommand(commandLine); 
 
-        // ==> will start from here
-        if (flag)
-        {
-            filtered_tokens = str_tokenize(commandLine, '|');
-            // filtered_tokens = checkForAliasing(filtered_tokens);
-
-            char *simpleCMD[100];
-            int cmdCounter = 0;
-
-            while (*filtered_tokens)
-            {
-                // filtered_tokens = checkForWildCards(filtered_tokens);
-                // puts(*filtered_tokens);
-                simpleCMD[cmdCounter++] = *filtered_tokens;
-                filtered_tokens++;
-            }
-
-            struct ShellCommands command = parse(commandLine);
-            executePipelinedCommands(cmdCounter, simpleCMD, command);
-        }
-        else
-        {
-
-            // ==> ----- CAREFUL -----
-            if (commandLine[0] == '!')
-            {
-                commandLine = showParticularHistory(commandLine);
-            }
-            // ----- CAREFUL -----
-
-            tokens = str_tokenize(commandLine, ' ');
-            filtered_tokens = checkForWildCards(tokens);
-            filtered_tokens = checkForAliasing(tokens);
-
-            if (strcmp(filtered_tokens[0], "exit"))
-            {
-                puts(RESET);
-                fprintf(stdout, "\e[1;1H\e[2J");
-                break;
-            }
-
-            // printf("EXE: %s\n", filtered_tokens[0]);
-            // printf("LENGTH: %s\n", strlen2(filtered_tokens));
-            execute(filtered_tokens);
-        }
-
-    } while (1);
+    } while (status != 0);
 
     writeHistory(historyCounter, ht);
     return;

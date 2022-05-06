@@ -40,15 +40,14 @@
 17. I/O Redirection [DONE]
 	> I may notify the user from which cmd we're taking input and where we're putting the output
 	
-18. CMD Aliasing [Working..]
+18. CMD Aliasing [DONE]
 	> Basic Aliasing done
-	> mycd creating segmentation error.
-	> Error Checking still remains...
+	> mycd creating segmentation error. [SOLVED]
+	> Muliple word command aliasing with wildcard character entry enabled. [DONE]
 	
-19. History Management [Working...]
+19. History Management [DONE]
 	> Basic history writing and reading done
 	> !5 type command execution done
-	> history -c still remainse... 
 	
-20. Command Auto-Completion 
+20. Command Auto-Completion [DONE]
 	> shows specific command if wrong command is given
