@@ -9,12 +9,12 @@ void restart(int sig)
     eventLoop();
 }
 
-void eventLoopWithColors(char *args, char *type)
+void eventLoopWithColors(char *cmd, char *type)
 {
 
     char *BGCode, *FGCode;
 
-    if (args == NULL)
+    if (cmd == NULL)
     {
         // perror("Wrong color code\n");
         return;
@@ -22,13 +22,13 @@ void eventLoopWithColors(char *args, char *type)
 
     if (strcmp(type, "user") || strcmp(type, "host"))
     {
-        FGCode = args;
+        FGCode = cmd;
         eventLoop(FGCode, type);
     }
 
     else
     {
-        BGCode = args;
+        BGCode = cmd;
 
         if (BGCode != NULL)
             printf("%s", BGCode);
@@ -45,39 +45,29 @@ void eventLoop(char *colorFlag, char *colorType)
     commandLine = (char *)malloc(sizeof(char) * 500);
 
     // history
-
     struct history ht[1000];
-    int id = 0;
+    int historyCounter = 0;
+    int historySerial = historySerialLocator() + 1;
+    int saveInputFileDescriptor, saveOutputFileDescriptor;
 
-    int sl = historySerialLocator() + 1;
-
-    int save_in, save_out;
-
-    save_in = dup(STDIN_FILENO);
-    save_out = dup(STDOUT_FILENO);
+    saveInputFileDescriptor = dup(STDIN_FILENO);
+    saveOutputFileDescriptor = dup(STDOUT_FILENO);
 
     do
     {
 
-        dup2(save_in, STDIN_FILENO);
-        dup2(save_out, STDOUT_FILENO);
+        dup2(saveInputFileDescriptor, STDIN_FILENO);
+        dup2(saveOutputFileDescriptor, STDOUT_FILENO);
 
-        // printf("HIST: %d\n", sl);
-        //   ==> need to remove redundant prompt input
         commandLine = take_user_input(colorFlag, colorType);
-        ht[id].cmd = commandLine;
-        ht[id++].order = sl++;
+        commandLine = strip(commandLine);
+        ht[historyCounter].cmd = commandLine;
+        ht[historyCounter++].order = historySerial++;
 
         // ==> control ctrl+C button
         // signal(SIGINT, &restart);
 
-        // ------ NEW CHANGE -------
-
-        // executenew(parsedCommand);
-
-        // ------ NEW CHANGE -------
-
-        // checking for pipelined commands
+        // checking for pipelined and IO redirected commands
         int flag = 0;
         for (int i = 0; i < strlen(commandLine); i++)
         {
@@ -95,19 +85,18 @@ void eventLoop(char *colorFlag, char *colorType)
             // filtered_tokens = checkForAliasing(filtered_tokens);
 
             char *simpleCMD[100];
-            int size = 0;
+            int cmdCounter = 0;
 
             while (*filtered_tokens)
             {
                 // filtered_tokens = checkForWildCards(filtered_tokens);
                 // puts(*filtered_tokens);
-                simpleCMD[size++] = *filtered_tokens;
+                simpleCMD[cmdCounter++] = *filtered_tokens;
                 filtered_tokens++;
             }
 
             struct ShellCommands command = parse(commandLine);
-
-            executePipelinedCommands(size, simpleCMD, command);
+            executePipelinedCommands(cmdCounter, simpleCMD, command);
         }
         else
         {
@@ -120,18 +109,8 @@ void eventLoop(char *colorFlag, char *colorType)
             // ----- CAREFUL -----
 
             tokens = str_tokenize(commandLine, ' ');
-            filtered_tokens = removeWhiteSpace(tokens);
-            filtered_tokens = checkForWildCards(filtered_tokens);
-            filtered_tokens = checkForAliasing(filtered_tokens);
-
-            // while(*test){
-            //     puts(*test);
-            //     test++;
-            // }
-
-            // this is a temporary block to exit the loop
-            // in final outcome the command will send a termination code
-            // for specific command
+            filtered_tokens = checkForWildCards(tokens);
+            filtered_tokens = checkForAliasing(tokens);
 
             if (strcmp(filtered_tokens[0], "exit"))
             {
@@ -140,12 +119,13 @@ void eventLoop(char *colorFlag, char *colorType)
                 break;
             }
 
-            // printf("%s\n", commandLine);
+            // printf("EXE: %s\n", filtered_tokens[0]);
+            // printf("LENGTH: %s\n", strlen2(filtered_tokens));
             execute(filtered_tokens);
         }
 
     } while (1);
 
-    writeHistory(id, ht);
+    writeHistory(historyCounter, ht);
     return;
 }

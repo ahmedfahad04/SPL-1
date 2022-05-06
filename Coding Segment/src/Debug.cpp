@@ -1353,7 +1353,7 @@ char **strtokenize(char *ch, char sep)
                 newstr[j] = '\0';
                 raw_words[k++] = newstr;
                 changed = 1;
-                // printf("NEW: %s -> %d\n", newstr, qFlag);
+                 printf("NEW: %s -> %d\n", newstr, qFlag);
 
                 newstr = (char *)malloc(sizeof(char) * BUFFER_SIZE);
                 j = 0;

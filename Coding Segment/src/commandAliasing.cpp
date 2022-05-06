@@ -59,31 +59,37 @@ void aliasCommands(char **words)
         return;
     }
 
-    if (strcmp(words[0], "alias"))
-    {
-        refactor = str_tokenize(words[1], '=');
-        puts(refactor[0]); // ls
-        puts(refactor[1]); // list
-        setAlias(refactor[0], refactor[1]);
-    }
+    // if (strcontain(words[1], "="))
+    // {
+        if (strcmp(words[0], "alias"))
+        {
+            refactor = str_tokenize(words[1], '=');
+            puts(refactor[0]); // ls
+            puts(refactor[1]); // list
+            setAlias(refactor[0], refactor[1]);
+        }
+    // } else {
+    //     puts("Wrong command formate.\n[alias command=aliasName]");
+    //     return;
+    // }
 }
 
 char *removeQuotes(char *str)
 {
     char *editedStr = (char *)malloc(sizeof(char) * BUFFER_SIZE);
-    int i, k=0;
+    int i, k = 0;
 
     for (i = 0; str[i]; i++)
     {
-        if (str[i] == '\'' or str[i] == '\"') continue;
-        else editedStr[k++] = str[i];
+        if (str[i] == '\'' or str[i] == '\"')
+            continue;
+        else
+            editedStr[k++] = str[i];
     }
 
     editedStr[k] = '\0';
     return editedStr;
 }
-
-
 
 char **checkForAliasing(char **data)
 {
@@ -144,13 +150,13 @@ char **checkForAliasing(char **data)
             // free(chunks);
 
             if (flag)
-                newargs[id++] = *data;
+                newargs[id++] = removeQuotes(*data);
             fclose(f2);
         }
 
         else
         {
-            newargs[id++] = *data;
+            newargs[id++] = removeQuotes(*data);
         }
 
         // printf("--DATA: %s\n", newargs[id-1]);
@@ -164,4 +170,3 @@ char **checkForAliasing(char **data)
     char **ans = newargs;
     return ans;
 }
-

@@ -223,7 +223,8 @@ void getSuggestedCommand(char *currentCommand, char *&cmd, int size)
         {
             maxcnt = cnt;
             cmd = strcpy(suggestions[i].cmd);
-            printf("slsh: Correct \'%s\' to \'%s\'\n", currentCommand, cmd);
+            printf("slsh: Correct \'%s%s%s\' to \'%s%s%s\'\n", FONT_RED, currentCommand, RESET, FONT_GRN, cmd, RESET);
+
         }
 
         //printf("CMD: %s, CNT: %d\n", strcpy(suggestions[i].cmd), suggestions[i].freq);
@@ -307,6 +308,7 @@ void BKTreeGeneration(char *allArgs)
 void findExeFileName(char *cmd)
 {
     printf("Executable file(s) of \"%s\" are: \n", cmd);
+    int flag = -1;
 
     char *path =
         "ls /usr/bin;"
@@ -318,26 +320,13 @@ void findExeFileName(char *cmd)
     while (*exeFilePath)
     {
 
-        int flag = strsubstr(cmd, *exeFilePath);
+        flag = strsubstr(cmd, *exeFilePath);
 
         if (flag >= 0)
         {
 
-            // Here we'll try to color the searched word.....
 
             char *newword = strip(*exeFilePath);
-            // char **words = strsplit(cmd, newword);
-
-            // while(*words){
-            //     printf(">> %s\n", *words);
-            //     words++;
-            // }
-
-            // // for(int i=0; i<strlen(fileName); i++){
-
-            // //     // if(i <= coloredStrLen) printf("\u001b[31%c\u001b[0m", exeFilePath[i]);
-            // //     // else printf("%c", fileName[i]);
-            // // }
 
             printf("%s", *exeFilePath);
             break;
@@ -345,4 +334,6 @@ void findExeFileName(char *cmd)
 
         exeFilePath++;
     }
+
+    if(flag == -1) puts("slsh: No executabale file found!!");
 }

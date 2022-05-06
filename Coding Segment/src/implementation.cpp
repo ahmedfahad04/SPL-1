@@ -331,6 +331,7 @@ bool wildcardmatching(char *str, char *pat, int slen, int plen)
 
     for (int i = 1; i <= slen; i++)
     {
+        // if(str[i-1] == '.') continue;
         for (int j = 1; j <= plen; j++)
         {
 
@@ -378,7 +379,7 @@ char **checkForWildCards(char **data)
             {
                 char *dname = entry->d_name;
 
-
+                if(dname[0] == '.') continue;   // ignore the hidden files
                 if (wildcardmatching(dname, *data, strlen(dname), strlen(*data)))
                 {
                     // puts(dname);

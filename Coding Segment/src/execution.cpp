@@ -390,7 +390,7 @@ void executePipelinedCommands(int size, char *simpleCMD[], struct ShellCommands 
                     printf("Execution failed..#B: %d", i);
                 }
             }
-            waitpid(pid[i], NULL, 0);
+            // waitpid(pid[i], NULL, 0);
         }
 
         else if (i == size - 1)
