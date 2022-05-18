@@ -360,6 +360,7 @@ char **checkForWildCards(char **data)
 
     while (*data)
     {
+        printf("DATA: %s\n", *data);
         if (strcontain(*data, "*"))
         {
             char *args = (char *)malloc(sizeof(char) * 1024);

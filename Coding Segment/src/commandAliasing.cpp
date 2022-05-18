@@ -165,6 +165,15 @@ char **checkForAliasing(char **data)
     }
 
     newargs[id] = NULL;
-    char **ans = checkForWildCards(newargs);
+    for(int i=0; i<id; i++){
+        printf("ARG: %s\n", newargs[i]);
+    }
+
+    char **ans;
+    
+    // if we pass 'alias command' then the first will be discarded...
+    if(strlen2(newargs) >= 2 and !strcontain(newargs[1],"=")) ans = checkForWildCards(newargs);
+    else ans = newargs;
+
     return ans;
 }

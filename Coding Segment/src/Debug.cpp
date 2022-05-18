@@ -790,7 +790,7 @@ void change_directory(char *path)
     if (tildeStatus)
     {
         newPath = strcatt("/home/", userName());
-        printf("NEW: %s\n", newPath);
+        // printf("NEW: %s\n", newPath);
 
         if (chdir(newPath) != 0)
             printf("slsh: cd: %s: No such file or directory\n", newPath);
@@ -1353,7 +1353,7 @@ char **strtokenize(char *ch, char sep)
                 newstr[j] = '\0';
                 raw_words[k++] = newstr;
                 changed = 1;
-                 printf("NEW: %s -> %d\n", newstr, qFlag);
+                //  printf("NEW: %s -> %d\n", newstr, qFlag);
 
                 newstr = (char *)malloc(sizeof(char) * BUFFER_SIZE);
                 j = 0;

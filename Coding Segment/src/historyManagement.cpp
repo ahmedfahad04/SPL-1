@@ -94,8 +94,7 @@ char *readHistory(int order)
 
             if (strcmp(sl, chunks[0]))
             {
-
-                return chunks[1];
+                return strip(chunks[1]);
             }
         }
     }

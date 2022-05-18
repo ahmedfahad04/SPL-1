@@ -62,6 +62,7 @@ int porcessSingleCommand(char *command)
 
     tokens = str_tokenize(command, ' ');
     filtered_tokens = checkForAliasing(tokens);
+    // filtered_tokens = checkForWildCards(filtered_tokens);
 
     if (strcmp(filtered_tokens[0], "exit"))
     {
