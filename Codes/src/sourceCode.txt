@@ -1,0 +1,15 @@
+colorManagement.cpp
+commandAliasing.cpp
+commandAutoCompletion.cpp
+execution.cpp
+historyManagement.cpp
+implementation.cpp
+main.cpp
+Makefile
+obj
+prompt.cpp
+run
+shell.h
+slsh.cpp
+sourceCode.txt
+suggestingCMDs.cpp

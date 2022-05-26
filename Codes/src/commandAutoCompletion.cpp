@@ -118,11 +118,6 @@ void frequencyCalculator(char *command, FILE *save)
 
         chunks = str_tokenize(line, ' ');
         simplecmd = chunks[0];
-        // will handle case of ./run -> commands
-
-
-        // puts(strip(simplecmd[0]));
-        // printf(">> %s\n", command);
 
         if (strcmp(strcpy(command), strip(simplecmd)))
         {

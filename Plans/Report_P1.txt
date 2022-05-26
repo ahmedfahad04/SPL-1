@@ -1,0 +1,22 @@
+• Shell Syntax	  		What your input means to the shell.
+	> Shell Operations
+	1. Read User Input
+	2. Breaks into operator and Aliasing is performed.
+	3. Token Parsing
+		* Simple Commands
+		* Pipeline
+	4. Shell Expansions
+		* Tilde Expansion
+		* File Name Expansion (Using WildCard)
+	5. Perform Command Redirection
+	6. Execute the Commands
+	7. Wait for Exit status
+	
+	
+• Shell Commands	  	The types of commands you can use.
+• Shell Functions	  	Grouping commands by name.
+• Shell Parameters	  	How the shell stores values.
+• Shell Expansions	  	How Bash expands parameters and the various expansions available.
+• Redirections	  		A way to control where input and output go.
+• Executing Commands		What happens when you run a command.
+• Shell Scripts	[X]  		Executing files of shell commands. 

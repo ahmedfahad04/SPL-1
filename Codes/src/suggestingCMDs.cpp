@@ -250,9 +250,7 @@ char *AutoCommandCompletion(int flag, char *args)
     int i = 0, cmdID = 0;
 
     BKTreeGeneration(args);
-    // printf("CMD: %s\n", args);
 
-    // ==> Will start from HERE
     struct cmdFreq freq[100];
 
     if ((fp = fopen(".tempfqr", "a")) == NULL)
@@ -260,15 +258,10 @@ char *AutoCommandCompletion(int flag, char *args)
         puts("Failed to open .tempfqr file");
     }
 
-    // printf("ROOTWORD: %s\n", rootWord);
-    // printf("FLAG: %d\n", flag);
     printTree(root, rootWord, fp, cmdID, flag);
-
-    // puts("SECOND");
 
     char *CMD = (char *)malloc(sizeof(char) * 500);
     getSuggestedCommand(args, CMD, cmdID);
-    //puts(CMD);
     
 
     fclose(fp);

@@ -43,7 +43,6 @@ int historySerialLocator()
             }
         }
 
-        // printf("CUR: %d\n", serial);
         fclose(fp);
         return serial;
     }
@@ -68,7 +67,7 @@ void writeHistory(int size, struct history ht[])
 char *readHistory(int order)
 {
 
-    FILE *fp = fopen(historyFileName, "r"); ///~/Desktop/SPL-1.2/Coding Segment/src/.history
+    FILE *fp = fopen(historyFileName, "r");
 
     char *line = NULL;
     size_t len = 0;

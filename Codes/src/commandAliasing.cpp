@@ -5,10 +5,7 @@
 
 void setAlias(char *cmd, char *alias)
 {
-    // error checking....
-    // ==> also group command aliasing
-    // need to check if user given name already exists or not
-    // first create the file if it's not been created
+
     char *aliasfp = strcatt(strcatt("/home/", userName()), "/.slsh_alias");
 
     // printf("ALIAS: %s\n", aliasfp);
@@ -165,9 +162,9 @@ char **checkForAliasing(char **data)
     }
 
     newargs[id] = NULL;
-    for(int i=0; i<id; i++){
-        printf("ARG: %s\n", newargs[i]);
-    }
+    // for(int i=0; i<id; i++){
+    //     printf("ARG: %s\n", newargs[i]);
+    // }
 
     char **ans;
     

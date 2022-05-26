@@ -39,3 +39,8 @@ clean:
 	
 line:
 	wc -l *.*
+
+
+
+# disable all warnings
+CXXFLAGS += -w

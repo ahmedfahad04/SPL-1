@@ -267,7 +267,7 @@ void execute(char **args)
         
     }
 
-// ==> will start from here
+    // ==> will start from here
     // store process id
     // check if the process if child or parent
     // if it's the child process run execv()
@@ -284,16 +284,11 @@ void execute(char **args)
         {
             if (execvp(args[0], args) == -1)
             {
-                //printf("NEWF: %d\n", flag);
                 if (flag)
                     char *CMD = AutoCommandCompletion(flag, args[0]);
                 else
                     commandSuggestion(flag, args);
 
-                // puts(CMD);
-
-                // mergeAndExecute(CMD, args);
-                // perror("Execution failed\n");
             }
             exit(0);
         }
@@ -306,7 +301,6 @@ void execute(char **args)
         else
         {
             status = waitpid(process_id, NULL, 0);
-            // printf("It's a parent proecss\n");
         }
     }
 }

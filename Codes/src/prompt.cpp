@@ -52,23 +52,25 @@ void prompt()
     printf("%s\u001b[1m%s%s$ %s\u001b[1m%s", RESET, hostFontColor, getCurrentDirectory(), hostFontColor, RESET);
 }
 
-char *take_user_input(char *C_Code, char *colorType, int fsl, FILE *fp)
+char *take_user_input(char *colorcolorCode, char *colorType, int fsl, FILE *fp)
 {
-    char *buffer, *splitted_words, *path;
+    char *buffer, *path;
     char ch;
-    int location = 0, buffer_size = BUFFER_SIZE;
-    // FILE *fp = fopen(".history", "a+");
+    int location = 0, buffer_size = 1024;   // BUFFER_SIZE macro was the issue i guess
 
     // dynamically allocate memory to store the user prompt
     buffer = (char *)malloc(sizeof(char) * buffer_size);
-    splitted_words = (char *)malloc(sizeof(char) * buffer_size);
 
-    if (strlen(C_Code) != 0)
+    // check if new color colorCode is applied or not
+    if (strlen(colorcolorCode) != 0)
     {
-        promptWithColors(C_Code, colorType);
+        promptWithColors(colorcolorCode, colorType);
     }
     else
         prompt();
+
+    int quoteStart = 0;
+    char *temp;
 
     while (1)
     {
@@ -76,15 +78,15 @@ char *take_user_input(char *C_Code, char *colorType, int fsl, FILE *fp)
         if (ch == '\r')
             continue;
 
-        if (location > buffer_size)
+        if (location >= buffer_size)
         {
             buffer_size += 1024;
             buffer = (char *)realloc(buffer, buffer_size);
-            splitted_words = (char *)realloc(buffer, buffer_size);
         }
 
         if ((int)ch == EOF or ch == '\n' or buffer == NULL)
         {
+
             // this portion is for taking multiline input delimited by '\'
             int tmploc = location - 1;
 
@@ -103,8 +105,6 @@ char *take_user_input(char *C_Code, char *colorType, int fsl, FILE *fp)
         location++;
     }
 
-    // splitted_words = splitstr(buffer);
-    // return splitted_words;
     return buffer;
 }
 
