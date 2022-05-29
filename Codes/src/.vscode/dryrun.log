@@ -1,0 +1,17 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/home/ahmedfahad/Documents/Fahad_SPL1/Codes/src'
+g++ -c main.cpp 2> temp
+g++ -c prompt.cpp 2> temp
+g++ -c implementation.cpp 2> temp
+g++ -c execution.cpp 2> temp
+g++ -c commandAliasing.cpp 2> temp
+g++ -c suggestingCMDs.cpp 2> temp
+g++ -c slsh.cpp 2> temp
+g++ -c colorManagement.cpp 2> temp
+ 
+g++ -c historyManagement.cpp 2> temp
+g++ -c commandAutoCompletion.cpp 2> temp
+g++ -o run main.o prompt.o commandAliasing.o implementation.o execution.o suggestingCMDs.o slsh.o colorManagement.o historyManagement.o commandAutoCompletion.o -pthread 2> temp
+mv *.o obj
+make: Leaving directory '/home/ahmedfahad/Documents/Fahad_SPL1/Codes/src'
+ 

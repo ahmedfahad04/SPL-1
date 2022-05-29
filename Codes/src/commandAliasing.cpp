@@ -56,8 +56,8 @@ void aliasCommands(char **words)
         return;
     }
 
-    // if (strcontain(words[1], "="))
-    // {
+    if (strcontain(words[1], "="))
+    {
         if (strcmp(words[0], "alias"))
         {
             refactor = str_tokenize(words[1], '=');
@@ -65,10 +65,10 @@ void aliasCommands(char **words)
             puts(refactor[1]); // list
             setAlias(refactor[0], refactor[1]);
         }
-    // } else {
-    //     puts("Wrong command formate.\n[alias command=aliasName]");
-    //     return;
-    // }
+    } else {
+        puts("Wrong command formate.\n[alias command=aliasName]");
+        return;
+    }
 }
 
 char *removeQuotes(char *str)

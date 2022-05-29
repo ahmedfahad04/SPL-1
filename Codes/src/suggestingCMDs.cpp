@@ -182,8 +182,6 @@ void printTree(struct node *head, char *keyword, FILE *fp, int &id, int flag)
 
         if (head->data <= 3 && (strlen(head->word) >= strlen(keyword)))
         {
-            // printf("***FLAG: %d", flag);
-
             if (flag)
             {
                 frequencyCalculator(head->word, fp);
@@ -226,8 +224,6 @@ void getSuggestedCommand(char *currentCommand, char *&cmd, int size)
             printf("slsh: Correct \'%s%s%s\' to \'%s%s%s\'\n", FONT_RED, currentCommand, RESET, FONT_GRN, cmd, RESET);
 
         }
-
-        //printf("CMD: %s, CNT: %d\n", strcpy(suggestions[i].cmd), suggestions[i].freq);
     }
 }
 

@@ -58,7 +58,7 @@ void updateCmdFrequency()
         *line = NULL;
         ssize_t read;
 
-        // first read the cmd feq file to get the current freq of specific command "CMD"
+        // first read the cmdfeq file to get the current freq of specific command "CMD"
         while ((read = getline(&line, &len, currFrq)) != -1)
         {
             chunks = (char **)malloc(sizeof(char) * 100);
@@ -99,11 +99,15 @@ void frequencyCalculator(char *command, FILE *save)
 {
 
     FILE *fp;
+    char *myuserName = strcatt("/home/", userName());
+    char *file_destination = strcatt(myuserName, "/.bash_history");
+
+    // printf("PATH: %s\n", file_destination);
 
     // ==> becareful about file path name
-    if((fp = fopen("/home/ahmedfahad/.bash_history", "r")) == NULL){
+    if((fp = fopen(file_destination, "r")) == NULL){
         printf("Failed to open history file");
-    }
+    } 
 
 
     char *line = NULL;
@@ -127,7 +131,6 @@ void frequencyCalculator(char *command, FILE *save)
 
     fclose(fp);
 
-    // need to think do we need this counter condition??
     if(counter > 0) fprintf(save, "%d %s\n", counter, strcpy(command));
 }
 
