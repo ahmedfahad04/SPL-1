@@ -351,8 +351,8 @@ int main()
 
     // parsing ends.....
 
-    printf("STDOUT: %s\n", command.infile);
-    printf("STDIN: %s\n", command.outfile);
+    printf("STDIN: %s\n", command.infile);
+    printf("STDOUT: %s\n", command.outfile);
     printf("SIZE: %d\n", size);
 
     pid_t pid[100];

@@ -3,7 +3,6 @@
 #include <thread>
 #include "shell.h"
 
-
 int processPipelinedCommand(char *command)
 {
 
@@ -118,12 +117,11 @@ void eventLoop(char *colorFlag, char *colorType)
 
     do
     {
-
         dup2(saveInputFileDescriptor, STDIN_FILENO);
         dup2(saveOutputFileDescriptor, STDOUT_FILENO);
 
         commandLine = takeUserInput(colorFlag, colorType);
-        commandLine = strip(commandLine);
+        commandLine = strip(commandLine); // remove redundant white space/newline
 
         if (strlen(commandLine) != 0)
         {

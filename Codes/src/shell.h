@@ -41,7 +41,6 @@
 #define BG_DARK_CYN "\u001b[46m;1m"
 #define BG_DARK_WHT "\u001b[47m;1m"
 
-
 // BK TREE NODE
 struct node
 {
@@ -57,10 +56,8 @@ struct ShellCommands
     char *simpleCommand[100];
     char *infile;
     char *outfile;
-    char *background;
     char size = 0;
 };
-void executenew(int size, struct ShellCommands command);
 
 // COMMAND AUTOCOMPLETION
 struct cmdFreq
@@ -76,7 +73,7 @@ void showValue(char *value);
 void updateCmdFrequency();
 int count(char *data[], char *info, int size);
 void commandSuggestion(int flag, char **args);
-char * AutoCommandCompletion(int flag, char *args);
+char *AutoCommandCompletion(int flag, char *args);
 
 // HISTORY
 struct history
@@ -110,7 +107,7 @@ char *strcatt(const char *with, const char *str);
 char *strreplace(const char *info, const char *with, const char *str);
 bool strcontain(const char *data, const char *substr);
 char **removeWhiteSpace(char **raw_data);
-void PieTable(char *neddle, int neddle_len, int *LPS);
+void prefixTable(char *neddle, int neddle_len, int *LPS);
 int strsubstr(char *neddle, char *heystack);
 char **strsplit(char *find, char *text);
 char *strip(char *word);
@@ -128,7 +125,6 @@ char *current_directory();
 char *hostName();
 char *userName();
 void execute(char **args);
-bool isBuiltInCmd(char *cmd);
 char *getCurrentDirectory();
 void BKTreeGeneration(char *cmd);
 void findExeFileName(char *cmd);

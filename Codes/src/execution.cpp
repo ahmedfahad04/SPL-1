@@ -1,5 +1,3 @@
-#include <sys/socket.h>
-#include <thread>
 #include <fcntl.h>
 #include <unistd.h>
 #include <stdlib.h>
@@ -217,24 +215,6 @@ char *userName()
     return user;
 }
 
-bool isBuiltInCmd(char *cmd)
-{
-
-    bool status = 0;
-
-    if (strcmp(cmd, "cd"))
-    {
-        status = 1;
-    }
-
-    else
-    {
-        status = 0;
-    }
-
-    return status;
-}
-
 void execute(char **args)
 {
 
@@ -393,10 +373,10 @@ void executePipelinedCommands(int size, char *simpleCMD[], struct ShellCommands 
 
                 if (execvp(cmd[0], cmd) == -1)
                 {
-                    printf("Execution failed..#B: %d", i);
+                    printf("Execution failed..#first: %d", i);
                 }
             }
-            // waitpid(pid[i], NULL, 0);
+            
         }
 
         else if (i == size - 1)
@@ -415,7 +395,7 @@ void executePipelinedCommands(int size, char *simpleCMD[], struct ShellCommands 
 
                 if (execvp(cmd[0], cmd) == -1)
                 {
-                    printf("Execution failed..#A: %d", i);
+                    printf("Execution failed..#Last: %d", i);
                 }
             }
 
@@ -453,11 +433,11 @@ void executePipelinedCommands(int size, char *simpleCMD[], struct ShellCommands 
 
                 if (execvp(cmd[0], cmd) == -1)
                 {
-                    printf("Execution failed..#C: %d", i);
+                    printf("Execution failed..#Middle: %d", i);
                 }
             }
 
-            // erpor ar fd er kaj nai tai etake ekhanei off korte hobe
+            // fd should be stopped here; otherwise it'll invoke to user keep the stdin / stdout open
             close(fd[i - 1][1]);
             close(fd[i - 1][0]);
             waitpid(pid[i], NULL, 0);

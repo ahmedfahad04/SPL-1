@@ -8,7 +8,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Mon May 30 05:23:28 2022
+# Make data base, printed on Mon May 30 09:57:50 2022
 
 # Variables
 
@@ -25,7 +25,7 @@ SNAP_INSTANCE_KEY =
 # environment
 GJS_DEBUG_OUTPUT = stderr
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-082d9e1f-2c77-47c3-bc89-c3e447371778.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-6d59cd15-793b-4398-aae7-2ea732bb5fd9.sock
 # environment
 VSCODE_CWD = /home/ahmedfahad
 # default
@@ -43,7 +43,7 @@ VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # default
 .VARIABLES := 
 # environment
-PWD = /home/ahmedfahad/Documents/Fahad_SPL1/Codes/src
+PWD = /home/ahmedfahad/Documents/SPLs/Fahad_SPL1/Codes/src
 # automatic
 %D = $(patsubst %/,%,$(dir $%))
 # environment
@@ -59,7 +59,7 @@ VSCODE_CODE_CACHE_PATH = /home/ahmedfahad/.config/Code/CachedData/c3511e6c69bb39
 # environment
 LANG = C
 # environment
-XAUTHORITY = /run/user/1000/.mutter-Xwaylandauth.82C2M1
+XAUTHORITY = /run/user/1000/.mutter-Xwaylandauth.8SP7M1
 # default
 .LOADED := 
 # default
@@ -67,7 +67,7 @@ XAUTHORITY = /run/user/1000/.mutter-Xwaylandauth.82C2M1
 # makefile
 MAKEFLAGS = pqrR
 # makefile
-CURDIR := /home/ahmedfahad/Documents/Fahad_SPL1/Codes/src
+CURDIR := /home/ahmedfahad/Documents/SPLs/Fahad_SPL1/Codes/src
 # environment
 VSCODE_PIPE_LOGGING = true
 # environment
@@ -99,7 +99,7 @@ SNAP_REEXEC =
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 2966
+VSCODE_PID = 10551
 # environment
 XDG_SESSION_TYPE = wayland
 # automatic
@@ -107,7 +107,7 @@ XDG_SESSION_TYPE = wayland
 # environment
 BAMF_DESKTOP_FILE_HINT = /var/lib/snapd/desktop/applications/code_code.desktop
 # environment
-SESSION_MANAGER = local/dell-Inspiron-5505:@/tmp/.ICE-unix/1689,unix/dell-Inspiron-5505:/tmp/.ICE-unix/1689
+SESSION_MANAGER = local/dell-Inspiron-5505:@/tmp/.ICE-unix/1663,unix/dell-Inspiron-5505:/tmp/.ICE-unix/1663
 # automatic
 *F = $(notdir $*)
 # environment
@@ -151,7 +151,7 @@ SNAP_USER_COMMON = /home/ahmedfahad/snap/code/common
 # environment
 SNAP = /snap/code/97
 # environment
-INVOCATION_ID = 3632921c0fcf46239acc383f9298d2a1
+INVOCATION_ID = 11b3965de29742d2826aa5ab8bcdd019
 # environment
 SNAP_REVISION = 97
 # environment
@@ -201,9 +201,9 @@ SNAP_DATA = /var/snap/code/97
 # environment
 SNAP_CONTEXT = CYsl8mgEvAP9Cl6fS0_h4kUibDTxUjQyrE-akb8cc2Fl1qg2VJaV
 # environment
-MANAGERPID = 1534
+MANAGERPID = 1506
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 2912
+GIO_LAUNCHED_DESKTOP_FILE_PID = 10502
 # environment
 _ = /snap/code/97/usr/share/code/code
 # environment
@@ -211,7 +211,7 @@ XDG_RUNTIME_DIR = /run/user/1000
 # environment
 GDK_PIXBUF_MODULE_FILE = /home/ahmedfahad/snap/code/common/.cache/gdk-pixbuf-loaders.cache
 # environment
-JOURNAL_STREAM = 8:33407
+JOURNAL_STREAM = 8:38039
 # environment
 XDG_SESSION_CLASS = user
 # environment
@@ -265,9 +265,9 @@ SNAP_LIBRARY_PATH = /var/lib/snapd/lib/gl:/var/lib/snapd/lib/gl32:/var/lib/snapd
 
 # Directories
 
-# . (device 66313, inode 4064952): 23 files, no impossibilities.
+# . (device 66313, inode 4064952): 24 files, no impossibilities.
 
-# 23 files, no impossibilities in 1 directories.
+# 24 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -282,6 +282,7 @@ suggestingCMDs.cpp:
 #  File has not been updated.
 
 # Not a target:
+ 
 prompt.cpp:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -296,7 +297,6 @@ implementation.cpp:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
- 
 #  Last modified 2022-05-29 18:31:26.642359293
 #  File has been updated.
 #  Successfully updated.
@@ -465,12 +465,12 @@ prompt.o: prompt.cpp shell.h
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 40 / storage = 480 B / avg = 12 B
-# current buf: size = 8162 B / used = 480 B / count = 40 / avg = 12 B
+# strcache buffers: 1 (0) / strings = 41 / storage = 480 B / avg = 11 B
+# current buf: size = 8162 B / used = 480 B / count = 41 / avg = 11 B
 
-# strcache performance: lookups = 83 / hit rate = 51%
+# strcache performance: lookups = 84 / hit rate = 51%
 # hash-table stats:
-# Load=40/8192=0%, Rehash=0, Collisions=0/83=0%
-# Finished Make data base on Mon May 30 05:23:28 2022
+# Load=41/8192=1%, Rehash=0, Collisions=0/84=0%
+# Finished Make data base on Mon May 30 09:57:50 2022
 
  

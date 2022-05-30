@@ -32,7 +32,6 @@ int historySerialLocator()
         int line_counter = 0;
         while ((read = getline(&line, &len, fp)) != -1)
         {
-            // char *data = (char *) malloc (sizeof(char) * 100);
             line_counter++;
         }
 

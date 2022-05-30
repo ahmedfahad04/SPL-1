@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void PieTable(char *neddle, int neddle_len, int *LPS)
+void prefixTable(char *neddle, int neddle_len, int *LPS)
 {
 
     int len = 0;
@@ -37,7 +37,7 @@ int strsubstr(char *neddle, char *heystack)
 
     int LPS[neddle_len];
 
-    PieTable(neddle, neddle_len, LPS);
+    prefixTable(neddle, neddle_len, LPS);
     int i = 0;
     int j = 0;
     while (i < heystack_len)

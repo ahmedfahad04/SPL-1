@@ -171,12 +171,13 @@ bool strcontain(const char *data, const char *substr)
     return flag;
 }
 
-void PieTable(char *neddle, int neddle_len, int *LPS)
+void prefixTable(char *neddle, int neddle_len, int *LPS)
 {
 
     int len = 0;
     LPS[0] = 0;
     int i = 1;
+    
     while (i < neddle_len)
     {
         if (neddle[i] == neddle[len])
@@ -208,29 +209,31 @@ int strsubstr(char *neddle, char *heystack)
 
     int LPS[neddle_len];
 
-    PieTable(neddle, neddle_len, LPS);
-    int i = 0;
-    int j = 0;
+    prefixTable(neddle, neddle_len, LPS);
+    int i = 0;  // denote string length
+    int j = 0;  // denote pattern length
 
     while (i < heystack_len)
     {
+        // current character match
         if (neddle[j] == heystack[i])
         {
             j++;
             i++;
         }
 
+        // match found
         if (j == neddle_len)
         {
             return (i - j);
         }
 
+
         else if (i < heystack_len && neddle[j] != heystack[i])
         {
-
-            if (j != 0)
+            if (j != 0)         
                 j = LPS[j - 1];
-            else
+            else                // means starting of needle
                 i = i + 1;
         }
     }
@@ -420,7 +423,6 @@ struct ShellCommands parse(char *data)
     command.outfile = NULL;
     command.infile = NULL;
 
-
     // pipelined command
     if (strcontain(data, "|"))
     {
@@ -429,13 +431,10 @@ struct ShellCommands parse(char *data)
     else
         *cmd = data; // only a single command
 
-
-
     while (*cmd)
     {
         if (strcontain(*cmd, ">") or strcontain(*cmd, "<"))
         {
-
             // cat > infile < outfile
             // cat > infile  ------------------ Output redirection
             if (strcontain(*cmd, "<"))

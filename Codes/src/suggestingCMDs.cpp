@@ -9,7 +9,7 @@
 #define MAXSIZE 10005
 using namespace std;
 
-int c[MAXSIZE][MAXSIZE], b[MAXSIZE][MAXSIZE], tolerance = -1;
+int c[MAXSIZE][MAXSIZE], b[MAXSIZE][MAXSIZE];
 int m, n, totalCommandCount = 0;
 FILE *fp;
 struct cmdFreq suggestions[1000];
@@ -260,13 +260,14 @@ void BKTreeGeneration(char *allArgs)
 
     while (*temp)
     {
-
-        m = strlen(*temp) + 1;
-        n = strlen(rootWord) + 1;
+        m = strlen(*temp) + 1;    // each new words
+        n = strlen(rootWord) + 1; // root word
 
         EditDistance(*temp, rootWord, m, n);
 
         int EdgeValue = c[m - 1][n - 1];
+
+        // will consider those string that have edit distance upto 3
         if (EdgeValue <= 3 or (m == n))
             addNode(root, EdgeValue, *temp);
 
