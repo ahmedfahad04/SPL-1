@@ -27,7 +27,7 @@ char **readCMDOutput(char *cmd)
     char *line = (char *)malloc(sizeof(char) * 1024);
     char **wordArr = (char **)malloc(sizeof(char) * buffer_size);
 
-    p = popen(cmd, "r"); /* Unix */
+    p = popen(cmd, "r");
 
     if (p == NULL)
     {
@@ -94,29 +94,22 @@ void EditDistance(char *x, char *y, int row, int col)
                 int m1 = min(subs, del);
                 int minimum = min(m1, insert);
 
-                // cout << x[i] << " " << y[j] << endl;
                 if (minimum == subs)
                 {
-                    // min = substitute
                     c[i][j] = c[i - 1][j - 1] + 1;
                     b[i][j] = SUBSTITUE;
-                    // cout << "SUBSTITUTE\n";
                 }
 
                 else if (minimum == c[i][j - 1])
                 {
-                    // min = insert
                     c[i][j] = c[i][j - 1] + 1;
                     b[i][j] = INSERT;
-                    // cout << "INSERT\n";
                 }
 
                 else
                 {
-                    // min = del
                     c[i][j] = c[i - 1][j] + 1;
                     b[i][j] = DELETE;
-                    // cout << "DEL\n";
                 }
             }
         }
@@ -139,7 +132,8 @@ void addNode(struct node *parent, int value, char *info)
 {
 
     if (value <= parent->data)
-    { // left node
+    {
+        // left node
         if (parent->left == NULL)
         {
             struct node *leftnode = createNode(value, info);
@@ -176,35 +170,27 @@ void printTree(struct node *head, char *keyword, FILE *fp, int &id, int flag)
 
     else
     {
-
         printTree(head->left, keyword, fp, id, flag);
-
 
         if (head->data <= 3 && (strlen(head->word) >= strlen(keyword)))
         {
             if (flag)
             {
                 frequencyCalculator(head->word, fp);
-                updateCmdFrequency();    // ==> here is the issue
+                updateCmdFrequency();
                 int status = generateAutoCommand(head->word);
 
                 if (status)
                 {
-
-                    // printf("    command -> %s", head->word);
-                    // showValue(head->word);
                     suggestions[id].cmd = head->word;
                     suggestions[id++].freq = status;
-
                 }
             }
             else
             {
-                // ==> changes here
                 printf("    command -> %s", head->word);
             }
         }
-
 
         printTree(head->right, keyword, fp, id, flag);
     }
@@ -222,7 +208,6 @@ void getSuggestedCommand(char *currentCommand, char *&cmd, int size)
             maxcnt = cnt;
             cmd = strcpy(suggestions[i].cmd);
             printf("slsh: Correct \'%s%s%s\' to \'%s%s%s\'\n", FONT_RED, currentCommand, RESET, FONT_GRN, cmd, RESET);
-
         }
     }
 }
@@ -258,7 +243,6 @@ char *AutoCommandCompletion(int flag, char *args)
 
     char *CMD = (char *)malloc(sizeof(char) * 500);
     getSuggestedCommand(args, CMD, cmdID);
-    
 
     fclose(fp);
 
@@ -268,9 +252,7 @@ char *AutoCommandCompletion(int flag, char *args)
 void BKTreeGeneration(char *allArgs)
 {
 
-    // puts("INSIDE BK TREE");
     rootWord = allArgs;
-
     root = createNode(10, rootWord); // root value
 
     char **allCMDs = readCMDOutput("ls /usr/bin");
@@ -290,12 +272,11 @@ void BKTreeGeneration(char *allArgs)
 
         temp++;
     }
-
-    // puts(rootWord);
 }
 
 void findExeFileName(char *cmd)
 {
+    // used in apropos command
     printf("Executable file(s) of \"%s\" are: \n", cmd);
     int flag = -1;
 
@@ -308,13 +289,11 @@ void findExeFileName(char *cmd)
 
     while (*exeFilePath)
     {
-
+        // KMP Algorithm
         flag = strsubstr(cmd, *exeFilePath);
 
         if (flag >= 0)
         {
-
-
             char *newword = strip(*exeFilePath);
 
             printf("%s", *exeFilePath);
@@ -324,5 +303,6 @@ void findExeFileName(char *cmd)
         exeFilePath++;
     }
 
-    if(flag == -1) puts("slsh: No executabale file found!!");
+    if (flag == -1)
+        puts("slsh: No executabale file found!!");
 }

@@ -8,7 +8,6 @@ g++ -c commandAliasing.cpp 2> temp
 g++ -c suggestingCMDs.cpp 2> temp
 g++ -c slsh.cpp 2> temp
 g++ -c colorManagement.cpp 2> temp
- 
 g++ -c historyManagement.cpp 2> temp
 g++ -c commandAutoCompletion.cpp 2> temp
 g++ -o run main.o prompt.o commandAliasing.o implementation.o execution.o suggestingCMDs.o slsh.o colorManagement.o historyManagement.o commandAutoCompletion.o -pthread 2> temp

@@ -33,7 +33,7 @@ void updateCmdFrequency()
     while ((read1 = getline(&line, &len, currFrq)) != -1)
     {
         chunks = (char **)malloc(sizeof(char) * 100);
-        chunks = str_tokenize(line, ' ');
+        chunks = strTokenize(line, ' ');
 
         int isExist = count(distinctCMD, chunks[1], dsize);
 
@@ -51,9 +51,6 @@ void updateCmdFrequency()
     // test run
     for (int i = 0; i < dsize; i++)
     {
-
-        // printf("Distinct CMD: %s, CNT: %d\n", distinctCMD[i], distinctCounter[i]);
-
         len = 0;
         *line = NULL;
         ssize_t read;
@@ -62,17 +59,14 @@ void updateCmdFrequency()
         while ((read = getline(&line, &len, currFrq)) != -1)
         {
             chunks = (char **)malloc(sizeof(char) * 100);
-            chunks = str_tokenize(line, ' ');
-
-            // puts(chunks[1]);
-            // puts(chunks[0]);
+            chunks = strTokenize(line, ' ');
 
             if (strcmp(chunks[1], strcpy(distinctCMD[i])))
             {
                 int cnt = atoi(chunks[0]);
                 distinctCounter[i] += cnt;
             }
-            else // no need
+            else
             {
                 unMatchedCMD[id].cmd = chunks[1];
                 unMatchedCMD[id++].freq = atoi(chunks[0]);
@@ -84,9 +78,6 @@ void updateCmdFrequency()
             fprintf(temp, "%d %s\n", distinctCounter[i], strcpy(distinctCMD[i]));
         }
     }
-
-    // also add the new freq
-    // newCounter += newFreq;
 
     // temp close both file
     fclose(currFrq);
@@ -102,9 +93,6 @@ void frequencyCalculator(char *command, FILE *save)
     char *myuserName = strcatt("/home/", userName());
     char *file_destination = strcatt(myuserName, "/.bash_history");
 
-    // printf("PATH: %s\n", file_destination);
-
-    // ==> becareful about file path name
     if((fp = fopen(file_destination, "r")) == NULL){
         printf("Failed to open history file");
     } 
@@ -120,7 +108,7 @@ void frequencyCalculator(char *command, FILE *save)
         char **chunks = (char **)malloc(sizeof(char) * 100);
         char *simplecmd = (char *)malloc(sizeof(char) * 100);
 
-        chunks = str_tokenize(line, ' ');
+        chunks = strTokenize(line, ' ');
         simplecmd = chunks[0];
 
         if (strcmp(strcpy(command), strip(simplecmd)))
@@ -164,7 +152,7 @@ int generateAutoCommand(char *cmd)
     while ((read = getline(&line, &len, fp)) != -1)
     {
         char **chunks = (char **)malloc(sizeof(char) * 100);
-        chunks = str_tokenize(line, ' ');
+        chunks = strTokenize(line, ' ');
 
         if (strcmp(strcpy(cmd), strip(chunks[1])))
         {
@@ -176,37 +164,3 @@ int generateAutoCommand(char *cmd)
 
     return 0;
 }
-
-void mergeAndExecute(char *command, char **data)
-{
-
-
-    puts("INSIDE MERGE");
-    puts(command);
-
-    char *newargs[500];
-    int id = 0;
-
-    while (*data)
-    {
-        if (id == 0)
-        {
-            newargs[id++] = command;
-        }
-        else
-        {
-            newargs[id++] = *data;
-        }
-
-        puts(*data);
-        data++;
-    }
-
-    // free(newargs);
-    newargs[id] = NULL;
-
-    execute(newargs);
-}
-
-
-

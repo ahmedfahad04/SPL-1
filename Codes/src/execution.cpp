@@ -12,12 +12,11 @@
 
 int flag = 0;
 
-
-void cmd_execute(char **args)
+void cmdExecute(char **args)
 {
     // temporarily I'll send the pure text
     // in future I'll send the tokenize text for execution
-    // cmd_execute(commandLine);
+    // cmdExecute(commandLine);
 
     char *cmd = args[0];
 
@@ -30,6 +29,23 @@ void cmd_execute(char **args)
     {
 
         findExeFileName(args[1]);
+    }
+
+    if (strcmp(cmd, "history"))
+    {
+
+        if (strlen2(args) > 1)
+        {
+            if (strcmp(args[1], "-c"))
+            {
+                clearHistory();
+            }
+        }
+
+        else
+        {
+            readHistory();
+        }
     }
 
     if (strcmp(cmd, "color"))
@@ -179,7 +195,7 @@ char *userName()
     // read - holds the length of the line
     while ((read = getline(&line, &length, fp)) != -1)
     {
-        char **chunk = str_tokenize(line, ':');
+        char **chunk = strTokenize(line, ':');
 
         if (chunk[5] != 0)
         {
@@ -228,7 +244,7 @@ void execute(char **args)
     if (strcmp(command, "cd"))
     {
 
-        cmd_execute(args);
+        cmdExecute(args);
     }
 
     else if (strcmp(command, "apropos"))
@@ -240,12 +256,12 @@ void execute(char **args)
             return;
         }
 
-        cmd_execute(args);
+        cmdExecute(args);
     }
 
     else if (strcmp(command, "color"))
     {
-        cmd_execute(args);
+        cmdExecute(args);
     }
 
     else if (strcmp(command, "alias"))
@@ -255,7 +271,7 @@ void execute(char **args)
 
     else if (strcmp(command, "history"))
     {
-        readHistory();
+        cmdExecute(args);
     }
 
     else if (strcmp(command, "autocomplete"))
@@ -264,7 +280,6 @@ void execute(char **args)
             flag = 1;
         else
             flag = 0;
-        
     }
 
     // ==> will start from here
@@ -274,7 +289,7 @@ void execute(char **args)
     // if it's parent process then wait for the child process to be terminated
     else
     {
-    
+
         pid_t status, process_id;
 
         process_id = fork();
@@ -288,7 +303,6 @@ void execute(char **args)
                     char *CMD = AutoCommandCompletion(flag, args[0]);
                 else
                     commandSuggestion(flag, args);
-
             }
             exit(0);
         }
@@ -316,12 +330,10 @@ void executePipelinedCommands(int size, char *simpleCMD[], struct ShellCommands 
     for (int i = 0; i < size; i++)
     {
         char *currCMD = strip(command.simpleCommand[i]);
-        char **cmd = str_tokenize(currCMD, ' ');
+        char **cmd = strTokenize(currCMD, ' ');
         cmd = checkForWildCards(cmd); // checking if any wildcard pattern is available or not
         cmd = checkForAliasing(cmd);
 
-        // ==X this is the breakpoint
-        // cmd = checkForAliasing(cmd);  // checking if any alias is available or not
         int fdout, file;
 
         // this is input redirection...

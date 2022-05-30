@@ -3,11 +3,6 @@
 #include <thread>
 #include "shell.h"
 
-void restart(int sig)
-{
-    puts("Start again");
-    eventLoop();
-}
 
 int processPipelinedCommand(char *command)
 {
@@ -25,19 +20,15 @@ int processPipelinedCommand(char *command)
         }
     }
 
-    // ==> will start from here
     if (flag)
     {
-        filtered_tokens = str_tokenize(command, '|');
-        // filtered_tokens = checkForAliasing(filtered_tokens);
+        filtered_tokens = strTokenize(command, '|');
 
         char *simpleCMD[100];
         int cmdCounter = 0;
 
         while (*filtered_tokens)
         {
-            // filtered_tokens = checkForWildCards(filtered_tokens);
-            // puts(*filtered_tokens);
             simpleCMD[cmdCounter++] = *filtered_tokens;
             filtered_tokens++;
         }
@@ -53,6 +44,9 @@ int processPipelinedCommand(char *command)
 int porcessSingleCommand(char *command)
 {
 
+    if (strlen(command) == 0)
+        return 1;
+
     char **tokens, **filtered_tokens;
 
     if (command[0] == '!')
@@ -60,7 +54,7 @@ int porcessSingleCommand(char *command)
         command = showParticularHistory(command);
     }
 
-    tokens = str_tokenize(command, ' ');
+    tokens = strTokenize(command, ' ');
     filtered_tokens = checkForAliasing(tokens);
     // filtered_tokens = checkForWildCards(filtered_tokens);
 
@@ -108,6 +102,7 @@ void eventLoopWithColors(char *cmd, char *type)
 void eventLoop(char *colorFlag, char *colorType)
 {
     fprintf(stdout, "\e[1;1H\e[2J");
+    intro();
 
     char *commandLine, **tokens, **filtered_tokens;
     commandLine = (char *)malloc(sizeof(char) * 500);
@@ -127,18 +122,25 @@ void eventLoop(char *colorFlag, char *colorType)
         dup2(saveInputFileDescriptor, STDIN_FILENO);
         dup2(saveOutputFileDescriptor, STDOUT_FILENO);
 
-        commandLine = take_user_input(colorFlag, colorType);
+        commandLine = takeUserInput(colorFlag, colorType);
         commandLine = strip(commandLine);
-        ht[historyCounter].cmd = commandLine;
-        ht[historyCounter++].order = historySerial++;
+
+        if (strlen(commandLine) != 0)
+        {
+            ht[historyCounter].cmd = commandLine;
+            ht[historyCounter++].order = historySerial++;
+        }
 
         // execute commands
         status = processPipelinedCommand(commandLine);
 
-        if (status == 0) 
-            status = porcessSingleCommand(commandLine); 
+        if (status == 0)
+            status = porcessSingleCommand(commandLine);
 
     } while (status != 0);
+
+    ht[historyCounter].cmd = "exit";
+    ht[historyCounter++].order = historySerial++;
 
     writeHistory(historyCounter, ht);
     return;

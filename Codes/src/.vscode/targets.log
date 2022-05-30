@@ -8,7 +8,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sun May 29 19:43:41 2022
+# Make data base, printed on Mon May 30 05:23:28 2022
 
 # Variables
 
@@ -25,7 +25,7 @@ SNAP_INSTANCE_KEY =
 # environment
 GJS_DEBUG_OUTPUT = stderr
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-511c4c7f-5d12-463f-81b6-938b9ba2db1a.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-082d9e1f-2c77-47c3-bc89-c3e447371778.sock
 # environment
 VSCODE_CWD = /home/ahmedfahad
 # default
@@ -59,7 +59,7 @@ VSCODE_CODE_CACHE_PATH = /home/ahmedfahad/.config/Code/CachedData/c3511e6c69bb39
 # environment
 LANG = C
 # environment
-XAUTHORITY = /run/user/1000/.mutter-Xwaylandauth.3KJEN1
+XAUTHORITY = /run/user/1000/.mutter-Xwaylandauth.82C2M1
 # default
 .LOADED := 
 # default
@@ -99,7 +99,7 @@ SNAP_REEXEC =
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 10030
+VSCODE_PID = 2966
 # environment
 XDG_SESSION_TYPE = wayland
 # automatic
@@ -107,7 +107,7 @@ XDG_SESSION_TYPE = wayland
 # environment
 BAMF_DESKTOP_FILE_HINT = /var/lib/snapd/desktop/applications/code_code.desktop
 # environment
-SESSION_MANAGER = local/dell-Inspiron-5505:@/tmp/.ICE-unix/1570,unix/dell-Inspiron-5505:/tmp/.ICE-unix/1570
+SESSION_MANAGER = local/dell-Inspiron-5505:@/tmp/.ICE-unix/1689,unix/dell-Inspiron-5505:/tmp/.ICE-unix/1689
 # automatic
 *F = $(notdir $*)
 # environment
@@ -151,7 +151,7 @@ SNAP_USER_COMMON = /home/ahmedfahad/snap/code/common
 # environment
 SNAP = /snap/code/97
 # environment
-INVOCATION_ID = c900867b55654e79bb0374bf7706d03d
+INVOCATION_ID = 3632921c0fcf46239acc383f9298d2a1
 # environment
 SNAP_REVISION = 97
 # environment
@@ -201,9 +201,9 @@ SNAP_DATA = /var/snap/code/97
 # environment
 SNAP_CONTEXT = CYsl8mgEvAP9Cl6fS0_h4kUibDTxUjQyrE-akb8cc2Fl1qg2VJaV
 # environment
-MANAGERPID = 1413
+MANAGERPID = 1534
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 9983
+GIO_LAUNCHED_DESKTOP_FILE_PID = 2912
 # environment
 _ = /snap/code/97/usr/share/code/code
 # environment
@@ -211,7 +211,7 @@ XDG_RUNTIME_DIR = /run/user/1000
 # environment
 GDK_PIXBUF_MODULE_FILE = /home/ahmedfahad/snap/code/common/.cache/gdk-pixbuf-loaders.cache
 # environment
-JOURNAL_STREAM = 8:35151
+JOURNAL_STREAM = 8:33407
 # environment
 XDG_SESSION_CLASS = user
 # environment
@@ -282,7 +282,6 @@ suggestingCMDs.cpp:
 #  File has not been updated.
 
 # Not a target:
- 
 prompt.cpp:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -297,6 +296,7 @@ implementation.cpp:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
+ 
 #  Last modified 2022-05-29 18:31:26.642359293
 #  File has been updated.
 #  Successfully updated.
@@ -471,6 +471,6 @@ prompt.o: prompt.cpp shell.h
 # strcache performance: lookups = 83 / hit rate = 51%
 # hash-table stats:
 # Load=40/8192=0%, Rehash=0, Collisions=0/83=0%
-# Finished Make data base on Sun May 29 19:43:41 2022
+# Finished Make data base on Mon May 30 05:23:28 2022
 
  

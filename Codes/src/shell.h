@@ -54,7 +54,7 @@ struct node
 // COMMAND STRUCT
 struct ShellCommands
 {
-    char *simpleCommand[50];
+    char *simpleCommand[100];
     char *infile;
     char *outfile;
     char *background;
@@ -75,7 +75,6 @@ int generateAutoCommand(char *cmd);
 void showValue(char *value);
 void updateCmdFrequency();
 int count(char *data[], char *info, int size);
-void mergeAndExecute(char *command, char **data);
 void commandSuggestion(int flag, char **args);
 char * AutoCommandCompletion(int flag, char *args);
 
@@ -89,6 +88,7 @@ int historySerialLocator();
 void writeHistory(int size, struct history ht[]);
 char *readHistory(int serial = -1);
 char *showParticularHistory(char *cmd);
+void clearHistory();
 
 // MAIN LOOP
 void eventLoop(char *code = "", char *type = "");
@@ -97,9 +97,8 @@ void eventLoopWithColors(char *ch = "", char *type = "");
 // COMMAND PROMPT
 void prompt();
 void promptWithColors(char *code, char *colorType);
-char *take_user_input(char *code = "", char *colorType = "", int fsl = 0, FILE *fp = NULL);
-char **str_tokenize(char *ch, char sep);
-void sig_handler(int signum);
+char *takeUserInput(char *code = "", char *colorType = "", int fsl = 0, FILE *fp = NULL);
+char **strTokenize(char *ch, char sep);
 
 // BASIC STRING OPERATIONS
 size_t strlen(const char *str);
@@ -115,15 +114,15 @@ void PieTable(char *neddle, int neddle_len, int *LPS);
 int strsubstr(char *neddle, char *heystack);
 char **strsplit(char *find, char *text);
 char *strip(char *word);
-char *showCode();
 char *selectBGColor(char *args);
 char *selectFGColor(char *args);
 char *numToStr(int num);
 void userManual();
 bool wildcardmatching(char *str, char *pat, int slen, int plen);
+void intro();
 
 // COMMAND EXECUTION
-void cmd_execute(char **args);
+void cmdExecute(char **args);
 void change_directory(char *path);
 char *current_directory();
 char *hostName();

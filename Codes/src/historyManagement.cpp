@@ -29,22 +29,15 @@ int historySerialLocator()
         ssize_t read;
         int serial = 0;
 
+        int line_counter = 0;
         while ((read = getline(&line, &len, fp)) != -1)
         {
-            char **chunks = (char **)malloc(sizeof(char) * 500);
-
-            chunks = str_tokenize(line, ': ');
-            if (strlen(chunks[1]) == 0)
-                continue;
-            else
-            {
-                serial = atoi(chunks[0]);
-                // printf("SL: %d\n", serial);
-            }
+            // char *data = (char *) malloc (sizeof(char) * 100);
+            line_counter++;
         }
 
         fclose(fp);
-        return serial;
+        return line_counter;
     }
 }
 
@@ -58,7 +51,7 @@ void writeHistory(int size, struct history ht[])
         if (ht[i].cmd[0] == '!')
             continue;
         else
-            fprintf(fhist, "%d: %s\n", ht[i].order, ht[i].cmd);
+            fprintf(fhist, "%s\n", ht[i].cmd);
     }
 
     fclose(fhist);
@@ -75,26 +68,27 @@ char *readHistory(int order)
     int serial = 0;
 
     if (order == -1)
-    {
+    {   
+        int cnt = 1;
         while ((read = getline(&line, &len, fp)) != -1)
         {
-            printf("%s", line);
+            printf("%d: %s",cnt, line);
+            cnt++;
         }
     }
     else
     {
         char *sl = numToStr(order);
         int i = 0;
+
+        int counter = 1;
         while ((read = getline(&line, &len, fp)) != -1)
         {
-
-            char **chunks = (char **)malloc(sizeof(char) * 100);
-            chunks = str_tokenize(line, ':');
-
-            if (strcmp(sl, chunks[0]))
+            if(counter == order)
             {
-                return strip(chunks[1]);
+                return strip(line);
             }
+            counter++;
         }
     }
 
@@ -114,4 +108,14 @@ char *showParticularHistory(char *input)
 
     char *ans = readHistory(num);
     return ans;
+}
+
+void clearHistory(){
+
+    if(remove(historyFileName) == 0){
+        puts("History cleared");
+    } else {
+        puts("History failed to be removed!");
+    }
+
 }

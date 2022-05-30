@@ -60,7 +60,7 @@ void aliasCommands(char **words)
     {
         if (strcmp(words[0], "alias"))
         {
-            refactor = str_tokenize(words[1], '=');
+            refactor = strTokenize(words[1], '=');
             puts(refactor[0]); // ls
             puts(refactor[1]); // list
             setAlias(refactor[0], refactor[1]);
@@ -122,7 +122,7 @@ char **checkForAliasing(char **data)
 
             while ((read = getline(&line, &len, f2)) != -1)
             {
-                chunks = str_tokenize(line, ' ');
+                chunks = strTokenize(line, ' ');
 
                 int wordLen = strlen2(chunks);
 

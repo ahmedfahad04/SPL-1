@@ -52,7 +52,7 @@ void prompt()
     printf("%s\u001b[1m%s%s$ %s\u001b[1m%s", RESET, hostFontColor, getCurrentDirectory(), hostFontColor, RESET);
 }
 
-char *take_user_input(char *colorcolorCode, char *colorType, int fsl, FILE *fp)
+char *takeUserInput(char *colorcolorCode, char *colorType, int fsl, FILE *fp)
 {
     char *buffer, *path;
     char ch;
@@ -86,7 +86,6 @@ char *take_user_input(char *colorcolorCode, char *colorType, int fsl, FILE *fp)
 
         if ((int)ch == EOF or ch == '\n' or buffer == NULL)
         {
-
             // this portion is for taking multiline input delimited by '\'
             int tmploc = location - 1;
 
@@ -135,7 +134,7 @@ char **removeWhiteSpace(char **raw_data)
     return words;
 }
 
-char **str_tokenize(char *ch, char sep)
+char **strTokenize(char *ch, char sep)
 {
 
     char *newstr = (char *)malloc(sizeof(char) * BUFFER_SIZE);
@@ -214,9 +213,9 @@ char *strip(char *word)
     for (int i = 0; i < strlen(word); i++)
     {
 
-        if (word[i] == ' ' and i == 0)
+        if ((word[i] == ' ' or word[i] == '\n') and i == 0)
             continue;
-        else if (word[i] == ' ' and i == strlen(word) - 1)
+        else if ((word[i] == ' ' or word[i] == '\n') and i == strlen(word) - 1)
             continue;
         else
             demo[id++] = word[i];

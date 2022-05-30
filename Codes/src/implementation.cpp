@@ -18,7 +18,6 @@ size_t strlen(const char *str)
 
 bool strcmp(const char *a, const char *b)
 {
-
     if (strlen(a) != strlen(b))
         return false;
     else
@@ -104,9 +103,6 @@ char *strreplace(const char *data, const char *with, const char *str)
     int id = 0, j = 0;
     for (int i = 0; i < strlen(data); i++)
     {
-
-        // cout << "D: " << data[i] << ", W: " << with[j] <<", I: " << i <<endl;
-
         if (data[i] == with[j])
         {
             if (start == -1)
@@ -251,7 +247,6 @@ char **strsplit(char *find, char *text)
 
     char **chunk = (char **)malloc(sizeof(char) * 1024);
     char *word = (char *)malloc(sizeof(char) * 1024);
-    // char *str2 = (char *)malloc(sizeof(char) * 1024);
 
     chunk[0] = find;
 
@@ -288,7 +283,6 @@ char *numToStr(int num)
     for (; j < i; j++)
     {
         str[j] = result[i - j - 1];
-        // printf("%c..\n", result[j]);
     }
 
     str[j] = '\0';
@@ -298,7 +292,6 @@ char *numToStr(int num)
 
 bool wildcardmatching(char *str, char *pat, int slen, int plen)
 {
-    // ==> need to check null character before . operator
     if (plen == 0)
     {
         if (plen == 0)
@@ -331,7 +324,6 @@ bool wildcardmatching(char *str, char *pat, int slen, int plen)
 
     for (int i = 1; i <= slen; i++)
     {
-        // if(str[i-1] == '.') continue;
         for (int j = 1; j <= plen; j++)
         {
 
@@ -360,7 +352,6 @@ char **checkForWildCards(char **data)
 
     while (*data)
     {
-        //printf("DATA: %s\n", *data);
         if (strcontain(*data, "*"))
         {
             char *args = (char *)malloc(sizeof(char) * 1024);
@@ -391,7 +382,7 @@ char **checkForWildCards(char **data)
 
             closedir(folder);
 
-            char **dirs = str_tokenize(args, ' ');
+            char **dirs = strTokenize(args, ' ');
             while (*dirs)
             {
                 if (strlen(*dirs) != 0)
@@ -414,15 +405,12 @@ char **checkForWildCards(char **data)
 
 void showValue(char *val)
 {
-
     prompt();
     printf("%s", val);
 }
 
 struct ShellCommands parse(char *data)
 {
-
-
     char **cmd = (char **)malloc(sizeof(char) * 1024);
     char **red = (char **)malloc(sizeof(char) * 1024);
 
@@ -436,7 +424,7 @@ struct ShellCommands parse(char *data)
     // pipelined command
     if (strcontain(data, "|"))
     {
-        cmd = str_tokenize(data, '|');
+        cmd = strTokenize(data, '|');
     }
     else
         *cmd = data; // only a single command
@@ -452,14 +440,14 @@ struct ShellCommands parse(char *data)
             // cat > infile  ------------------ Output redirection
             if (strcontain(*cmd, "<"))
             {
-                red = str_tokenize(*cmd, '<');
+                red = strTokenize(*cmd, '<');
                 char *p1 = strip(red[0]);
                 char *p2 = strip(red[1]);
 
                 // case 1 -------- echo hello < infile > outfile
                 if (strcontain(p2, ">"))
                 {
-                    red = str_tokenize(p2, '>');
+                    red = strTokenize(p2, '>');
                     command.infile = red[0];
                     command.outfile = red[1];
                 }
@@ -471,7 +459,7 @@ struct ShellCommands parse(char *data)
                 // case2 ---------- echo hello > infile < outfile
                 if (strcontain(p1, ">"))
                 {
-                    red = str_tokenize(p1, '>');
+                    red = strTokenize(p1, '>');
                     command.simpleCommand[size++] = red[0];
                     command.outfile = red[1];
                 }
@@ -483,14 +471,14 @@ struct ShellCommands parse(char *data)
 
             else if (strcontain(*cmd, ">"))
             {
-                red = str_tokenize(*cmd, '>');
+                red = strTokenize(*cmd, '>');
                 char *p1 = strip(red[0]);
                 char *p2 = strip(red[1]);
 
                 // case 1---------- echo hello > infile < outfile
                 if (strcontain(p2, "<"))
                 {
-                    red = str_tokenize(p2, '<');
+                    red = strTokenize(p2, '<');
                     command.outfile = red[0];
                     command.infile = red[1];
                 }
@@ -502,7 +490,7 @@ struct ShellCommands parse(char *data)
                 // case 2 -------- echo hello < infile > outfile
                 if (strcontain(p1, ">"))
                 {
-                    red = str_tokenize(p1, '>');
+                    red = strTokenize(p1, '>');
                     command.simpleCommand[size++] = red[0];
                     command.outfile = red[1];
                 }
@@ -527,11 +515,31 @@ struct ShellCommands parse(char *data)
 
     // parsing ends.....
 
-    // printf("STDOUT: %s\n", command.infile);
-    // printf("STDIN: %s\n", command.outfile);
-    // printf("SIZE: %d\n", size);
-
     command.size = size;
 
     return command;
+}
+
+void intro() {
+
+    FILE *fp = fopen("intro.txt", "r");
+
+    if (fp == NULL)
+    {
+        printf("Error opening file!\n");
+        exit(1);
+    }
+
+    char line[1024];
+
+    while (fgets(line, sizeof(line), fp))
+    {
+        printf("%s", line);
+    }
+
+    fclose(fp);
+
+    printf("\n");
+
+    return;
 }
