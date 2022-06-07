@@ -58,7 +58,6 @@ monotonous can be relinquished by using different variants of the terminal. Howe
 integrated the ANSI codes in the eventloop of the shell to manipulate the prompt and
 background color.
 
- <hr> 
 
 ## Shell History Management
 Our shell keeps track of user command history. Users can invoke specific commands using
