@@ -9,7 +9,6 @@ I will recreate a simple Linux Shell (Bash) that includes the basic shell operat
 * Shell History Management
 * Command Correction
 
- <hr> 
 
 ## Executing Shell Commands
 Initially, I will take the command prompt from
@@ -22,7 +21,6 @@ as stdout/stderr. Then they will again enter another command prompt and this pro
 continued till the user exits the program. And this process of Read-Evaluate-Print-Loop is known
 as REPL in terms of shell process execution.
 
- <hr> 
 
 ## Command Name Customization
 Users can assign short names or refactor shell commands through aliasing. By using aliases,
@@ -32,7 +30,6 @@ actual command. And the second part is the aliased command. We map these two com
 so that the actual command can be replaced with aliased command before execution is
 performed.
 
- <hr> 
 
 ## Pipelined Command Execution
 A pipeline is a collection of one or more instructions partitioned by the '|' control operator.
@@ -43,7 +40,6 @@ commands simultaneously. We have used the pipe function to link the input-output
 commands. And to represent the standard input-output stream we have used the file
 descriptors. These descriptors act as the placeholder for stdin, stdout, and stderr.
 
- <hr> 
 
 ## Input-Output Redirection
 Redirection allows us to change the standard input (stdin) and standard output (stdout) while
@@ -54,7 +50,6 @@ names as well as their relevant redirection sequence. This is the most challengi
 feature. Later on, after extracting the file names, we use the file descriptors. By replicating
 the descriptors, we redirect the stdin and stdout to the files mentioned in the shell command.
 
- <hr> 
 
 ## Terminal Color Customization
 Terminal color customization denotes changing the color of the system prompt and terminal
@@ -73,8 +68,7 @@ creates a new history file to store user-given commands. Later on, whenever the 
 starts, our shell search for the latest history serial number, so that the new history can be
 appended from that point. Also, these serial numbers are useful for invoking any particular
 command without typing it repeatedly.
-
- <hr> 
+ 
 
 ## Command Correction
 It is quite common that we type the wrong shell commands with or without the actual
@@ -83,8 +77,6 @@ command if he/she puts any wrong commands. This feature is quite useful for thos
 new to Linux and learning commands by trial and error. Initially, it will suggest to the user
 what can be the closest command to the given wrong command. In autocompletion mode,
 our shell will suggest the most accurate command by inspecting user command history.
-
- <hr> 
 
 ## Resources
 
