@@ -84,3 +84,13 @@ new to Linux and learning commands by trial and error. Initially, it will sugges
 what can be the closest command to the given wrong command. In autocompletion mode,
 our shell will suggest the most accurate command by inspecting user command history.
 
+ <hr> 
+
+## Resources
+
+* Shell builtins (https://www.gnu.org/software/bash/manual/html_node/Shell-Builtin-Commands.html)
+* Simple commands (https://www.gnu.org/software/bash/manual/html_node/Simple-Commands.html)
+* Basic Shell Features (https://www.gnu.org/software/bash/manual/html_node/Basic-Shell-Features.html)
+* Interactive and non interactive shell (https://www.gnu.org/software/bash/manual/html_node/What-is-an-Interactive-Shell_003f.html)
+* Shell operation (https://www.gnu.org/software/bash/manual/html_node/Shell-Operation.html)
+
