@@ -1,4 +1,4 @@
-## slsh:~# Simple Linux Shell
+### slsh:~# Simple Linux Shell
 I will recreate a simple Linux Shell (Bash) that includes the basic shell operations namely:
  
 * Executing simple shell commands
