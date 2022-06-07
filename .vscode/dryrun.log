@@ -1,0 +1,6 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/home/ahmedfahad/Documents/SPLs/Fahad_SPL1'
+make: Leaving directory '/home/ahmedfahad/Documents/SPLs/Fahad_SPL1'
+ 
+make: *** No targets specified and no makefile found.  Stop.
+
