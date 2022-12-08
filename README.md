@@ -9,6 +9,17 @@ I will recreate a simple Linux Shell (Bash) that includes the basic shell operat
 * Shell History Management
 * Command Correction
 
+# How to Use
+Run the following command on your **Linux Terminal** and enjoy!
+
+```
+git clone https://github.com/ahmedfahad04/SPL-1.git
+cd SPL-1
+cd Codes
+cd src
+./run
+```
+
 # Features in Details
 Previously I have defined the features names only. Here you can understand how those features have been implemented in my porject. 
 
