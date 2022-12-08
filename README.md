@@ -9,8 +9,10 @@ I will recreate a simple Linux Shell (Bash) that includes the basic shell operat
 * Shell History Management
 * Command Correction
 
+# Features in Details
+Previously I have defined the features names only. Here you can understand how those features have been implemented in my porject. 
 
-## Executing Shell Commands
+### Executing Shell Commands
 Initially, I will take the command prompt from
 the user. Later I will parse and tokenize the command line and sort out the commands and
 respective arguments. Then I will check whether the parsed command is built-in or an external
@@ -22,7 +24,7 @@ continued till the user exits the program. And this process of Read-Evaluate-Pri
 as REPL in terms of shell process execution.
 
 
-## Command Name Customization
+### Command Name Customization
 Users can assign short names or refactor shell commands through aliasing. By using aliases,
 users can save a lot of time while doing tasks frequently. In that feature, we split the
 command arguments into two parts. The first part, followed by the keyword ‘alias’, is the
@@ -31,7 +33,7 @@ so that the actual command can be replaced with aliased command before execution
 performed.
 
 
-## Pipelined Command Execution
+### Pipelined Command Execution
 A pipeline is a collection of one or more instructions partitioned by the '|' control operator.
 The output of each command in the pipeline is linked to the following command's input
 through a pipe. It is a very common scenario when we need to execute multiple commands
@@ -41,7 +43,7 @@ commands. And to represent the standard input-output stream we have used the fil
 descriptors. These descriptors act as the placeholder for stdin, stdout, and stderr.
 
 
-## Input-Output Redirection
+### Input-Output Redirection
 Redirection allows us to change the standard input (stdin) and standard output (stdout) while
 executing shell commands in the terminal. It works with commands' file handles. This file
 handle can be replicated, opened, or closed and even can change the file the command read
@@ -51,7 +53,7 @@ feature. Later on, after extracting the file names, we use the file descriptors.
 the descriptors, we redirect the stdin and stdout to the files mentioned in the shell command.
 
 
-## Terminal Color Customization
+### Terminal Color Customization
 Terminal color customization denotes changing the color of the system prompt and terminal
 background. Sometimes working in the same environment seems monotonous. And this
 monotonous can be relinquished by using different variants of the terminal. However, we have
@@ -59,7 +61,7 @@ integrated the ANSI codes in the eventloop of the shell to manipulate the prompt
 background color.
 
 
-## Shell History Management
+### Shell History Management
 Our shell keeps track of user command history. Users can invoke specific commands using
 the history expansion character (!). Sometimes some important commands might need in an
 emergency and in that case, history plays a vital role. Initially, for a new user, our shell
@@ -69,7 +71,7 @@ appended from that point. Also, these serial numbers are useful for invoking any
 command without typing it repeatedly.
  
 
-## Command Correction
+### Command Correction
 It is quite common that we type the wrong shell commands with or without the actual
 command. In that case, this feature will help the user to understand the relevant shell
 command if he/she puts any wrong commands. This feature is quite useful for those who are
@@ -77,11 +79,14 @@ new to Linux and learning commands by trial and error. Initially, it will sugges
 what can be the closest command to the given wrong command. In autocompletion mode,
 our shell will suggest the most accurate command by inspecting user command history.
 
-## Resources
+# Demonstration
+You can find the demonstration **Video** <a href="https://www.linkedin.com/posts/istiaq-ahmed-fahad-5666431a6_project-software-linux-activity-6943895969100902400-uk1z?utm_source=share&utm_medium=member_desktop" target="blank"> here </a>
+
+# Resources
 
 * Shell builtins (https://www.gnu.org/software/bash/manual/html_node/Shell-Builtin-Commands.html)
 * Simple commands (https://www.gnu.org/software/bash/manual/html_node/Simple-Commands.html)
 * Basic Shell Features (https://www.gnu.org/software/bash/manual/html_node/Basic-Shell-Features.html)
 * Interactive and non interactive shell (https://www.gnu.org/software/bash/manual/html_node/What-is-an-Interactive-Shell_003f.html)
-* Shell operation (https://www.gnu.org/software/bash/manual/html_node/Shell-Operation.html)
+* Shell operation (https://www.gnu.org/software/bash/manual/html_node/Shell-Operation.html) 
 
