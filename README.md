@@ -91,7 +91,7 @@ what can be the closest command to the given wrong command. In autocompletion mo
 our shell will suggest the most accurate command by inspecting user command history.
 
 # Demonstration
-You can find the demonstration **Video** <a href="https://www.linkedin.com/posts/istiaq-ahmed-fahad-5666431a6_project-software-linux-activity-6943895969100902400-uk1z?utm_source=share&utm_medium=member_desktop" target="blank"> here </a>
+You can find the demonstration **Video** [here](https://www.linkedin.com/posts/ahmedfahad04_project-software-linux-activity-6943895969100902400-wLyc?utm_source=share&utm_medium=member_android)
 
 # Resources
 
